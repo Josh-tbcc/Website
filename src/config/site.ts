@@ -15,11 +15,12 @@ export const site = {
   phone: '07 3496 9345',
   email: 'yandina@thebalancedchiro.com.au',
   address: {
-    street: 'Centre 5/18 Farrell St',
+    street: 'Shop 5, 18 Farrell St',
     suburb: 'Yandina',
     state: 'QLD',
     postcode: '4561',
   },
+  directions: 'Next door to Lawn Espresso, a short walk from Yandina Station.',
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=5%2F18+Farrell+St+Yandina+QLD+4561',
   mapsEmbed:
     'https://www.google.com/maps?q=5%2F18+Farrell+St+Yandina+QLD+4561&output=embed',
@@ -34,11 +35,16 @@ export const site = {
     { days: 'Sunday', time: 'Closed' },
   ],
 
-  // Online booking (Zurili). Use the PUBLIC booking page link —
-  // never put API keys in this file, the website is public.
+  // Online booking (Zurili), shown inside /book-online-yandina so patients
+  // stay on thebalancedchiro.com.au. Never put API keys in this file —
+  // the website is public.
   booking: {
-    url: '', // TODO: Zurili public booking link, e.g. https://book.zurili.com/…
-    embed: true, // show the booking page inside /book (set false to just link out)
+    // Preferred: paste Zurili's embed code (the <script>/<iframe> snippet)
+    // between the backticks.
+    embedCode: ``, // TODO
+    // Alternative: Zurili's booking page link, shown in a frame on our page.
+    url: '',
+    embed: true, // false = open the booking link in a new tab instead
     newPatientLabel: 'New Patient Consultation (30 min)',
   },
 

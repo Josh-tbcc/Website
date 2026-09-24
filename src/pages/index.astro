@@ -10,7 +10,11 @@ import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 
 const heroImg = fs.existsSync(path.join(process.cwd(), 'public/images/hero.jpg')) ? '/images/hero.jpg' : null;
-const conditions = ['Lower back pain', 'Neck pain', 'Headaches', 'Sciatica', 'Posture', 'Pregnancy', 'Kids & families', 'Sports & athletes', 'Stiffness', 'Long-term wellness'];
+const conditions = [
+  ['Back pain', '/back-pain'], ['Neck pain', '/neck-pain'], ['Headaches', '/headaches'], ['Sciatica', '/sciatica'],
+  ['Hip pain', '/hip-pain'], ['Posture', '/poor-posture'], ['Pregnancy', '/pregnancy-chiropractic'], ['Arthritis', '/arthritis'],
+  ['Stress & tension', '/stress'], ['Kids & families', '/who-we-help#families'], ['Sports & athletes', '/who-we-help#athletes'],
+];
 const who = [
   { icon: 'users', title: 'Families & kids', text: 'Gentle, age-appropriate care from little ones to grandparents.', href: '/who-we-help#families' },
   { icon: 'heart', title: 'Pregnancy', text: 'Support for your changing body through every trimester.', href: '/who-we-help#pregnancy' },
@@ -47,7 +51,7 @@ const who = [
   <!-- CONDITIONS RIBBON -->
   <div class="marquee" aria-label="Conditions we help with">
     <div class="marquee__track">
-      {[...conditions, ...conditions].map((c) => <span>{c}</span>)}
+      {[...conditions, ...conditions].map(([label, href], i) => <a href={href} tabindex={i >= conditions.length ? -1 : undefined} aria-hidden={i >= conditions.length ? 'true' : undefined}><span>{label}</span></a>)}
     </div>
   </div>
 

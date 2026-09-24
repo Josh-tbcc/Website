@@ -23,6 +23,7 @@ const groups = [
     title: 'Pregnancy',
     photo: '/images/pregnancy.jpg',
     alt: 'Pregnancy chiropractic care',
+    links: [['More about pregnancy care', '/pregnancy-chiropractic']],
     body: [
       'Your body changes quickly during pregnancy, and your spine and pelvis carry much of that load. We use pregnancy-friendly positioning and gentle techniques to support you through each trimester and beyond.',
     ],
@@ -41,6 +42,7 @@ const groups = [
     title: 'Ongoing & chronic issues',
     photo: '/images/chronic.jpg',
     alt: 'Dr Josh adjusting a patient’s mid back',
+    links: [['Back pain', '/back-pain'], ['Neck pain', '/neck-pain'], ['Headaches', '/headaches'], ['Sciatica', '/sciatica'], ['Hip pain', '/hip-pain'], ['Arthritis', '/arthritis'], ['Posture', '/poor-posture'], ['Stress & tension', '/stress']],
     body: [
       'Lower back pain, neck pain, sciatica, headaches, stiffness: if it has been hanging around for months or years, it’s a pattern, not a one-off. We measure what’s going on and build a staged plan that goes beyond short-term relief.',
     ],
@@ -70,7 +72,8 @@ const hasPhoto = (src: string) => fs.existsSync(path.join(process.cwd(), 'public
         <div class="reveal" style={i % 2 && hasPhoto(g.photo) ? 'order:2' : ''}>
           <h2>{g.title}</h2>
           {g.body.map((p) => <p>{p}</p>)}
-          <a class="btn btn--dark" href="/book" data-book>Book a consult<Icon name="arrow" /></a>
+          {g.links && <p class="cond-links">{g.links.map(([l, h]) => <a href={h}>{l}</a>)}</p>}
+          <a class="btn btn--dark" href="/book-online-yandina" data-book>Book a consult<Icon name="arrow" /></a>
         </div>
         {hasPhoto(g.photo) && <Media src={g.photo} alt={g.alt} label={`${g.title} photo`} shape="tall" class="reveal" />}
       </div>
@@ -83,5 +86,8 @@ const hasPhoto = (src: string) => fs.existsSync(path.join(process.cwd(), 'public
   section[id] { scroll-margin-top: 90px; }
   .jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
   .jump a { padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); color: var(--white); text-decoration: none; font-weight: 600; font-size: .9rem; transition: background .2s; }
+  .cond-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 24px; }
+  .cond-links a { padding: 7px 14px; border-radius: 999px; background: var(--mint-soft); color: var(--brand-dark); text-decoration: none; font-weight: 600; font-size: .88rem; }
+  .cond-links a:hover { background: var(--brand); color: var(--white); }
   .jump a:hover { background: rgba(255,255,255,.12); color: var(--white); }
 </style>

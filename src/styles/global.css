@@ -270,6 +270,9 @@ details.faq p { margin: 12px 0 0; max-width: 680px; }
 .marquee__track { display: flex; gap: 48px; width: max-content; animation: marquee 38s linear infinite; }
 .marquee__track span { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.1rem, 2vw, 1.5rem); color: var(--ink); letter-spacing: -0.02em; display: inline-flex; align-items: center; gap: 48px; white-space: nowrap; }
 .marquee__track span::after { content: '✦'; color: var(--brand); font-size: .8em; }
+.marquee__track a { text-decoration: none; }
+.marquee__track a:hover span { color: var(--brand); }
+.marquee:hover .marquee__track { animation-play-state: paused; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 /* Scroll reveal */

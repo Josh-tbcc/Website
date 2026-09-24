@@ -11,8 +11,9 @@ New website for **thebalancedchiro.com.au**, built with [Astro](https://astro.bu
 | Thermal Scan | `/thermography` | Thermpix scan explained |
 | Who We Help | `/who-we-help` | Families, kids, pregnancy, athletes, chronic issues, wellness |
 | About | `/about` | Mission, team, values |
-| Contact | `/contact` | Address, hours, map |
-| Book Online | `/book` | Zurili booking (new + existing patients) |
+| Contact | `/contact-us` | Address, hours, map |
+| Book Online | `/book-online-yandina` | Zurili booking embedded on our own page (new + existing patients) |
+| Condition pages | `/back-pain`, `/neck-pain`, `/headaches`, `/sciatica`, `/hip-pain`, `/arthritis`, `/poor-posture`, `/stress`, `/pregnancy-chiropractic` | Local SEO pages at the same addresses as the old site. Content lives in `src/config/conditions.ts` |
 | **Meta ad landing page** | `/offer` | $49 Initial Assessment lead form, with no menu so visitors stay on the offer |
 | Thank you | `/offer/thank-you` | Shown after a lead submits (fires the Meta `Lead` event) |
 | Privacy | `/privacy` | Privacy policy |
@@ -21,6 +22,8 @@ New website for **thebalancedchiro.com.au**, built with [Astro](https://astro.bu
 
 Almost everything (phone, hours, booking link, Meta Pixel, video IDs, team bios)
 is in **`src/config/site.ts`**. Search that file for `TODO` to see what's still missing.
+
+Old website addresses that no longer exist are redirected in **`public/_redirects`**.
 
 Photos go in **`public/images/`**. Each grey placeholder on the site shows the exact file name it's waiting for.
 

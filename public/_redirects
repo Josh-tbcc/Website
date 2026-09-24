@@ -1,0 +1,12 @@
+# Old website addresses -> new pages (301 = permanent, keeps Google rankings)
+/book                         /book-online-yandina   301
+/contact                      /contact-us            301
+/wellness-referral-program    /about                 301
+/workshops                    /about                 301
+/about-us                     /about                 301
+/our-team                     /about                 301
+/services                     /who-we-help           301
+/conditions                   /who-we-help           301
+/new-patient                  /new-patients          301
+/blog                         /                      301
+/blog/*                       /                      301
