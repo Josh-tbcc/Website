@@ -20,7 +20,7 @@ const who = [
 ---
 <Base overlayHeader>
   <!-- HERO -->
-  <section class="hero on-dark" style={heroImg ? `--hero:url(${heroImg})` : undefined}>
+  <section class:list={['hero on-dark', { 'hero--photo': heroImg }]} style={heroImg ? `--hero:url(${heroImg})` : undefined}>
     <div class="hero__bg" aria-hidden="true"></div>
     <div class="container hero__inner">
       <div class="hero__copy reveal">
@@ -95,7 +95,7 @@ const who = [
           <p>We lock in your progress with home care, corrective exercises and regular check-ins, so you keep the gains you’ve worked for.</p>
           <div class="progress" aria-hidden="true"><span></span><span></span><span></span></div>
         </div>
-        <Media src="/images/adjusting-table.jpg" alt="Chiropractic adjustment at The Balanced Chiropractic Centre" label="Adjusting photo" class="bento__img reveal" />
+        <Media src="/images/workshop.jpg" alt="Dr Josh teaching a health workshop at The Balanced Chiropractic Centre" label="Workshop photo" class="bento__img reveal" />
       </div>
     </div>
   </section>
@@ -200,6 +200,15 @@ const who = [
       linear-gradient(180deg, rgba(12,29,32,.55) 0%, rgba(12,29,32,.2) 35%, rgba(12,29,32,.85) 100%),
       var(--hero, radial-gradient(70% 60% at 80% 20%, #1486bb 0%, transparent 60%), radial-gradient(60% 60% at 10% 90%, #4f9a36 0%, transparent 60%), radial-gradient(40% 40% at 60% 70%, rgba(28,174,229,.35) 0%, transparent 70%), #0c1d20) center / cover no-repeat;
   }
+  .hero--photo .hero__bg {
+    background:
+      linear-gradient(90deg, rgba(15,28,36,.88) 0%, rgba(15,28,36,.6) 45%, rgba(15,28,36,.15) 100%),
+      linear-gradient(180deg, rgba(15,28,36,.45) 0%, rgba(15,28,36,0) 30%, rgba(15,28,36,.75) 100%),
+      var(--hero) 72% 22% / cover no-repeat, #0f1c24;
+  }
+  @media (max-width: 700px) {
+    .hero--photo .hero__bg { background: linear-gradient(180deg, rgba(15,28,36,.55) 0%, rgba(15,28,36,.8) 45%, rgba(15,28,36,.95) 100%), var(--hero) 80% 0% / cover no-repeat, #0f1c24; }
+  }
   .hero__inner { padding-top: 140px; padding-bottom: clamp(32px, 5vw, 56px); display: grid; gap: clamp(40px, 6vw, 72px); }
   .hero h1 { color: var(--white); font-size: clamp(2.8rem, 8vw, 6.2rem); margin-bottom: .35em; }
   .hero .lead { color: #c4d4d5; max-width: 560px; margin-bottom: 1.8em; }
@@ -213,6 +222,7 @@ const who = [
   .bento__b { grid-column: 2; grid-row: 1; }
   .bento__c { grid-column: 3; grid-row: 1 / span 2; display: flex; flex-direction: column; }
   .bento :global(.bento__img) { grid-column: 1 / span 2; grid-row: 2; aspect-ratio: auto; min-height: 280px; }
+  .bento :global(.bento__img img) { position: absolute; inset: 0; }
   .progress { display: flex; gap: 6px; margin-top: auto; padding-top: 32px; }
   .progress span { flex: 1; height: 6px; border-radius: 6px; background: rgba(28,174,229,.25); }
   .progress span:last-child { background: var(--mint); }
