@@ -70,7 +70,7 @@ Netlify republishes automatically within a minute.
 | Setting | Where to get it |
 |---|---|
 | `phone`, `email`, `hours` | Current website |
-| `booking.url` | Zurili → Online Booking settings → your **public booking page link**. (We don't need API keys. Please **don't** paste API keys into the website, because anything on a website is public.) |
+| `booking.embedCode` | Zurili → Online Booking / website settings → **embed code** (a `<script>` or `<iframe>` snippet). Or copy it from the current booking page: open thebalancedchiro.com.au/book-online-yandina, right-click → **View Page Source**, search for `zurili`, and copy those lines. Never paste API keys into the website. |
 | `intakeFormUrl` | Jotform → your new patient form → Publish → copy link |
 | `metaPixelId` | Daina / Meta Events Manager → Data sources → Pixel ID (a long number) |
 | `videos.*` | Upload each video to YouTube (Unlisted is fine), copy the ID after `v=` in the link |
@@ -80,8 +80,8 @@ Photos: drop them into `public/images/` with the file names shown on the placeho
 (e.g. `hero.jpg`, `team.jpg`, `dr-josh.jpg`, `thermography-scan.jpg`, `logo.png`).
 Resize photos to about **2000px wide** first. Your originals are 7–10MB each, which is too slow for phones.
 
-> If Zurili's booking page refuses to load inside the site (some systems block that),
-> set `booking.embed` to `false` and the Book button will open Zurili in a new tab instead.
+> Booking stays on thebalancedchiro.com.au/book-online-yandina (good for SEO). If Zurili only
+> gives you a link rather than embed code, put it in `booking.url` and it shows in a frame on the page.
 
 ## Step 6: Point the domain at Netlify (go-live day)
 
@@ -130,7 +130,7 @@ data export is saved somewhere safe.
 - [ ] Google Business Profile → update the website link if needed (it's the same address, so usually nothing to change).
 - [ ] Google Search Console → add the site and submit `https://thebalancedchiro.com.au/sitemap-index.xml`.
 - [ ] Meta Events Manager → confirm `PageView`, `Lead` and `Schedule` events are firing.
-- [ ] Old Perfect Patients page links: send Claude the list of old URLs and we'll add redirects so Google traffic isn't lost.
+- [ ] Old page addresses: the booking, contact and condition pages keep their old addresses. Others (blog, workshops, referral program) redirect via `public/_redirects`. Check Google Search Console → Pages for any 404s after launch and add them there.
 
 ---
 

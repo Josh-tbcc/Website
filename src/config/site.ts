@@ -7,44 +7,49 @@ export const site = {
   name: 'The Balanced Chiropractic Centre',
   shortName: 'Balanced Chiro',
   url: 'https://thebalancedchiro.com.au',
-  tagline: 'Chiropractic care built for the long term',
+  tagline: 'Health from within',
   description:
     'Family chiropractic in Yandina on the Sunshine Coast. Thermal nerve scans, in-house X-ray and a clear plan to correct the cause — not just chase the pain.',
 
   // Contact
-  phone: '07 0000 0000', // TODO: real phone number
-  email: 'hello@thebalancedchiro.com.au', // TODO: confirm reception email
+  phone: '07 3496 9345',
+  email: 'yandina@thebalancedchiro.com.au',
   address: {
-    street: 'Centre 5/18 Farrell St',
+    street: 'Shop 5, 18 Farrell St',
     suburb: 'Yandina',
     state: 'QLD',
     postcode: '4561',
   },
+  directions: 'Next door to Lawn Espresso, a short walk from Yandina Station.',
   mapsUrl: 'https://www.google.com/maps/search/?api=1&query=5%2F18+Farrell+St+Yandina+QLD+4561',
   mapsEmbed:
     'https://www.google.com/maps?q=5%2F18+Farrell+St+Yandina+QLD+4561&output=embed',
 
-  // TODO: copy the real hours from the current website
   hours: [
-    { days: 'Monday', time: '7:00am – 6:00pm' },
-    { days: 'Tuesday', time: '7:00am – 6:00pm' },
-    { days: 'Wednesday', time: '7:00am – 6:00pm' },
-    { days: 'Thursday', time: '7:00am – 6:00pm' },
-    { days: 'Friday', time: '7:00am – 12:00pm' },
-    { days: 'Saturday', time: 'By appointment' },
+    { days: 'Monday', time: '2:30pm – 6:00pm' },
+    { days: 'Tuesday', time: '7:00am – 10:00am, 2:30pm – 6:00pm' },
+    { days: 'Wednesday', time: '2:30pm – 6:00pm' },
+    { days: 'Thursday', time: '7:00am – 10:00am, 2:30pm – 6:00pm' },
+    { days: 'Friday', time: '7:00am – 10:00am' },
+    { days: 'Saturday', time: 'Closed' },
     { days: 'Sunday', time: 'Closed' },
   ],
 
-  // Online booking (Zurili). Use the PUBLIC booking page link —
-  // never put API keys in this file, the website is public.
+  // Online booking (Zurili), shown inside /book-online-yandina so patients
+  // stay on thebalancedchiro.com.au. Never put API keys in this file —
+  // the website is public.
   booking: {
-    url: '', // TODO: Zurili public booking link, e.g. https://book.zurili.com/…
-    embed: true, // show the booking page inside /book (set false to just link out)
+    // Preferred: paste Zurili's embed code (the <script>/<iframe> snippet)
+    // between the backticks.
+    embedCode: ``, // TODO
+    // Alternative: Zurili's booking page link, shown in a frame on our page.
+    url: '',
+    embed: true, // false = open the booking link in a new tab instead
     newPatientLabel: 'New Patient Consultation (30 min)',
   },
 
   // Online intake form (Jotform)
-  intakeFormUrl: '', // TODO: Jotform new patient intake link
+  intakeFormUrl: 'https://form.jotform.com/262209246859062',
 
   // $49 Meta ad offer
   offer: {
@@ -69,7 +74,6 @@ export const site = {
 
   // Videos — paste YouTube video IDs (the part after v=)
   videos: {
-    patientJourney: '', // TODO: "Journey of patient in our office"
     thermography: '', // TODO: thermal scan explainer
     intro: '', // optional: welcome video from Dr Josh
   },

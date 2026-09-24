@@ -1,0 +1,96 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Media from '../components/Media.astro';
+import BookButton from '../components/BookButton.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { conditions, type Condition } from '../config/conditions';
+
+export function getStaticPaths() {
+  return conditions.map((c) => ({ params: { slug: c.slug }, props: { c } }));
+}
+
+const { c } = Astro.props as { c: Condition };
+const others = conditions.filter((o) => o.slug !== c.slug);
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: c.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<Base title={c.metaTitle} description={c.metaDescription}>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <PageHero eyebrow={`${c.name} · Chiropractor Yandina`} title={c.h1} lead={c.intro}>
+    <div class="btn-row" slot="actions">
+      <BookButton label="Book a consultation" />
+      <a class="btn btn--glass" href="/new-patients">What to expect</a>
+    </div>
+    <Media slot="aside" src={c.photo} alt={c.photoAlt} label={c.photoAlt} />
+  </PageHero>
+
+  <section class="section">
+    <div class="container split" style="align-items:start">
+      <div class="reveal">
+        <span class="eyebrow">Sound familiar?</span>
+        <h2>Common signs we see</h2>
+        <ul class="checklist">
+          {c.signs.map((s) => <li>{s}</li>)}
+        </ul>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="eyebrow">Why it keeps returning</span>
+        <h2>Looking beyond the symptom</h2>
+        {c.why.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream panel">
+    <div class="container split">
+      <div class="reveal">
+        <span class="eyebrow">How we help</span>
+        <h2>We measure first, then build your plan</h2>
+        <p class="lead">Every new patient starts with a comprehensive assessment, followed by a report of findings where we explain exactly what we found and the path forward.</p>
+        <div class="btn-row">
+          <a class="btn btn--dark" href="/thermography">About the thermal scan<Icon name="arrow" /></a>
+        </div>
+      </div>
+      <div class="steps">
+        {c.focus.map((f, i) => (
+          <div class={`step reveal reveal-delay-${Math.min(i, 3)}`}><p><strong>{f}</strong></p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <h2 class="center">{c.name}: common questions</h2>
+      {c.faqs.map((f) => (
+        <details class="faq"><summary>{f.q}</summary><p>{f.a}</p></details>
+      ))}
+      <p class="fine-print" style="margin-top:28px">Individual results vary. Your care is tailored to you following a thorough history and examination. If we find something that needs a different approach, we’ll refer you to the right health professional.</p>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <h2 style="font-size:1.5rem">Other conditions we help with</h2>
+      <div class="other">
+        {others.map((o) => <a href={`/${o.slug}`}>{o.name}</a>)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title={`Let’s find out what’s behind your ${c.name.toLowerCase()}`} />
+</Base>
+
+<style>
+  .step { padding-left: 84px; }
+  .step p { margin: 0; }
+  .other { display: flex; flex-wrap: wrap; gap: 10px; }
+  .other a { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; color: var(--ink); font-weight: 600; font-size: .95rem; transition: background .2s, border-color .2s; }
+  .other a:hover { background: var(--mint-soft); border-color: transparent; color: var(--brand-dark); }
+</style>

@@ -2,25 +2,32 @@
    Brand tokens — swap these to match the logo exactly
    ───────────────────────────────────────────────────────────── */
 :root {
-  --ink: #0c1d20;            /* near-black green: headings, dark sections */
-  --ink-2: #13292d;
-  --text: #33464a;
-  --muted: #6b7d80;
-  --brand: #0f766e;          /* deep teal */
-  --brand-dark: #0b5a54;
-  --mint: #8ce3c7;           /* highlight on dark backgrounds */
-  --mint-soft: #e3f6ef;
-  --accent: #ff7a45;         /* conversion colour for key CTAs */
-  --accent-dark: #e8622d;
-  --cream: #f7f4ee;
+  /* Taken from the logo */
+  --logo-blue: #1caee5;      /* "Chiropractic" */
+  --logo-green: #6cb350;     /* "BALANCED" */
+  --logo-yellow: #f6dc6b;    /* bottom of the ring */
+  --logo-grey: #373536;      /* "The", "Centre", figure */
+  --ring: linear-gradient(135deg, #8ccbef 0%, #9fd3c4 40%, #e9e27a 75%, #ffd37b 100%);
+
+  --ink: #0f1c24;            /* deep navy-charcoal: headings, dark sections */
+  --ink-2: #172a35;
+  --text: #34454d;
+  --muted: #6a7b83;
+  --brand: #0a78a8;          /* logo blue, darkened for readable text on white */
+  --brand-dark: #085f86;
+  --mint: #8fd8f5;           /* light blue highlight on dark backgrounds */
+  --mint-soft: #e6f5fc;
+  --accent: #6cb350;         /* logo green: main call-to-action buttons */
+  --accent-dark: #5c9f42;
+  --cream: #f8f6ef;
   --stone: #eeebe4;
-  --line: #e4e7e6;
+  --line: #e3e8ea;
   --white: #ffffff;
   --radius-sm: 12px;
   --radius: 22px;
   --radius-lg: 32px;
-  --shadow-sm: 0 1px 2px rgba(12, 29, 32, .05), 0 4px 14px rgba(12, 29, 32, .05);
-  --shadow: 0 2px 6px rgba(12, 29, 32, .04), 0 20px 50px -12px rgba(12, 29, 32, .16);
+  --shadow-sm: 0 1px 2px rgba(15, 28, 36, .05), 0 4px 14px rgba(15, 28, 36, .05);
+  --shadow: 0 2px 6px rgba(15, 28, 36, .04), 0 20px 50px -12px rgba(15, 28, 36, .16);
   --max: 1240px;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-head: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
@@ -43,6 +50,7 @@ img, video, iframe { max-width: 100%; display: block; }
 a { color: var(--brand); text-underline-offset: 3px; }
 a:hover { color: var(--brand-dark); }
 ::selection { background: var(--mint); color: var(--ink); }
+.ring-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--ring); }
 
 h1, h2, h3, h4 {
   font-family: var(--font-head);
@@ -57,8 +65,11 @@ h1 { font-size: clamp(2.5rem, 6.2vw, 4.75rem); }
 h2 { font-size: clamp(2rem, 4.2vw, 3.25rem); }
 h3 { font-size: 1.28rem; letter-spacing: -0.02em; font-weight: 700; line-height: 1.25; }
 p { margin: 0 0 1em; text-wrap: pretty; }
-.hl { color: var(--brand); }
-.on-dark .hl, .section--ink .hl { color: var(--mint); }
+.hl {
+  background: linear-gradient(90deg, #0a8fc9, #4f9f33);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.on-dark .hl, .section--ink .hl { background-image: linear-gradient(90deg, #5cc8f2, #9ad67c 70%, #f3dd72); }
 
 .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
 .section { padding: clamp(64px, 9vw, 128px) 0; }
@@ -109,8 +120,8 @@ p { margin: 0 0 1em; text-wrap: pretty; }
 .btn svg { width: 1.05em; height: 1.05em; transition: transform .25s var(--ease); }
 .btn:hover svg { transform: translateX(3px); }
 .btn:hover { transform: translateY(-2px); }
-.btn--primary { background: var(--accent); color: var(--white); box-shadow: 0 10px 24px -8px rgba(255, 122, 69, .7); }
-.btn--primary:hover { background: var(--accent-dark); color: var(--white); }
+.btn--primary { background: var(--accent); color: var(--ink); box-shadow: 0 10px 24px -8px rgba(108, 179, 80, .75); }
+.btn--primary:hover { background: #7cc45f; color: var(--ink); }
 .btn--dark { background: var(--ink); color: var(--white); }
 .btn--dark:hover { background: var(--brand); color: var(--white); }
 .btn--ghost { border-color: rgba(12, 29, 32, .18); color: var(--ink); background: transparent; }
@@ -182,9 +193,9 @@ p { margin: 0 0 1em; text-wrap: pretty; }
   overflow: hidden;
   aspect-ratio: 4 / 3;
   background:
-    radial-gradient(120% 90% at 10% 10%, #bfe9dc 0%, transparent 55%),
-    radial-gradient(90% 80% at 90% 90%, #f3dcc8 0%, transparent 55%),
-    #e7efec;
+    radial-gradient(120% 90% at 10% 10%, #c9ebf9 0%, transparent 55%),
+    radial-gradient(90% 80% at 90% 90%, #fbefc4 0%, transparent 55%),
+    #eef4f2;
 }
 .media img { width: 100%; height: 100%; object-fit: cover; }
 .media--tall { aspect-ratio: 4 / 5; }
@@ -259,6 +270,9 @@ details.faq p { margin: 12px 0 0; max-width: 680px; }
 .marquee__track { display: flex; gap: 48px; width: max-content; animation: marquee 38s linear infinite; }
 .marquee__track span { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.1rem, 2vw, 1.5rem); color: var(--ink); letter-spacing: -0.02em; display: inline-flex; align-items: center; gap: 48px; white-space: nowrap; }
 .marquee__track span::after { content: '✦'; color: var(--brand); font-size: .8em; }
+.marquee__track a { text-decoration: none; }
+.marquee__track a:hover span { color: var(--brand); }
+.marquee:hover .marquee__track { animation-play-state: paused; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 /* Scroll reveal */

@@ -5,18 +5,18 @@ import PageHero from '../components/PageHero.astro';
 import { site } from '../config/site';
 const a = site.address;
 ---
-<Base title="Contact & Location" description={`Find The Balanced Chiropractic Centre at ${a.street}, ${a.suburb}. Hours, phone and directions.`}>
+<Base title="Contact Us" description={`Find The Balanced Chiropractic Centre at ${a.street}, ${a.suburb}. Hours, phone and directions.`}>
   <PageHero eyebrow="Contact" title="Visit us in <span class='hl'>Yandina.</span>" lead="Easy to reach from Nambour, Coolum, Eumundi, Maleny and across the Sunshine Coast hinterland." />
   <section class="section">
     <div class="container grid grid-2" style="align-items:start">
       <div class="card">
         <h2>Get in touch</h2>
-        <p><strong>Address</strong><br />{a.street}<br />{a.suburb} {a.state} {a.postcode}<br /><a href={site.mapsUrl} target="_blank" rel="noopener">Get directions →</a></p>
+        <p><strong>Address</strong><br />{a.street}<br />{a.suburb} {a.state} {a.postcode}<br /><span class="fine-print">{site.directions}</span><br /><a href={site.mapsUrl} target="_blank" rel="noopener">Get directions →</a></p>
         <p><strong>Phone</strong><br /><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a></p>
         <p><strong>Email</strong><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
         <h3 style="margin-top:28px">Hours</h3>
         <table class="hours-table">
-          {site.hours.map((h) => <tr><td>{h.days}</td><td>{h.time}</td></tr>)}
+          {site.hours.map((h) => <tr><td>{h.days}</td><td>{h.time.split(', ').map((t, i) => <>{i > 0 && <br />}{t}</>)}</td></tr>)}
         </table>
         <div class="btn-row" style="margin-top:24px"><BookButton /></div>
       </div>

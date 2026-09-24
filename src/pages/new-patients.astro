@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
-import Video from '../components/Video.astro';
 import BookButton from '../components/BookButton.astro';
 import CtaBand from '../components/CtaBand.astro';
 import PageHero from '../components/PageHero.astro';
@@ -68,18 +67,6 @@ const faqs = [
     </div>
   </section>
 
-  <section class="section section--cream panel">
-    <div class="container">
-      <div class="center narrow">
-        <span class="eyebrow">Watch</span>
-        <h2>A patient’s journey in our office</h2>
-      </div>
-      <div style="max-width:900px;margin:28px auto 0">
-        <Video id={site.videos.patientJourney} title="A patient’s journey at The Balanced Chiropractic Centre" label="“Journey of patient in our office” video" />
-      </div>
-    </div>
-  </section>
-
   <section class="section">
     <div class="container split">
       <div>
@@ -88,7 +75,7 @@ const faqs = [
         <p>Your care plan is built around your results and your goals. We re-assess your posture and progress every 12 visits, and at major reviews we compare fresh results against where you started, so you can see how your spine and nervous system have changed.</p>
         <p>Most people come to us for pain. Many stay because they discover how much better they can feel, move and function when their body is working the way it’s designed to.</p>
       </div>
-      <Media src="/images/adjusting-table.jpg" alt="Adjusting table at The Balanced Chiropractic Centre" label="Adjusting table / session photo" />
+      <Media src="/images/care-plan.jpg" alt="Dr Josh explaining spinal X-ray findings" label="Care plan photo" shape="tall" />
     </div>
   </section>
 

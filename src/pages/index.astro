@@ -10,7 +10,11 @@ import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 
 const heroImg = fs.existsSync(path.join(process.cwd(), 'public/images/hero.jpg')) ? '/images/hero.jpg' : null;
-const conditions = ['Lower back pain', 'Neck pain', 'Headaches', 'Sciatica', 'Posture', 'Pregnancy', 'Kids & families', 'Sports & athletes', 'Stiffness', 'Long-term wellness'];
+const conditions = [
+  ['Back pain', '/back-pain'], ['Neck pain', '/neck-pain'], ['Headaches', '/headaches'], ['Sciatica', '/sciatica'],
+  ['Hip pain', '/hip-pain'], ['Posture', '/poor-posture'], ['Pregnancy', '/pregnancy-chiropractic'], ['Arthritis', '/arthritis'],
+  ['Stress & tension', '/stress'], ['Kids & families', '/who-we-help#families'], ['Sports & athletes', '/who-we-help#athletes'],
+];
 const who = [
   { icon: 'users', title: 'Families & kids', text: 'Gentle, age-appropriate care from little ones to grandparents.', href: '/who-we-help#families' },
   { icon: 'heart', title: 'Pregnancy', text: 'Support for your changing body through every trimester.', href: '/who-we-help#pregnancy' },
@@ -20,7 +24,7 @@ const who = [
 ---
 <Base overlayHeader>
   <!-- HERO -->
-  <section class="hero on-dark" style={heroImg ? `--hero:url(${heroImg})` : undefined}>
+  <section class:list={['hero on-dark', { 'hero--photo': heroImg }]} style={heroImg ? `--hero:url(${heroImg})` : undefined}>
     <div class="hero__bg" aria-hidden="true"></div>
     <div class="container hero__inner">
       <div class="hero__copy reveal">
@@ -47,7 +51,7 @@ const who = [
   <!-- CONDITIONS RIBBON -->
   <div class="marquee" aria-label="Conditions we help with">
     <div class="marquee__track">
-      {[...conditions, ...conditions].map((c) => <span>{c}</span>)}
+      {[...conditions, ...conditions].map(([label, href], i) => <a href={href} tabindex={i >= conditions.length ? -1 : undefined} aria-hidden={i >= conditions.length ? 'true' : undefined}><span>{label}</span></a>)}
     </div>
   </div>
 
@@ -95,7 +99,7 @@ const who = [
           <p>We lock in your progress with home care, corrective exercises and regular check-ins, so you keep the gains you’ve worked for.</p>
           <div class="progress" aria-hidden="true"><span></span><span></span><span></span></div>
         </div>
-        <Media src="/images/adjusting-table.jpg" alt="Chiropractic adjustment at The Balanced Chiropractic Centre" label="Adjusting photo" class="bento__img reveal" />
+        <Media src="/images/treatment-room.jpg" alt="Treatment room at The Balanced Chiropractic Centre" label="Treatment room photo" class="bento__img reveal" />
       </div>
     </div>
   </section>
@@ -104,7 +108,7 @@ const who = [
   <section class="section">
     <div class="container split">
       <div class="reveal">
-        <Video id={site.videos.thermography} title="Thermography scan at The Balanced Chiropractic Centre" label="Thermography scan video" />
+        <Video id={site.videos.thermography} title="Thermography scan at The Balanced Chiropractic Centre" label="Thermography scan video" fallback="/images/thermal-back.jpg" fallbackAlt="Thermpix thermal image of a patient’s back on the scanner screen" position="center 45%" />
       </div>
       <div class="reveal reveal-delay-1">
         <span class="eyebrow">Thermography nerve scan</span>
@@ -116,22 +120,6 @@ const who = [
           <li><Icon name="xray" /><div><strong>In-house X-ray</strong><span>With motion studies when clinically required</span></div></li>
         </ul>
         <a class="btn btn--ghost" href="/thermography">How the scan works<Icon name="arrow" /></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- PATIENT JOURNEY VIDEO -->
-  <section class="section section--tight">
-    <div class="panel journey on-dark">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <span class="eyebrow">Your journey with us</span>
-            <h2>See what your first visits look like</h2>
-          </div>
-          <p class="lead">From the moment you walk in to your report of findings, here’s exactly what happens, so there are no surprises.</p>
-        </div>
-        <div class="reveal"><Video id={site.videos.patientJourney} title="A patient’s journey at The Balanced Chiropractic Centre" label="“Journey of patient in our office” video" /></div>
       </div>
     </div>
   </section>
@@ -191,7 +179,7 @@ const who = [
   <!-- TEAM -->
   <section class="section">
     <div class="container split">
-      <Media src="/images/team.jpg" alt="The team at The Balanced Chiropractic Centre" label="Team photo" shape="tall" class="reveal" />
+      <Media src="/images/dr-josh.jpg" alt="Dr Joshua Kassis, chiropractor at The Balanced Chiropractic Centre" label="Dr Josh photo" shape="tall" class="reveal" />
       <div class="reveal reveal-delay-1">
         <span class="eyebrow">Meet the team</span>
         <h2>A family practice for the Yandina community</h2>
@@ -214,7 +202,16 @@ const who = [
   .hero__bg { position: absolute; inset: 0; z-index: -1;
     background:
       linear-gradient(180deg, rgba(12,29,32,.55) 0%, rgba(12,29,32,.2) 35%, rgba(12,29,32,.85) 100%),
-      var(--hero, radial-gradient(70% 60% at 80% 20%, #1f8a7f 0%, transparent 60%), radial-gradient(60% 60% at 10% 90%, #0f766e 0%, transparent 60%), radial-gradient(40% 40% at 60% 70%, rgba(140,227,199,.35) 0%, transparent 70%), #0c1d20) center / cover no-repeat;
+      var(--hero, radial-gradient(70% 60% at 80% 20%, #1486bb 0%, transparent 60%), radial-gradient(60% 60% at 10% 90%, #4f9a36 0%, transparent 60%), radial-gradient(40% 40% at 60% 70%, rgba(28,174,229,.35) 0%, transparent 70%), #0c1d20) center / cover no-repeat;
+  }
+  .hero--photo .hero__bg {
+    background:
+      linear-gradient(90deg, rgba(15,28,36,.88) 0%, rgba(15,28,36,.6) 45%, rgba(15,28,36,.15) 100%),
+      linear-gradient(180deg, rgba(15,28,36,.45) 0%, rgba(15,28,36,0) 30%, rgba(15,28,36,.75) 100%),
+      var(--hero) 72% 22% / cover no-repeat, #0f1c24;
+  }
+  @media (max-width: 700px) {
+    .hero--photo .hero__bg { background: linear-gradient(180deg, rgba(15,28,36,.55) 0%, rgba(15,28,36,.8) 45%, rgba(15,28,36,.95) 100%), var(--hero) 80% 0% / cover no-repeat, #0f1c24; }
   }
   .hero__inner { padding-top: 140px; padding-bottom: clamp(32px, 5vw, 56px); display: grid; gap: clamp(40px, 6vw, 72px); }
   .hero h1 { color: var(--white); font-size: clamp(2.8rem, 8vw, 6.2rem); margin-bottom: .35em; }
@@ -229,8 +226,9 @@ const who = [
   .bento__b { grid-column: 2; grid-row: 1; }
   .bento__c { grid-column: 3; grid-row: 1 / span 2; display: flex; flex-direction: column; }
   .bento :global(.bento__img) { grid-column: 1 / span 2; grid-row: 2; aspect-ratio: auto; min-height: 280px; }
+  .bento :global(.bento__img img) { position: absolute; inset: 0; }
   .progress { display: flex; gap: 6px; margin-top: auto; padding-top: 32px; }
-  .progress span { flex: 1; height: 6px; border-radius: 6px; background: rgba(140,227,199,.25); }
+  .progress span { flex: 1; height: 6px; border-radius: 6px; background: rgba(28,174,229,.25); }
   .progress span:last-child { background: var(--mint); }
   @media (max-width: 960px) {
     .bento { grid-template-columns: 1fr 1fr; }
@@ -257,8 +255,6 @@ const who = [
   .feature-list strong { display: block; color: var(--ink); font-family: var(--font-head); }
   .feature-list span { font-size: .95rem; color: var(--muted); }
 
-  .journey { background: radial-gradient(60% 80% at 100% 0%, rgba(140,227,199,.18), transparent 60%), var(--ink); padding: clamp(56px, 8vw, 104px) 0; color: #b9c9cb; }
-  .journey h2 { color: var(--white); }
 
   .sticky-col { position: sticky; top: 120px; }
   @media (max-width: 960px) { .sticky-col { position: static; } }
