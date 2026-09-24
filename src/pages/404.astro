@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import BookButton from '../components/BookButton.astro';
+---
+<Base title="Page not found" noindex>
+  <section class="section">
+    <div class="container narrow center">
+      <h1>Sorry, that page has moved</h1>
+      <p class="lead">We’ve built a brand new website, so some old links have changed.</p>
+      <div class="btn-row" style="justify-content:center"><a class="btn btn--ghost" href="/">Go to homepage</a><BookButton /></div>
+    </div>
+  </section>
+</Base>

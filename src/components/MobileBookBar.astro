@@ -1,0 +1,17 @@
+---
+import { site } from '../config/site';
+---
+<div class="mbar">
+  <a href={`tel:${site.phone.replace(/\s/g, '')}`} class="mbar__call">Call</a>
+  <a href="/book" class="mbar__book" data-book>Book Online</a>
+</div>
+<style>
+  .mbar { display: none; }
+  @media (max-width: 700px) {
+    .mbar { display: grid; grid-template-columns: 1fr 2fr; position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; box-shadow: 0 -4px 20px rgba(0,0,0,.12); }
+    .mbar a { padding: 16px; text-align: center; font-weight: 700; text-decoration: none; }
+    .mbar__call { background: var(--ink); color: var(--white); }
+    .mbar__book { background: var(--accent); color: var(--white); }
+    :global(body) { padding-bottom: 56px; }
+  }
+</style>

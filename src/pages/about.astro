@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Video from '../components/Video.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site, team } from '../config/site';
+
+const values = [
+  ['Insight', 'We don’t guess, we test. Thorough assessments at the start and regular re-assessments along the way.'],
+  ['Honest communication', 'Clear, open recommendations about what your body needs to get where you want to go.'],
+  ['Education', 'Every person who walks through our doors should leave understanding their body a little better.'],
+  ['Tribe', 'The best results come from long-term relationships and a community that supports each other.'],
+];
+---
+<Base title="About Us" description="Meet Dr Joshua Kassis and the team at The Balanced Chiropractic Centre, a family chiropractic practice in Yandina on the Sunshine Coast.">
+  <section class="section section--mist">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">About us</span>
+        <h1>Helping Yandina live healthier, for life</h1>
+        <p class="lead">Our mission is to empower families and our community to achieve lifelong health through chiropractic care, education and genuine connection.</p>
+        <p>We believe the body is intelligently designed to heal and thrive when the spine and nervous system are working well. Our job is to help you get there, and to help you stay there.</p>
+      </div>
+      <Media src="/images/team.jpg" alt="The team at The Balanced Chiropractic Centre" label="Team photo" />
+    </div>
+  </section>
+
+  {site.videos.intro && (
+    <section class="section">
+      <div class="container" style="max-width:900px">
+        <Video id={site.videos.intro} title="Welcome from Dr Josh" />
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container">
+      <div class="center narrow">
+        <span class="eyebrow">Our chiropractors</span>
+        <h2>Meet the team</h2>
+      </div>
+      <div class="grid grid-2" style="margin-top:36px">
+        {team.map((m) => (
+          <div class="card">
+            <Media src={m.photo} alt={m.name} label={`${m.name} headshot`} shape="tall" />
+            <h3 style="margin-top:22px">{m.name}</h3>
+            <p class="pill">{m.role}</p>
+            <p style="margin-top:12px">{m.bio}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand">
+    <div class="container">
+      <div class="center narrow">
+        <span class="eyebrow">What we stand for</span>
+        <h2>Our values</h2>
+      </div>
+      <div class="grid grid-4" style="margin-top:36px">
+        {values.map(([t, d]) => <div class="card"><h3>{t}</h3><p>{d}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config/site';
+const { url, embed, newPatientLabel } = site.booking;
+---
+<Base title="Book Online" description="Book your chiropractic appointment online at The Balanced Chiropractic Centre, Yandina: new patients and existing practice members.">
+  <section class="section section--mist" style="padding-bottom:40px">
+    <div class="container narrow center">
+      <span class="eyebrow">Book online</span>
+      <h1>Choose a time that suits you</h1>
+      <p class="lead">
+        <strong>New here?</strong> Select <em>{newPatientLabel}</em>.<br />
+        <strong>Existing practice member?</strong> Choose your regular appointment type.
+      </p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:32px">
+    <div class="container">
+      {url ? (
+        embed ? (
+          <>
+            <div class="booking-frame"><iframe src={url} title="Online booking" loading="eager"></iframe></div>
+            <p class="center fine-print" style="margin-top:14px">Booking not loading? <a href={url} target="_blank" rel="noopener">Open the booking page in a new tab</a> or call <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a>.</p>
+          </>
+        ) : (
+          <div class="center"><a class="btn btn--primary" href={url} target="_blank" rel="noopener" data-book>Open online booking</a></div>
+        )
+      ) : (
+        <div class="card center narrow">
+          <h2>Online booking coming soon</h2>
+          <p>(Add the Zurili public booking link in src/config/site.ts.)</p>
+          <p>In the meantime, call us on <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a>.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</Base>
+<style>
+  .booking-frame { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+  .booking-frame iframe { width: 100%; height: 900px; border: 0; }
+</style>

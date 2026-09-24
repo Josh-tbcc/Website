@@ -1,0 +1,72 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import { site } from '../config/site';
+import BookButton from './BookButton.astro';
+
+const nav = [
+  { href: '/new-patients', label: 'New Patients' },
+  { href: '/thermography', label: 'Thermal Scan' },
+  { href: '/who-we-help', label: 'Who We Help' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+const current = Astro.url.pathname.replace(/\/$/, '');
+const logo = ['logo.svg', 'logo.png'].find((f) => fs.existsSync(path.join(process.cwd(), 'public/images', f)));
+---
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="brand" aria-label={site.name}>
+      {logo
+        ? <img src={`/images/${logo}`} alt={site.name} height="52" />
+        : <span class="brand__text">The Balanced<br /><strong>Chiropractic Centre</strong></span>}
+    </a>
+    <nav class="nav" aria-label="Main">
+      <ul id="nav-list">
+        {nav.map((n) => (
+          <li><a href={n.href} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a></li>
+        ))}
+        <li class="nav__mobile-cta"><a href={`tel:${site.phone.replace(/\s/g, '')}`}>Call {site.phone}</a></li>
+      </ul>
+    </nav>
+    <div class="site-header__cta">
+      <BookButton />
+      <button class="menu-toggle" aria-controls="nav-list" aria-expanded="false" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 76px; }
+  .brand { text-decoration: none; color: var(--ink); line-height: 1.1; flex-shrink: 0; }
+  .brand__text { font-family: var(--font-head); font-size: 1rem; }
+  .brand__text strong { font-size: 1.15rem; }
+  .nav ul { list-style: none; display: flex; gap: 26px; margin: 0; padding: 0; }
+  .nav a { text-decoration: none; color: var(--ink); font-weight: 600; font-size: 0.95rem; }
+  .nav a:hover, .nav a[aria-current='page'] { color: var(--brand); }
+  .nav__mobile-cta { display: none; }
+  .site-header__cta { display: flex; align-items: center; gap: 10px; }
+  .site-header__cta :global(.btn) { padding: 0.7em 1.2em; }
+  .menu-toggle { display: none; background: none; border: 0; padding: 8px; cursor: pointer; }
+  .menu-toggle span { display: block; width: 24px; height: 2px; background: var(--ink); margin: 5px 0; transition: .2s; }
+  @media (max-width: 960px) {
+    .menu-toggle { display: block; }
+    .nav ul { display: none; position: absolute; top: 76px; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--white); border-bottom: 1px solid var(--line); padding: 8px 20px 20px; box-shadow: var(--shadow); }
+    .nav ul.open { display: flex; }
+    .nav li a { display: block; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 1.05rem; }
+    .nav__mobile-cta { display: block; }
+  }
+  @media (max-width: 420px) { .brand__text { font-size: .85rem; } .brand__text strong { font-size: 1rem; } }
+</style>
+
+<script>
+  const btn = document.querySelector('.menu-toggle');
+  const list = document.getElementById('nav-list');
+  btn?.addEventListener('click', () => {
+    const open = list?.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(!!open));
+  });
+</script>

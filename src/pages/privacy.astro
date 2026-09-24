@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../config/site';
+---
+<Base title="Privacy Policy" description={`Privacy policy for ${site.name}.`}>
+  <section class="section">
+    <div class="container narrow prose">
+      <h1>Privacy Policy</h1>
+      <p>{site.name} respects your privacy and handles personal information in line with the Australian Privacy Principles under the <em>Privacy Act 1988</em> (Cth).</p>
+      <h2>What we collect</h2>
+      <p>When you contact us, submit a form or book online, we collect the details you provide, such as your name, phone number, email and information about your health concern. We also use cookies and similar tools (including Meta Pixel and Google Analytics) to understand how our website and advertising are performing.</p>
+      <h2>How we use it</h2>
+      <p>We use your information to respond to your enquiry, arrange and manage appointments, provide care, and improve our services. We don’t sell your personal information.</p>
+      <h2>Health information</h2>
+      <p>Clinical records are stored securely in our practice management system and are only accessed by authorised team members involved in your care.</p>
+      <h2>Access and correction</h2>
+      <p>You can ask to access or correct the personal information we hold about you by contacting us on {site.phone} or {site.email}.</p>
+      <h2>Complaints</h2>
+      <p>If you have a concern about how we’ve handled your information, please contact us first. If you’re not satisfied, you can contact the Office of the Australian Information Commissioner (oaic.gov.au).</p>
+      <p class="fine-print">Last updated: {new Date().toLocaleDateString('en-AU', { month: 'long', year: 'numeric' })}</p>
+    </div>
+  </section>
+</Base>
+<style>.prose h2 { font-size: 1.4rem; margin-top: 1.6em; }</style>

@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import BookButton from '../components/BookButton.astro';
+import { site } from '../config/site';
+const a = site.address;
+---
+<Base title="Contact & Location" description={`Find The Balanced Chiropractic Centre at ${a.street}, ${a.suburb}. Hours, phone and directions.`}>
+  <section class="section section--mist">
+    <div class="container narrow center">
+      <span class="eyebrow">Contact</span>
+      <h1>Visit us in Yandina</h1>
+      <p class="lead">Easy to reach from Nambour, Coolum, Eumundi, Maleny and across the Sunshine Coast hinterland.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container grid grid-2" style="align-items:start">
+      <div class="card">
+        <h2>Get in touch</h2>
+        <p><strong>Address</strong><br />{a.street}<br />{a.suburb} {a.state} {a.postcode}<br /><a href={site.mapsUrl} target="_blank" rel="noopener">Get directions →</a></p>
+        <p><strong>Phone</strong><br /><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a></p>
+        <p><strong>Email</strong><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <h3 style="margin-top:28px">Hours</h3>
+        <table class="hours-table">
+          {site.hours.map((h) => <tr><td>{h.days}</td><td>{h.time}</td></tr>)}
+        </table>
+        <div class="btn-row" style="margin-top:24px"><BookButton /></div>
+      </div>
+      <div class="map">
+        <iframe src={site.mapsEmbed} title="Map to The Balanced Chiropractic Centre" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .hours-table { width: 100%; border-collapse: collapse; }
+  .hours-table td { padding: 8px 0; border-bottom: 1px solid var(--line); }
+  .hours-table td:last-child { text-align: right; font-weight: 600; }
+  .map { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); min-height: 460px; }
+  .map iframe { width: 100%; height: 100%; min-height: 460px; border: 0; }
+</style>

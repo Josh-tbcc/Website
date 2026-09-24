@@ -1,0 +1,163 @@
+---
+import Base from '../../layouts/Base.astro';
+import Media from '../../components/Media.astro';
+import Video from '../../components/Video.astro';
+import { site } from '../../config/site';
+const { offer } = site;
+---
+<Base
+  landing
+  noindex
+  title={`${offer.price} ${offer.name}`}
+  description={`New patient ${offer.name} at The Balanced Chiropractic Centre, Yandina: thermography scan, spinal assessment and clear answers for ${offer.price}.`}
+>
+  <!-- HERO + FORM -->
+  <section class="lp-hero">
+    <div class="container lp-grid">
+      <div class="lp-copy">
+        <span class="eyebrow">Yandina · Sunshine Coast</span>
+        <h1>Back or neck pain that keeps coming back?</h1>
+        <p class="lead">It isn’t random, and it’s rarely just tight muscles. It’s a pattern your spine and nervous system have adapted to. Let’s measure what’s actually going on.</p>
+        <div class="price-tag">
+          <span class="price-tag__price">{offer.price}</span>
+          <span class="price-tag__label">New patient {offer.name}</span>
+        </div>
+        <ul class="checklist">
+          {offer.includes.map((i) => <li>{i}</li>)}
+        </ul>
+      </div>
+
+      <div class="card lp-form" id="claim">
+        <h2>Claim your {offer.price} assessment</h2>
+        <p class="fine-print" style="margin-top:-6px">Leave your details and our team will call you to find a time that suits.</p>
+        <form
+          class="form"
+          name="offer-lead"
+          method="POST"
+          action="/offer/thank-you"
+          data-netlify="true"
+          netlify-honeypot="company"
+          id="lead-form"
+        >
+          <input type="hidden" name="form-name" value="offer-lead" />
+          <p class="hidden"><label>Don’t fill this in: <input name="company" /></label></p>
+          <label>Full name<input name="name" autocomplete="name" required /></label>
+          <label>Mobile<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required /></label>
+          <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+          <label>What’s been going on?<textarea name="concern" rows="3" placeholder="e.g. lower back pain for 6 months"></textarea></label>
+          <label>Do you live, work or can travel to Yandina?
+            <select name="location" required>
+              <option value="">Select…</option>
+              <option>Yes, I live or work in Yandina</option>
+              <option>Yes, I can travel to Yandina</option>
+              <option>No</option>
+            </select>
+          </label>
+          <input type="hidden" name="utm_source" />
+          <input type="hidden" name="utm_campaign" />
+          <input type="hidden" name="utm_content" />
+          <button class="btn btn--primary btn--block" type="submit">Claim My {offer.price} Assessment</button>
+          <p class="fine-print">By submitting you agree to be contacted by our team about your appointment. See our <a href="/privacy">privacy policy</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="section section--sand">
+    <div class="container">
+      <div class="center narrow">
+        <h2>See what happens at your assessment</h2>
+      </div>
+      <div style="max-width:880px;margin:28px auto 0">
+        <Video id={site.videos.patientJourney} title="A patient’s journey at The Balanced Chiropractic Centre" label="“Journey of patient in our office” video" />
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFFERENCE -->
+  <section class="section">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Why we’re different</span>
+        <h2>We don’t guess. We measure.</h2>
+        <p>Most people spend months, even years, trying to manage their pain with stretching, massage, new pillows or new routines. It helps for a while, then it comes back, because the underlying pattern was never measured, let alone corrected.</p>
+        <p>Your assessment starts with a <strong>Thermpix thermography scan</strong>, thermal imaging with AI-assisted analysis that identifies hotspots along your spine. Combined with a thorough exam and in-house X-ray if needed, it gives us a clear picture of which areas need correcting and why.</p>
+        <p>Then, at your report of findings, we explain exactly what’s going on and the path to fixing it for the long term.</p>
+      </div>
+      <Media src="/images/thermography-scan.jpg" alt="Thermography scan example" label="Thermpix scan image (de-identified)" />
+    </div>
+  </section>
+
+  <!-- STEPS -->
+  <section class="section section--mist">
+    <div class="container narrow">
+      <h2 class="center">How it works</h2>
+      <div class="steps" style="margin-top:28px">
+        <div class="step"><h3>Leave your details</h3><p>It takes 30 seconds. Our team will call you, usually the same or next business day.</p></div>
+        <div class="step"><h3>Your assessment</h3><p>History, thermography scan, spinal and neurological assessment, and X-rays in-house if required.</p></div>
+        <div class="step"><h3>Your report of findings</h3><p>Clear answers about what’s going on, and a plan to correct it for the long term.</p></div>
+      </div>
+      <div class="center" style="margin-top:28px">
+        <a class="btn btn--primary" href="#claim">Claim My {offer.price} Assessment</a>
+      </div>
+      <p class="fine-print center" style="margin-top:24px">
+        {offer.price} {offer.name} is for new patients only. Care recommendations and any further visits are discussed at
+        your report of findings. Individual results vary.
+      </p>
+    </div>
+  </section>
+
+  <a class="lp-sticky btn btn--primary" href="#claim">Claim {offer.price} Assessment</a>
+</Base>
+
+<script is:inline define:vars={{ sheetWebhook: offer.sheetWebhook }}>
+  (function () {
+    var form = document.getElementById('lead-form');
+    if (!form) return;
+    // Hide the floating mobile button while the form is on screen
+    var sticky = document.querySelector('.lp-sticky');
+    if (sticky && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        sticky.style.visibility = entries[0].isIntersecting ? 'hidden' : 'visible';
+      }).observe(document.getElementById('claim'));
+    }
+    // Carry ad tracking (utm_*) into the lead
+    var params = new URLSearchParams(location.search);
+    ['utm_source', 'utm_campaign', 'utm_content'].forEach(function (k) {
+      var el = form.querySelector('[name="' + k + '"]');
+      if (el && params.get(k)) el.value = params.get(k);
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('button[type=submit]');
+      btn.disabled = true; btn.textContent = 'Sending…';
+      var body = new URLSearchParams(new FormData(form)).toString();
+      var jobs = [
+        fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body }),
+      ];
+      if (sheetWebhook) {
+        jobs.push(fetch(sheetWebhook, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body }));
+      }
+      Promise.allSettled(jobs).then(function () {
+        if (window.fbq) window.fbq('track', 'Lead');
+        location.href = '/offer/thank-you';
+      });
+    });
+  })();
+</script>
+
+<style>
+  .lp-hero { background: linear-gradient(180deg, var(--mist), var(--white)); padding: clamp(32px, 5vw, 72px) 0; }
+  .lp-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
+  .lp-form h2 { font-size: 1.6rem; }
+  .price-tag { display: inline-flex; align-items: baseline; gap: 12px; background: var(--ink); color: var(--white); padding: 12px 20px; border-radius: 12px; margin: 6px 0 22px; }
+  .price-tag__price { font-family: var(--font-head); font-size: 2.2rem; font-weight: 700; color: #ffd2bd; }
+  .price-tag__label { font-weight: 600; }
+  .lp-sticky { display: none; }
+  @media (max-width: 900px) {
+    .lp-grid { grid-template-columns: 1fr; }
+    .lp-sticky { display: flex; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 40; }
+  }
+</style>

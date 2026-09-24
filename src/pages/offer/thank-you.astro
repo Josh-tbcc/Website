@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import Video from '../../components/Video.astro';
+import { site } from '../../config/site';
+---
+<Base landing noindex title="Thank You">
+  <section class="section section--mist">
+    <div class="container narrow center">
+      <span class="eyebrow">You’re in</span>
+      <h1>Thanks! We’ll be in touch shortly.</h1>
+      <p class="lead">One of our team will call you from <strong>{site.phone}</strong> to find a time for your assessment. Keep an eye on your phone. If you miss us, we’ll send a text.</p>
+      <p>Can’t wait? Call us now on <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a>.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:880px">
+      <h2 class="center">While you wait: here’s what to expect</h2>
+      <Video id={site.videos.patientJourney} title="A patient’s journey at The Balanced Chiropractic Centre" label="“Journey of patient in our office” video" />
+    </div>
+  </section>
+</Base>

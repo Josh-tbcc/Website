@@ -1,0 +1,16 @@
+---
+// Shows a photo from /public/images if it exists, otherwise a labelled
+// placeholder so it's obvious which photo belongs where.
+import fs from 'node:fs';
+import path from 'node:path';
+
+interface Props { src: string; alt: string; shape?: 'tall' | 'wide' | 'default'; label?: string; eager?: boolean }
+const { src, alt, shape = 'default', label, eager = false } = Astro.props;
+const exists = fs.existsSync(path.join(process.cwd(), 'public', src));
+const cls = ['media', shape === 'tall' && 'media--tall', shape === 'wide' && 'media--wide'].filter(Boolean).join(' ');
+---
+<div class={cls}>
+  {exists
+    ? <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+    : <span class="media__label">📷 {label ?? alt}<br /><small>Add photo: public{src}</small></span>}
+</div>

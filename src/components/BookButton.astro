@@ -1,0 +1,5 @@
+---
+interface Props { label?: string; variant?: 'primary' | 'ghost' | 'light'; block?: boolean }
+const { label = 'Book Online', variant = 'primary', block = false } = Astro.props;
+---
+<a href="/book" class={`btn btn--${variant}${block ? ' btn--block' : ''}`} data-book>{label}</a>

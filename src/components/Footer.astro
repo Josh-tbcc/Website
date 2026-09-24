@@ -1,0 +1,54 @@
+---
+import { site } from '../config/site';
+const year = new Date().getFullYear();
+const a = site.address;
+---
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h3>{site.name}</h3>
+      <p>{a.street}<br />{a.suburb} {a.state} {a.postcode}</p>
+      <p><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <p><a href={site.mapsUrl} target="_blank" rel="noopener">Get directions →</a></p>
+    </div>
+    <div>
+      <h3>Hours</h3>
+      <ul class="hours">
+        {site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}
+      </ul>
+    </div>
+    <div>
+      <h3>Explore</h3>
+      <ul class="links">
+        <li><a href="/new-patients">New Patients</a></li>
+        <li><a href="/thermography">Thermal Nerve Scan</a></li>
+        <li><a href="/who-we-help">Who We Help</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/book">Book Online</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+      </ul>
+      <p class="social">
+        {site.social.facebook && <a href={site.social.facebook} target="_blank" rel="noopener">Facebook</a>}
+        {site.social.instagram && <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>}
+        {site.social.googleReviews && <a href={site.social.googleReviews} target="_blank" rel="noopener">Google Reviews</a>}
+      </p>
+    </div>
+  </div>
+  <div class="container footer-base">
+    <p>© {year} {site.name}. All rights reserved. Individual results vary. Chiropractic care is tailored to each person following a thorough assessment.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: #0f2429; color: #b8cbcd; padding: 64px 0 24px; font-size: .95rem; }
+  .site-footer h3 { color: var(--white); font-size: 1.15rem; }
+  .site-footer a { color: #d9ecee; text-decoration: none; }
+  .site-footer a:hover { color: var(--white); text-decoration: underline; }
+  .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; }
+  .hours, .links { list-style: none; padding: 0; margin: 0; }
+  .hours li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,.1); }
+  .links li { padding: 4px 0; }
+  .social { display: flex; gap: 16px; margin-top: 16px; }
+  .footer-base { border-top: 1px solid rgba(255,255,255,.1); margin-top: 40px; padding-top: 20px; font-size: .8rem; color: #8aa3a6; }
+  @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr; } }
+</style>

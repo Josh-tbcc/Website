@@ -1,0 +1,19 @@
+---
+import BookButton from './BookButton.astro';
+import { site } from '../config/site';
+interface Props { title?: string; text?: string }
+const {
+  title = 'Ready to find out what’s really going on?',
+  text = 'Book your new patient consultation online in under a minute, or give the team a call.',
+} = Astro.props;
+---
+<section class="section section--ink">
+  <div class="container center narrow">
+    <h2>{title}</h2>
+    <p class="lead" style="color:#c7d9da">{text}</p>
+    <div class="btn-row" style="justify-content:center">
+      <BookButton label="Book Your First Visit" />
+      <a class="btn btn--light" href={`tel:${site.phone.replace(/\s/g, '')}`}>Call {site.phone}</a>
+    </div>
+  </div>
+</section>

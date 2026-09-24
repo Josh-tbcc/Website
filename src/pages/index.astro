@@ -1,0 +1,185 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Video from '../components/Video.astro';
+import BookButton from '../components/BookButton.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../config/site';
+---
+<Base>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Chiropractor · Yandina, Sunshine Coast</span>
+        <h1>We don’t guess.<br />We measure, then we correct.</h1>
+        <p class="lead">
+          Pain is usually the last thing to show up and the first thing to leave. At The Balanced Chiropractic Centre we
+          use thermal nerve scans, in-house X-ray and a thorough exam to find the pattern behind your symptoms, then
+          build a clear plan to change it.
+        </p>
+        <div class="btn-row">
+          <BookButton label="Book Your First Visit" />
+          <a class="btn btn--ghost" href="/new-patients">What to expect</a>
+        </div>
+        <ul class="hero__trust">
+          <li>Thermography nerve scanning</li>
+          <li>In-house X-ray</li>
+          <li>Families, kids & pregnancy</li>
+        </ul>
+      </div>
+      <Media src="/images/hero.jpg" alt="Chiropractor adjusting a patient at The Balanced Chiropractic Centre" label="Hero photo: Dr Josh adjusting / team shot" shape="tall" eager />
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="section section--sand">
+    <div class="container narrow center">
+      <span class="eyebrow">Sound familiar?</span>
+      <h2>It settles… then it comes straight back.</h2>
+      <p class="lead">
+        You stretch, get a massage, fix your posture, try something new, and for a while it feels better. Then the same
+        neck, the same lower back, the same headaches return. That isn’t bad luck. It’s a pattern your spine and nervous
+        system have adapted to over months and years, and patterns don’t change in a single visit.
+      </p>
+    </div>
+  </section>
+
+  <!-- APPROACH: 3 phases -->
+  <section class="section">
+    <div class="container">
+      <div class="center narrow">
+        <span class="eyebrow">Our approach</span>
+        <h2>Care that’s built to last</h2>
+        <p class="lead">Feeling better is the start. Staying better is the goal. Every plan moves through three clear phases, and we re-measure along the way so you can see the change, not just feel it.</p>
+      </div>
+      <div class="grid grid-3" style="margin-top:40px">
+        <div class="card">
+          <div class="icon-dot">01</div>
+          <h3>Relief</h3>
+          <p>We calm things down and get you moving again, focusing on the areas your scans and exam show are under the most stress.</p>
+        </div>
+        <div class="card">
+          <div class="icon-dot">02</div>
+          <h3>Correction</h3>
+          <p>With the fire out, we work on the underlying pattern: restoring motion, improving how your spine carries load and how your nervous system adapts.</p>
+        </div>
+        <div class="card">
+          <div class="icon-dot">03</div>
+          <h3>Strength & wellness</h3>
+          <p>We lock in your progress with home care, corrective exercises and regular check-ins, so you keep the gains you’ve worked for.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THERMOGRAPHY -->
+  <section class="section section--ink">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">Thermography nerve scan</span>
+        <h2>See what’s happening beneath the surface</h2>
+        <p>
+          Our Thermpix thermal imaging, with AI-assisted analysis, maps temperature differences along your spine and
+          body. Those hotspots give us an objective picture of where your nervous system is under stress, and a clear
+          starting point for your care.
+        </p>
+        <p>Because it’s measured, we can scan again as you progress and compare, so you and your chiropractor can both see how things are changing.</p>
+        <a class="btn btn--light" href="/thermography">How the scan works</a>
+      </div>
+      <Video id={site.videos.thermography} title="Thermography scan at The Balanced Chiropractic Centre" label="Thermography scan video" />
+    </div>
+  </section>
+
+  <!-- PATIENT JOURNEY VIDEO -->
+  <section class="section">
+    <div class="container">
+      <div class="center narrow">
+        <span class="eyebrow">Your journey with us</span>
+        <h2>See what your first visits look like</h2>
+        <p class="lead">From the moment you walk in to your report of findings, here’s exactly what happens, so there are no surprises.</p>
+      </div>
+      <div style="max-width:900px;margin:32px auto 0">
+        <Video id={site.videos.patientJourney} title="A patient’s journey at The Balanced Chiropractic Centre" label="“Journey of patient in our office” video" />
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW PATIENT STEPS -->
+  <section class="section section--mist">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">New patients</span>
+        <h2>Two visits to real answers</h2>
+        <div class="steps">
+          <div class="step">
+            <h3>Visit 1: Comprehensive assessment</h3>
+            <p>Full health history, thermography scan, spinal palpation, neurological tests and, if needed, in-house X-rays with motion studies to pinpoint the areas of restriction.</p>
+          </div>
+          <div class="step">
+            <h3>Visit 2: Report of findings</h3>
+            <p>We sit down and walk you through your results: what’s going on, why it matters, and the path to correct it long term.</p>
+          </div>
+          <div class="step">
+            <h3>Your care plan begins</h3>
+            <p>A clear, personalised plan with progress checks every 12 visits so you always know where you’re at.</p>
+          </div>
+        </div>
+        <div class="btn-row" style="margin-top:12px">
+          <BookButton label="Book New Patient Consult" />
+          <a class="btn btn--ghost" href="/new-patients">Learn more</a>
+        </div>
+      </div>
+      <Media src="/images/treatment-room.jpg" alt="Treatment room at The Balanced Chiropractic Centre" label="Treatment room photo" />
+    </div>
+  </section>
+
+  <!-- WHO WE HELP -->
+  <section class="section">
+    <div class="container">
+      <div class="center narrow">
+        <span class="eyebrow">Who we help</span>
+        <h2>Care for every stage of life</h2>
+      </div>
+      <div class="grid grid-4" style="margin-top:36px">
+        <a class="card who" href="/who-we-help#families"><h3>Families & kids</h3><p>Gentle, age-appropriate care from little ones to grandparents.</p></a>
+        <a class="card who" href="/who-we-help#pregnancy"><h3>Pregnancy</h3><p>Support for your changing body through each trimester.</p></a>
+        <a class="card who" href="/who-we-help#athletes"><h3>Sports & athletes</h3><p>Move better, recover faster and keep training.</p></a>
+        <a class="card who" href="/who-we-help#chronic"><h3>Ongoing & chronic issues</h3><p>For the back, neck and headaches that keep coming back.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM / CLINIC -->
+  <section class="section section--sand">
+    <div class="container split">
+      <Media src="/images/team.jpg" alt="The team at The Balanced Chiropractic Centre" label="Team photo" />
+      <div>
+        <span class="eyebrow">Meet the team</span>
+        <h2>A family practice for the Yandina community</h2>
+        <p>Led by Dr Joshua Kassis, our team believes the body is designed to heal and thrive when the spine and nervous system are working well. We’re here to help you understand your health, not just treat your symptoms, and to support you for years, not just weeks.</p>
+        <a class="btn btn--ghost" href="/about">About us</a>
+      </div>
+    </div>
+  </section>
+
+  {site.social.googleReviews && (
+    <section class="section">
+      <div class="container center narrow">
+        <h2>See what our community says</h2>
+        <p class="lead">Read our reviews on Google.</p>
+        <a class="btn btn--ghost" href={site.social.googleReviews} target="_blank" rel="noopener">Read Google reviews</a>
+      </div>
+    </section>
+  )}
+
+  <CtaBand />
+</Base>
+
+<style>
+  .hero { padding: clamp(40px, 6vw, 88px) 0; background: linear-gradient(180deg, var(--mist), var(--white)); }
+  .hero__trust { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: .92rem; font-weight: 600; color: var(--ink-soft); }
+  .hero__trust li::before { content: '✓ '; color: var(--brand); }
+  .who { text-decoration: none; color: inherit; transition: transform .15s ease; }
+  .who:hover { transform: translateY(-3px); color: inherit; }
+</style>

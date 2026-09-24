@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Video from '../components/Video.astro';
+import BookButton from '../components/BookButton.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../config/site';
+
+const faqs = [
+  {
+    q: 'How long is the first appointment?',
+    a: 'Your new patient consultation is booked as a 30-minute appointment. If X-rays are needed we take them in-house the same day, so you may be with us a little longer.',
+  },
+  {
+    q: 'Will I be adjusted on my first visit?',
+    a: 'Our first priority is understanding what’s going on. We gather all the information on day one, analyse it properly, then explain everything at your report of findings before we start care.',
+  },
+  {
+    q: 'Do I need a referral?',
+    a: 'No referral is needed. You can book online or call us directly.',
+  },
+  {
+    q: 'How long until I feel better?',
+    a: 'Everyone is different. Many people notice changes early, but lasting change takes longer than symptom relief. Your report of findings will set clear expectations for your situation, and we re-check your progress regularly.',
+  },
+  {
+    q: 'What should I wear?',
+    a: 'Comfortable clothing you can move in. Please bring any previous scans or reports you have.',
+  },
+];
+---
+<Base title="New Patients" description="What to expect at your first visit to The Balanced Chiropractic Centre in Yandina: comprehensive assessment, thermography scan, in-house X-ray and a clear report of findings.">
+  <section class="section section--mist">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">New patients</span>
+        <h1>Welcome. Here’s exactly what to expect.</h1>
+        <p class="lead">No guesswork, no rushing. Your first two visits are all about finding the real cause and giving you a clear plan forward.</p>
+        <div class="btn-row">
+          <BookButton label="Book New Patient Consult" />
+          {site.intakeFormUrl && <a class="btn btn--ghost" href={site.intakeFormUrl} target="_blank" rel="noopener">Complete intake form</a>}
+        </div>
+      </div>
+      <Media src="/images/reception.jpg" alt="Reception at The Balanced Chiropractic Centre" label="Reception desk photo" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-2" style="align-items:start">
+        <div class="card">
+          <span class="pill">Visit 1</span>
+          <h2 style="margin-top:14px">Comprehensive assessment</h2>
+          <ul class="checklist">
+            <li><strong>Full health history:</strong> your symptoms, past injuries, lifestyle and goals</li>
+            <li><strong>Thermography nerve scan:</strong> thermal imaging with AI-assisted analysis to identify hotspots along your spine</li>
+            <li><strong>Full spinal palpation</strong> to feel how each segment is moving</li>
+            <li><strong>Neurological and orthopaedic tests</strong></li>
+            <li><strong>In-house X-rays with motion studies</strong> if clinically required, to pinpoint the exact areas of restriction</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="pill">Visit 2</span>
+          <h2 style="margin-top:14px">Report of findings</h2>
+          <ul class="checklist">
+            <li>We walk you through your scans, X-rays and exam results in plain English</li>
+            <li>We explain exactly what’s going on and why it’s been coming back</li>
+            <li>We map out the path to correct it long term, including how long it’s likely to take</li>
+            <li>You ask every question you have. Bring your partner if you like.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand">
+    <div class="container">
+      <div class="center narrow">
+        <span class="eyebrow">Watch</span>
+        <h2>A patient’s journey in our office</h2>
+      </div>
+      <div style="max-width:900px;margin:28px auto 0">
+        <Video id={site.videos.patientJourney} title="A patient’s journey at The Balanced Chiropractic Centre" label="“Journey of patient in our office” video" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <span class="eyebrow">After your report</span>
+        <h2>A plan with milestones, not a guessing game</h2>
+        <p>Your care plan is built around your results and your goals. We re-assess your posture and progress every 12 visits, and at major reviews we compare fresh results against where you started, so you can see how your spine and nervous system have changed.</p>
+        <p>Most people come to us for pain. Many stay because they discover how much better they can feel, move and function when their body is working the way it’s designed to.</p>
+      </div>
+      <Media src="/images/adjusting-table.jpg" alt="Adjusting table at The Balanced Chiropractic Centre" label="Adjusting table / session photo" />
+    </div>
+  </section>
+
+  <section class="section section--mist">
+    <div class="container narrow">
+      <div class="center">
+        <span class="eyebrow">Before you arrive</span>
+        <h2>Save time on the day</h2>
+        <p class="lead">Complete your new patient forms online before your first visit so we can spend more time on you.</p>
+        {site.intakeFormUrl
+          ? <a class="btn btn--primary" href={site.intakeFormUrl} target="_blank" rel="noopener">Complete intake form</a>
+          : <p class="fine-print">(Jotform intake link goes here: add it in src/config/site.ts)</p>}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <h2 class="center">Common questions</h2>
+      {faqs.map((f) => (
+        <details class="faq"><summary>{f.q}</summary><p>{f.a}</p></details>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>

@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const groups = [
+  {
+    id: 'families',
+    title: 'Families & kids',
+    photo: '/images/kids.jpg',
+    body: [
+      'We’re a family practice at heart. From babies and school-aged kids to parents and grandparents, we tailor every adjustment to the person on the table, using gentle, age-appropriate techniques.',
+      'Kids’ spines go through a lot: birth, learning to walk, falls, school bags and screens. Regular check-ups help keep their growing bodies moving and adapting well.',
+    ],
+  },
+  {
+    id: 'pregnancy',
+    title: 'Pregnancy',
+    photo: '/images/pregnancy.jpg',
+    body: [
+      'Your body changes quickly during pregnancy, and your spine and pelvis carry much of that load. We use pregnancy-friendly positioning and gentle techniques to support you through each trimester and beyond.',
+    ],
+  },
+  {
+    id: 'athletes',
+    title: 'Sports & athletes',
+    photo: '/images/sports.jpg',
+    body: [
+      'Whether you’re chasing a PB, playing weekend footy or surfing before work, how well your spine moves affects how well you move. We work with athletes to improve mobility and balance, and to support recovery so you can keep training consistently.',
+    ],
+  },
+  {
+    id: 'chronic',
+    title: 'Ongoing & chronic issues',
+    photo: '/images/chronic.jpg',
+    body: [
+      'Lower back pain, neck pain, sciatica, headaches, stiffness: if it has been hanging around for months or years, it’s a pattern, not a one-off. We measure what’s going on and build a staged plan that goes beyond short-term relief.',
+    ],
+  },
+  {
+    id: 'wellness',
+    title: 'Wellness & prevention',
+    photo: '/images/wellness.jpg',
+    body: [
+      'Many of our practice members don’t come in because something hurts. They come in because they want to stay moving, stay well and keep their nervous system functioning at its best for the long run.',
+    ],
+  },
+];
+---
+<Base title="Who We Help" description="Family chiropractic in Yandina for kids, pregnancy, athletes, chronic back and neck issues and long-term wellness.">
+  <section class="section section--mist">
+    <div class="container narrow center">
+      <span class="eyebrow">Who we help</span>
+      <h1>Chiropractic for every stage of life</h1>
+      <p class="lead">Every body is different, so every plan is different. What stays the same is our process: assess thoroughly, explain clearly, and support you for the long term.</p>
+    </div>
+  </section>
+
+  {groups.map((g, i) => (
+    <section id={g.id} class={`section${i % 2 ? ' section--sand' : ''}`}>
+      <div class="container split">
+        <div style={i % 2 ? 'order:2' : ''}>
+          <h2>{g.title}</h2>
+          {g.body.map((p) => <p>{p}</p>)}
+          <a class="btn btn--ghost" href="/book" data-book>Book a consult</a>
+        </div>
+        <Media src={g.photo} alt={g.title} label={`${g.title} photo`} />
+      </div>
+    </section>
+  ))}
+
+  <CtaBand />
+</Base>
