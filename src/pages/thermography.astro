@@ -11,7 +11,7 @@ import { site } from '../config/site';
 <Base title="Thermography Nerve Scan" description="Thermpix thermal imaging with AI-assisted analysis at The Balanced Chiropractic Centre, Yandina. An objective look at where your nervous system is under stress.">
   <PageHero eyebrow="Thermography nerve scan" title="Clarity starts with <span class='hl'>measurement.</span>" lead="Thermography imaging identifies specific hotspots on your body and spine. It gives us an objective indication of which areas need attention, so your care is based on data, not guesswork.">
     <div class="btn-row" slot="actions"><BookButton label="Book a consult & scan" /></div>
-    <div slot="aside"><Video id={site.videos.thermography} title="Thermography scan at The Balanced Chiropractic Centre" label="Thermography scan video" /></div>
+    <div slot="aside"><Video id={site.videos.thermography} title="Thermography scan at The Balanced Chiropractic Centre" label="Thermography scan video" fallback="/images/thermal-scanning.jpg" fallbackAlt="Dr Josh performing a Thermpix thermography scan" position="center 22%" /></div>
   </PageHero>
 
   <section class="section">
@@ -42,7 +42,7 @@ import { site } from '../config/site';
 
   <section class="section section--cream panel">
     <div class="container split">
-      <Media src="/images/thermography-scan.jpg" alt="Example thermography scan image, patient details removed" label="Example Thermpix scan image (de-identified)" />
+      <Media src="/images/thermography-scan.jpg" alt="Thermpix scanner showing a thermal image of a patient’s upper back" label="Thermpix scan image" shape="tall" />
       <div>
         <span class="eyebrow">Why it matters</span>
         <h2>Pain tells you something’s wrong. The scan helps show where.</h2>

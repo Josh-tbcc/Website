@@ -4,12 +4,15 @@ import Media from '../components/Media.astro';
 import CtaBand from '../components/CtaBand.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const groups = [
   {
     id: 'families',
     title: 'Families & kids',
     photo: '/images/kids.jpg',
+    alt: 'Gentle chiropractic care for children',
     body: [
       'We’re a family practice at heart. From babies and school-aged kids to parents and grandparents, we tailor every adjustment to the person on the table, using gentle, age-appropriate techniques.',
       'Kids’ spines go through a lot: birth, learning to walk, falls, school bags and screens. Regular check-ups help keep their growing bodies moving and adapting well.',
@@ -19,6 +22,7 @@ const groups = [
     id: 'pregnancy',
     title: 'Pregnancy',
     photo: '/images/pregnancy.jpg',
+    alt: 'Pregnancy chiropractic care',
     body: [
       'Your body changes quickly during pregnancy, and your spine and pelvis carry much of that load. We use pregnancy-friendly positioning and gentle techniques to support you through each trimester and beyond.',
     ],
@@ -27,6 +31,7 @@ const groups = [
     id: 'athletes',
     title: 'Sports & athletes',
     photo: '/images/sports.jpg',
+    alt: 'Dr Josh checking leg length and balance',
     body: [
       'Whether you’re chasing a PB, playing weekend footy or surfing before work, how well your spine moves affects how well you move. We work with athletes to improve mobility and balance, and to support recovery so you can keep training consistently.',
     ],
@@ -35,6 +40,7 @@ const groups = [
     id: 'chronic',
     title: 'Ongoing & chronic issues',
     photo: '/images/chronic.jpg',
+    alt: 'Dr Josh adjusting a patient’s mid back',
     body: [
       'Lower back pain, neck pain, sciatica, headaches, stiffness: if it has been hanging around for months or years, it’s a pattern, not a one-off. We measure what’s going on and build a staged plan that goes beyond short-term relief.',
     ],
@@ -43,11 +49,13 @@ const groups = [
     id: 'wellness',
     title: 'Wellness & prevention',
     photo: '/images/wellness.jpg',
+    alt: 'Dr Josh adjusting a patient during a wellness visit',
     body: [
       'Many of our practice members don’t come in because something hurts. They come in because they want to stay moving, stay well and keep their nervous system functioning at its best for the long run.',
     ],
   },
 ];
+const hasPhoto = (src: string) => fs.existsSync(path.join(process.cwd(), 'public', src));
 ---
 <Base title="Who We Help" description="Family chiropractic in Yandina for kids, pregnancy, athletes, chronic back and neck issues and long-term wellness.">
   <PageHero eyebrow="Who we help" title="Chiropractic for <span class='hl'>every stage of life.</span>" lead="Every body is different, so every plan is different. What stays the same is our process: assess thoroughly, explain clearly, and support you for the long term.">
@@ -58,13 +66,13 @@ const groups = [
 
   {groups.map((g, i) => (
     <section id={g.id} class={`section${i % 2 ? ' section--cream panel' : ''}`}>
-      <div class="container split">
-        <div class="reveal" style={i % 2 ? 'order:2' : ''}>
+      <div class={hasPhoto(g.photo) ? 'container split' : 'container narrow'}>
+        <div class="reveal" style={i % 2 && hasPhoto(g.photo) ? 'order:2' : ''}>
           <h2>{g.title}</h2>
           {g.body.map((p) => <p>{p}</p>)}
           <a class="btn btn--dark" href="/book" data-book>Book a consult<Icon name="arrow" /></a>
         </div>
-        <Media src={g.photo} alt={g.title} label={`${g.title} photo`} class="reveal" />
+        {hasPhoto(g.photo) && <Media src={g.photo} alt={g.alt} label={`${g.title} photo`} shape="tall" class="reveal" />}
       </div>
     </section>
   ))}
