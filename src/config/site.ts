@@ -13,7 +13,7 @@ export const site = {
 
   // Contact
   phone: '07 3496 9345',
-  email: 'hello@thebalancedchiro.com.au', // TODO: confirm reception email
+  email: 'yadina@thebalancedchiro.com.au',
   address: {
     street: 'Centre 5/18 Farrell St',
     suburb: 'Yandina',
