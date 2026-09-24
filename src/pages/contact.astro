@@ -16,7 +16,7 @@ const a = site.address;
         <p><strong>Email</strong><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
         <h3 style="margin-top:28px">Hours</h3>
         <table class="hours-table">
-          {site.hours.map((h) => <tr><td>{h.days}</td><td>{h.time}</td></tr>)}
+          {site.hours.map((h) => <tr><td>{h.days}</td><td>{h.time.split(', ').map((t, i) => <>{i > 0 && <br />}{t}</>)}</td></tr>)}
         </table>
         <div class="btn-row" style="margin-top:24px"><BookButton /></div>
       </div>

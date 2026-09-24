@@ -7,12 +7,12 @@ export const site = {
   name: 'The Balanced Chiropractic Centre',
   shortName: 'Balanced Chiro',
   url: 'https://thebalancedchiro.com.au',
-  tagline: 'Chiropractic care built for the long term',
+  tagline: 'Health from within',
   description:
     'Family chiropractic in Yandina on the Sunshine Coast. Thermal nerve scans, in-house X-ray and a clear plan to correct the cause — not just chase the pain.',
 
   // Contact
-  phone: '07 0000 0000', // TODO: real phone number
+  phone: '07 3496 9345',
   email: 'hello@thebalancedchiro.com.au', // TODO: confirm reception email
   address: {
     street: 'Centre 5/18 Farrell St',
@@ -24,14 +24,13 @@ export const site = {
   mapsEmbed:
     'https://www.google.com/maps?q=5%2F18+Farrell+St+Yandina+QLD+4561&output=embed',
 
-  // TODO: copy the real hours from the current website
   hours: [
-    { days: 'Monday', time: '7:00am – 6:00pm' },
-    { days: 'Tuesday', time: '7:00am – 6:00pm' },
-    { days: 'Wednesday', time: '7:00am – 6:00pm' },
-    { days: 'Thursday', time: '7:00am – 6:00pm' },
-    { days: 'Friday', time: '7:00am – 12:00pm' },
-    { days: 'Saturday', time: 'By appointment' },
+    { days: 'Monday', time: '2:30pm – 6:00pm' },
+    { days: 'Tuesday', time: '7:00am – 10:00am, 2:30pm – 6:00pm' },
+    { days: 'Wednesday', time: '2:30pm – 6:00pm' },
+    { days: 'Thursday', time: '7:00am – 10:00am, 2:30pm – 6:00pm' },
+    { days: 'Friday', time: '7:00am – 10:00am' },
+    { days: 'Saturday', time: 'Closed' },
     { days: 'Sunday', time: 'Closed' },
   ],
 
