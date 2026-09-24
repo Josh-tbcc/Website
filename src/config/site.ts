@@ -43,7 +43,7 @@ export const site = {
   },
 
   // Online intake form (Jotform)
-  intakeFormUrl: '', // TODO: Jotform new patient intake link
+  intakeFormUrl: 'https://form.jotform.com/262209246859062',
 
   // $49 Meta ad offer
   offer: {
