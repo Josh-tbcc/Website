@@ -13,7 +13,7 @@ export const site = {
 
   // Contact
   phone: '07 3496 9345',
-  email: 'yadina@thebalancedchiro.com.au',
+  email: 'yandina@thebalancedchiro.com.au',
   address: {
     street: 'Centre 5/18 Farrell St',
     suburb: 'Yandina',
@@ -68,7 +68,6 @@ export const site = {
 
   // Videos — paste YouTube video IDs (the part after v=)
   videos: {
-    patientJourney: '', // TODO: "Journey of patient in our office"
     thermography: '', // TODO: thermal scan explainer
     intro: '', // optional: welcome video from Dr Josh
   },
