@@ -2,6 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
 import CtaBand from '../components/CtaBand.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
 
 const groups = [
   {
@@ -48,26 +50,30 @@ const groups = [
 ];
 ---
 <Base title="Who We Help" description="Family chiropractic in Yandina for kids, pregnancy, athletes, chronic back and neck issues and long-term wellness.">
-  <section class="section section--mist">
-    <div class="container narrow center">
-      <span class="eyebrow">Who we help</span>
-      <h1>Chiropractic for every stage of life</h1>
-      <p class="lead">Every body is different, so every plan is different. What stays the same is our process: assess thoroughly, explain clearly, and support you for the long term.</p>
-    </div>
-  </section>
+  <PageHero eyebrow="Who we help" title="Chiropractic for <span class='hl'>every stage of life.</span>" lead="Every body is different, so every plan is different. What stays the same is our process: assess thoroughly, explain clearly, and support you for the long term.">
+    <nav class="jump" slot="actions" aria-label="Jump to section">
+      {groups.map((g) => <a href={`#${g.id}`}>{g.title}</a>)}
+    </nav>
+  </PageHero>
 
   {groups.map((g, i) => (
-    <section id={g.id} class={`section${i % 2 ? ' section--sand' : ''}`}>
+    <section id={g.id} class={`section${i % 2 ? ' section--cream panel' : ''}`}>
       <div class="container split">
-        <div style={i % 2 ? 'order:2' : ''}>
+        <div class="reveal" style={i % 2 ? 'order:2' : ''}>
           <h2>{g.title}</h2>
           {g.body.map((p) => <p>{p}</p>)}
-          <a class="btn btn--ghost" href="/book" data-book>Book a consult</a>
+          <a class="btn btn--dark" href="/book" data-book>Book a consult<Icon name="arrow" /></a>
         </div>
-        <Media src={g.photo} alt={g.title} label={`${g.title} photo`} />
+        <Media src={g.photo} alt={g.title} label={`${g.title} photo`} class="reveal" />
       </div>
     </section>
   ))}
 
   <CtaBand />
 </Base>
+<style>
+  section[id] { scroll-margin-top: 90px; }
+  .jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .jump a { padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); color: var(--white); text-decoration: none; font-weight: 600; font-size: .9rem; transition: background .2s; }
+  .jump a:hover { background: rgba(255,255,255,.12); color: var(--white); }
+</style>

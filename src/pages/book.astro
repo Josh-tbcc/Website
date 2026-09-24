@@ -1,19 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../config/site';
+import PageHero from '../components/PageHero.astro';
 const { url, embed, newPatientLabel } = site.booking;
 ---
 <Base title="Book Online" description="Book your chiropractic appointment online at The Balanced Chiropractic Centre, Yandina: new patients and existing practice members.">
-  <section class="section section--mist" style="padding-bottom:40px">
-    <div class="container narrow center">
-      <span class="eyebrow">Book online</span>
-      <h1>Choose a time that suits you</h1>
-      <p class="lead">
-        <strong>New here?</strong> Select <em>{newPatientLabel}</em>.<br />
-        <strong>Existing practice member?</strong> Choose your regular appointment type.
-      </p>
+  <PageHero eyebrow="Book online" title="Choose a time <span class='hl'>that suits you.</span>">
+    <div slot="actions" class="book-tips">
+      <div><strong>New here?</strong><span>Select “{newPatientLabel}”</span></div>
+      <div><strong>Existing practice member?</strong><span>Choose your regular appointment</span></div>
     </div>
-  </section>
+  </PageHero>
   <section class="section" style="padding-top:32px">
     <div class="container">
       {url ? (
@@ -36,6 +33,11 @@ const { url, embed, newPatientLabel } = site.booking;
   </section>
 </Base>
 <style>
+  .book-tips { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 640px; }
+  .book-tips div { padding: 16px 18px; border-radius: 16px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
+  .book-tips strong { display: block; color: var(--white); }
+  .book-tips span { font-size: .92rem; }
+  @media (max-width: 560px) { .book-tips { grid-template-columns: 1fr; } }
   .booking-frame { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
   .booking-frame iframe { width: 100%; height: 900px; border: 0; }
 </style>

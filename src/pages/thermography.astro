@@ -4,23 +4,15 @@ import Media from '../components/Media.astro';
 import Video from '../components/Video.astro';
 import BookButton from '../components/BookButton.astro';
 import CtaBand from '../components/CtaBand.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 ---
 <Base title="Thermography Nerve Scan" description="Thermpix thermal imaging with AI-assisted analysis at The Balanced Chiropractic Centre, Yandina. An objective look at where your nervous system is under stress.">
-  <section class="section section--ink">
-    <div class="container split">
-      <div>
-        <span class="eyebrow">Thermography nerve scan</span>
-        <h1 style="color:#fff">Clarity starts with measurement</h1>
-        <p class="lead" style="color:#c7d9da">
-          Thermography imaging identifies specific hotspots on your body and spine. It gives us an objective indication
-          of which areas need attention, so your care is based on data, not guesswork.
-        </p>
-        <BookButton label="Book a Consult & Scan" />
-      </div>
-      <Video id={site.videos.thermography} title="Thermography scan at The Balanced Chiropractic Centre" label="Thermography scan video" />
-    </div>
-  </section>
+  <PageHero eyebrow="Thermography nerve scan" title="Clarity starts with <span class='hl'>measurement.</span>" lead="Thermography imaging identifies specific hotspots on your body and spine. It gives us an objective indication of which areas need attention, so your care is based on data, not guesswork.">
+    <div class="btn-row" slot="actions"><BookButton label="Book a consult & scan" /></div>
+    <div slot="aside"><Video id={site.videos.thermography} title="Thermography scan at The Balanced Chiropractic Centre" label="Thermography scan video" /></div>
+  </PageHero>
 
   <section class="section">
     <div class="container">
@@ -29,18 +21,18 @@ import { site } from '../config/site';
         <h2>Fast, painless and non-invasive</h2>
       </div>
       <div class="grid grid-3" style="margin-top:36px">
-        <div class="card">
-          <div class="icon-dot">1</div>
+        <div class="card card--hover reveal">
+          <div class="icon"><Icon name="scan" /></div>
           <h3>Thermal imaging</h3>
           <p>Our Thermpix camera captures detailed thermal images of your spine and body. Nothing touches you and there’s no radiation.</p>
         </div>
-        <div class="card">
-          <div class="icon-dot">2</div>
+        <div class="card card--hover reveal">
+          <div class="icon"><Icon name="sparkle" /></div>
           <h3>AI-assisted analysis</h3>
           <p>Integrated AI analysis highlights temperature patterns and asymmetries, helping us spot hotspots that suggest areas of stress and irritation.</p>
         </div>
-        <div class="card">
-          <div class="icon-dot">3</div>
+        <div class="card card--hover reveal">
+          <div class="icon"><Icon name="chart" /></div>
           <h3>Your roadmap</h3>
           <p>We combine your scan with your history, exam and X-rays (if needed) to pinpoint the areas to focus on, and show you the results in your report of findings.</p>
         </div>
@@ -48,7 +40,7 @@ import { site } from '../config/site';
     </div>
   </section>
 
-  <section class="section section--sand">
+  <section class="section section--cream panel">
     <div class="container split">
       <Media src="/images/thermography-scan.jpg" alt="Example thermography scan image, patient details removed" label="Example Thermpix scan image (de-identified)" />
       <div>

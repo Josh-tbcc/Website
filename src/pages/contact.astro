@@ -1,17 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
 import BookButton from '../components/BookButton.astro';
+import PageHero from '../components/PageHero.astro';
 import { site } from '../config/site';
 const a = site.address;
 ---
 <Base title="Contact & Location" description={`Find The Balanced Chiropractic Centre at ${a.street}, ${a.suburb}. Hours, phone and directions.`}>
-  <section class="section section--mist">
-    <div class="container narrow center">
-      <span class="eyebrow">Contact</span>
-      <h1>Visit us in Yandina</h1>
-      <p class="lead">Easy to reach from Nambour, Coolum, Eumundi, Maleny and across the Sunshine Coast hinterland.</p>
-    </div>
-  </section>
+  <PageHero eyebrow="Contact" title="Visit us in <span class='hl'>Yandina.</span>" lead="Easy to reach from Nambour, Coolum, Eumundi, Maleny and across the Sunshine Coast hinterland." />
   <section class="section">
     <div class="container grid grid-2" style="align-items:start">
       <div class="card">

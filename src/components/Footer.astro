@@ -1,54 +1,72 @@
 ---
 import { site } from '../config/site';
+import Icon from './Icon.astro';
 const year = new Date().getFullYear();
 const a = site.address;
+const tel = `tel:${site.phone.replace(/\s/g, '')}`;
 ---
 <footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <h3>{site.name}</h3>
-      <p>{a.street}<br />{a.suburb} {a.state} {a.postcode}</p>
-      <p><a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
-      <p><a href={site.mapsUrl} target="_blank" rel="noopener">Get directions →</a></p>
+  <div class="container">
+    <div class="footer-top">
+      <p class="footer-big">Measure. Correct.<br /><span>Stay well for life.</span></p>
+      <a class="btn btn--primary" href="/book" data-book>Book online<Icon name="arrow" /></a>
     </div>
-    <div>
-      <h3>Hours</h3>
-      <ul class="hours">
-        {site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}
-      </ul>
+    <div class="footer-grid">
+      <div>
+        <h3>Visit</h3>
+        <p><Icon name="pin" class="fi" />{a.street}<br />{a.suburb} {a.state} {a.postcode}</p>
+        <p><a href={site.mapsUrl} target="_blank" rel="noopener">Get directions →</a></p>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <p><a href={tel}>{site.phone}</a><br /><a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p class="social">
+          {site.social.facebook && <a href={site.social.facebook} target="_blank" rel="noopener">Facebook</a>}
+          {site.social.instagram && <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>}
+          {site.social.googleReviews && <a href={site.social.googleReviews} target="_blank" rel="noopener">Google Reviews</a>}
+        </p>
+      </div>
+      <div>
+        <h3>Hours</h3>
+        <ul class="hours">
+          {site.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}
+        </ul>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul class="links">
+          <li><a href="/new-patients">New Patients</a></li>
+          <li><a href="/thermography">Thermal Nerve Scan</a></li>
+          <li><a href="/who-we-help">Who We Help</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h3>Explore</h3>
-      <ul class="links">
-        <li><a href="/new-patients">New Patients</a></li>
-        <li><a href="/thermography">Thermal Nerve Scan</a></li>
-        <li><a href="/who-we-help">Who We Help</a></li>
-        <li><a href="/about">About Us</a></li>
-        <li><a href="/book">Book Online</a></li>
-        <li><a href="/privacy">Privacy Policy</a></li>
-      </ul>
-      <p class="social">
-        {site.social.facebook && <a href={site.social.facebook} target="_blank" rel="noopener">Facebook</a>}
-        {site.social.instagram && <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>}
-        {site.social.googleReviews && <a href={site.social.googleReviews} target="_blank" rel="noopener">Google Reviews</a>}
-      </p>
+    <div class="footer-base">
+      <p>© {year} {site.name}</p>
+      <p>Individual results vary. Care is tailored to each person following a thorough assessment.</p>
     </div>
-  </div>
-  <div class="container footer-base">
-    <p>© {year} {site.name}. All rights reserved. Individual results vary. Chiropractic care is tailored to each person following a thorough assessment.</p>
   </div>
 </footer>
 
 <style>
-  .site-footer { background: #0f2429; color: #b8cbcd; padding: 64px 0 24px; font-size: .95rem; }
-  .site-footer h3 { color: var(--white); font-size: 1.15rem; }
-  .site-footer a { color: #d9ecee; text-decoration: none; }
-  .site-footer a:hover { color: var(--white); text-decoration: underline; }
-  .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 40px; }
+  .site-footer { background: var(--ink); color: #9fb3b5; padding: clamp(64px, 8vw, 104px) 0 28px; font-size: .95rem; margin-top: 12px; }
+  .site-footer h3 { color: var(--white); font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; margin-bottom: 1.1em; }
+  .site-footer a { color: #d6e3e4; text-decoration: none; }
+  .site-footer a:hover { color: var(--mint); }
+  .footer-top { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; padding-bottom: 56px; margin-bottom: 56px; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .footer-big { font-family: var(--font-head); font-weight: 800; letter-spacing: -0.04em; line-height: 1; font-size: clamp(2.2rem, 6vw, 4.5rem); color: var(--white); margin: 0; }
+  .footer-big span { color: var(--mint); }
+  .footer-grid { display: grid; grid-template-columns: 1.1fr 1fr 1.2fr .9fr; gap: 40px; }
+  :global(.fi) { width: 16px; height: 16px; display: inline; vertical-align: -3px; margin-right: 6px; color: var(--mint); }
   .hours, .links { list-style: none; padding: 0; margin: 0; }
-  .hours li { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,.1); }
+  .hours li { display: flex; justify-content: space-between; gap: 12px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.06); }
   .links li { padding: 4px 0; }
-  .social { display: flex; gap: 16px; margin-top: 16px; }
-  .footer-base { border-top: 1px solid rgba(255,255,255,.1); margin-top: 40px; padding-top: 20px; font-size: .8rem; color: #8aa3a6; }
-  @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr; } }
+  .social { display: flex; flex-wrap: wrap; gap: 14px; }
+  .footer-base { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,.08); margin-top: 56px; padding-top: 22px; font-size: .8rem; color: #6f8689; }
+  .footer-base p { margin: 0; }
+  @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
 </style>

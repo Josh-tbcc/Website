@@ -1,6 +1,7 @@
 ---
 // YouTube embed (privacy-enhanced). Shows a placeholder until an ID is set.
-interface Props { id?: string; title: string; label?: string }
+import Icon from './Icon.astro';
+interface Props { id?: string; title: string; label?: string; poster?: string }
 const { id, title, label } = Astro.props;
 ---
 <div class="media media--wide video">
@@ -12,5 +13,8 @@ const { id, title, label } = Astro.props;
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
         style="width:100%;height:100%;border:0"></iframe>
-    : <span class="media__label">▶ {label ?? title}<br /><small>Add the YouTube ID in src/config/site.ts</small></span>}
+    : <>
+        <span class="media__play"><Icon name="play" /></span>
+        <span class="media__label">{label ?? title}<small>Add the YouTube ID in src/config/site.ts</small></span>
+      </>}
 </div>

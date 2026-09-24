@@ -1,185 +1,271 @@
 ---
+import fs from 'node:fs';
+import path from 'node:path';
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
 import Video from '../components/Video.astro';
 import BookButton from '../components/BookButton.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
+
+const heroImg = fs.existsSync(path.join(process.cwd(), 'public/images/hero.jpg')) ? '/images/hero.jpg' : null;
+const conditions = ['Lower back pain', 'Neck pain', 'Headaches', 'Sciatica', 'Posture', 'Pregnancy', 'Kids & families', 'Sports & athletes', 'Stiffness', 'Long-term wellness'];
+const who = [
+  { icon: 'users', title: 'Families & kids', text: 'Gentle, age-appropriate care from little ones to grandparents.', href: '/who-we-help#families' },
+  { icon: 'heart', title: 'Pregnancy', text: 'Support for your changing body through every trimester.', href: '/who-we-help#pregnancy' },
+  { icon: 'activity', title: 'Sports & athletes', text: 'Move better, recover well and keep training consistently.', href: '/who-we-help#athletes' },
+  { icon: 'spine', title: 'Ongoing issues', text: 'For the back, neck and headaches that keep coming back.', href: '/who-we-help#chronic' },
+];
 ---
-<Base>
+<Base overlayHeader>
   <!-- HERO -->
-  <section class="hero">
-    <div class="container split">
-      <div>
-        <span class="eyebrow">Chiropractor · Yandina, Sunshine Coast</span>
-        <h1>We don’t guess.<br />We measure, then we correct.</h1>
+  <section class="hero on-dark" style={heroImg ? `--hero:url(${heroImg})` : undefined}>
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="container hero__inner">
+      <div class="hero__copy reveal">
+        <span class="eyebrow">Chiropractor · Yandina</span>
+        <h1>We don’t guess.<br /><span class="hl">We measure.</span></h1>
         <p class="lead">
-          Pain is usually the last thing to show up and the first thing to leave. At The Balanced Chiropractic Centre we
-          use thermal nerve scans, in-house X-ray and a thorough exam to find the pattern behind your symptoms, then
-          build a clear plan to change it.
+          Thermal nerve scans, in-house X-ray and a thorough exam to find the pattern behind your symptoms,
+          then a clear plan to change it for good.
         </p>
         <div class="btn-row">
-          <BookButton label="Book Your First Visit" />
-          <a class="btn btn--ghost" href="/new-patients">What to expect</a>
+          <BookButton label="Book your first visit" />
+          <a class="btn btn--glass" href="/new-patients">What to expect</a>
         </div>
-        <ul class="hero__trust">
-          <li>Thermography nerve scanning</li>
-          <li>In-house X-ray</li>
-          <li>Families, kids & pregnancy</li>
-        </ul>
       </div>
-      <Media src="/images/hero.jpg" alt="Chiropractor adjusting a patient at The Balanced Chiropractic Centre" label="Hero photo: Dr Josh adjusting / team shot" shape="tall" eager />
+      <div class="stats hero__stats reveal reveal-delay-2">
+        <div class="stat"><strong>2 visits</strong><span>to clear answers and a plan</span></div>
+        <div class="stat"><strong>AI thermal scan</strong><span>Thermpix nerve imaging</span></div>
+        <div class="stat"><strong>Every 12 visits</strong><span>progress re-measured</span></div>
+      </div>
     </div>
+    {!heroImg && <span class="hero__todo">Hero photo to add: public/images/hero.jpg</span>}
   </section>
+
+  <!-- CONDITIONS RIBBON -->
+  <div class="marquee" aria-label="Conditions we help with">
+    <div class="marquee__track">
+      {[...conditions, ...conditions].map((c) => <span>{c}</span>)}
+    </div>
+  </div>
 
   <!-- THE PROBLEM -->
-  <section class="section section--sand">
-    <div class="container narrow center">
-      <span class="eyebrow">Sound familiar?</span>
-      <h2>It settles… then it comes straight back.</h2>
-      <p class="lead">
-        You stretch, get a massage, fix your posture, try something new, and for a while it feels better. Then the same
-        neck, the same lower back, the same headaches return. That isn’t bad luck. It’s a pattern your spine and nervous
-        system have adapted to over months and years, and patterns don’t change in a single visit.
-      </p>
+  <section class="section">
+    <div class="container split">
+      <div class="reveal">
+        <span class="eyebrow">Sound familiar?</span>
+        <h2>It settles… then it comes <span class="hl">straight back.</span></h2>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <p class="lead">
+          You stretch, get a massage, fix your posture, try something new, and for a while it feels better. Then the
+          same neck, the same lower back, the same headaches return.
+        </p>
+        <p>That isn’t bad luck. It’s a pattern your spine and nervous system have adapted to over months and years, and patterns don’t change in a single visit. Lasting change is built step by step, and measured along the way.</p>
+      </div>
     </div>
   </section>
 
-  <!-- APPROACH: 3 phases -->
-  <section class="section">
+  <!-- APPROACH: BENTO -->
+  <section class="section section--cream panel">
     <div class="container">
-      <div class="center narrow">
-        <span class="eyebrow">Our approach</span>
-        <h2>Care that’s built to last</h2>
-        <p class="lead">Feeling better is the start. Staying better is the goal. Every plan moves through three clear phases, and we re-measure along the way so you can see the change, not just feel it.</p>
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Our approach</span>
+          <h2>Care that’s built to last</h2>
+        </div>
+        <p>Feeling better is the start. Staying better is the goal. Every plan moves through three clear phases, and we re-measure so you can see the change, not just feel it.</p>
       </div>
-      <div class="grid grid-3" style="margin-top:40px">
-        <div class="card">
-          <div class="icon-dot">01</div>
+      <div class="bento">
+        <div class="card bento__a reveal">
+          <span class="num">PHASE 01</span>
           <h3>Relief</h3>
           <p>We calm things down and get you moving again, focusing on the areas your scans and exam show are under the most stress.</p>
         </div>
-        <div class="card">
-          <div class="icon-dot">02</div>
+        <div class="card bento__b reveal reveal-delay-1">
+          <span class="num">PHASE 02</span>
           <h3>Correction</h3>
           <p>With the fire out, we work on the underlying pattern: restoring motion, improving how your spine carries load and how your nervous system adapts.</p>
         </div>
-        <div class="card">
-          <div class="icon-dot">03</div>
+        <div class="card card--dark bento__c reveal reveal-delay-2">
+          <span class="num">PHASE 03</span>
           <h3>Strength & wellness</h3>
           <p>We lock in your progress with home care, corrective exercises and regular check-ins, so you keep the gains you’ve worked for.</p>
+          <div class="progress" aria-hidden="true"><span></span><span></span><span></span></div>
         </div>
+        <Media src="/images/adjusting-table.jpg" alt="Chiropractic adjustment at The Balanced Chiropractic Centre" label="Adjusting photo" class="bento__img reveal" />
       </div>
     </div>
   </section>
 
   <!-- THERMOGRAPHY -->
-  <section class="section section--ink">
+  <section class="section">
     <div class="container split">
-      <div>
-        <span class="eyebrow">Thermography nerve scan</span>
-        <h2>See what’s happening beneath the surface</h2>
-        <p>
-          Our Thermpix thermal imaging, with AI-assisted analysis, maps temperature differences along your spine and
-          body. Those hotspots give us an objective picture of where your nervous system is under stress, and a clear
-          starting point for your care.
-        </p>
-        <p>Because it’s measured, we can scan again as you progress and compare, so you and your chiropractor can both see how things are changing.</p>
-        <a class="btn btn--light" href="/thermography">How the scan works</a>
+      <div class="reveal">
+        <Video id={site.videos.thermography} title="Thermography scan at The Balanced Chiropractic Centre" label="Thermography scan video" />
       </div>
-      <Video id={site.videos.thermography} title="Thermography scan at The Balanced Chiropractic Centre" label="Thermography scan video" />
+      <div class="reveal reveal-delay-1">
+        <span class="eyebrow">Thermography nerve scan</span>
+        <h2>See what’s happening <span class="hl">beneath the surface</span></h2>
+        <p class="lead">Thermpix thermal imaging with AI-assisted analysis identifies hotspots along your spine, an objective picture of where your nervous system is under stress.</p>
+        <ul class="feature-list">
+          <li><Icon name="scan" /><div><strong>Non-invasive and painless</strong><span>Nothing touches you and there’s no radiation</span></div></li>
+          <li><Icon name="chart" /><div><strong>Progress you can see</strong><span>We re-scan and compare as your care progresses</span></div></li>
+          <li><Icon name="xray" /><div><strong>In-house X-ray</strong><span>With motion studies when clinically required</span></div></li>
+        </ul>
+        <a class="btn btn--ghost" href="/thermography">How the scan works<Icon name="arrow" /></a>
+      </div>
     </div>
   </section>
 
   <!-- PATIENT JOURNEY VIDEO -->
-  <section class="section">
-    <div class="container">
-      <div class="center narrow">
-        <span class="eyebrow">Your journey with us</span>
-        <h2>See what your first visits look like</h2>
-        <p class="lead">From the moment you walk in to your report of findings, here’s exactly what happens, so there are no surprises.</p>
-      </div>
-      <div style="max-width:900px;margin:32px auto 0">
-        <Video id={site.videos.patientJourney} title="A patient’s journey at The Balanced Chiropractic Centre" label="“Journey of patient in our office” video" />
+  <section class="section section--tight">
+    <div class="panel journey on-dark">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Your journey with us</span>
+            <h2>See what your first visits look like</h2>
+          </div>
+          <p class="lead">From the moment you walk in to your report of findings, here’s exactly what happens, so there are no surprises.</p>
+        </div>
+        <div class="reveal"><Video id={site.videos.patientJourney} title="A patient’s journey at The Balanced Chiropractic Centre" label="“Journey of patient in our office” video" /></div>
       </div>
     </div>
   </section>
 
   <!-- NEW PATIENT STEPS -->
-  <section class="section section--mist">
-    <div class="container split">
-      <div>
+  <section class="section">
+    <div class="container split" style="align-items:start">
+      <div class="sticky-col reveal">
         <span class="eyebrow">New patients</span>
         <h2>Two visits to real answers</h2>
-        <div class="steps">
-          <div class="step">
-            <h3>Visit 1: Comprehensive assessment</h3>
-            <p>Full health history, thermography scan, spinal palpation, neurological tests and, if needed, in-house X-rays with motion studies to pinpoint the areas of restriction.</p>
-          </div>
-          <div class="step">
-            <h3>Visit 2: Report of findings</h3>
-            <p>We sit down and walk you through your results: what’s going on, why it matters, and the path to correct it long term.</p>
-          </div>
-          <div class="step">
-            <h3>Your care plan begins</h3>
-            <p>A clear, personalised plan with progress checks every 12 visits so you always know where you’re at.</p>
-          </div>
-        </div>
-        <div class="btn-row" style="margin-top:12px">
-          <BookButton label="Book New Patient Consult" />
+        <p class="lead">No rushing and no guesswork. We gather everything we need, analyse it properly, then walk you through it.</p>
+        <div class="btn-row">
+          <BookButton label="Book new patient consult" />
           <a class="btn btn--ghost" href="/new-patients">Learn more</a>
         </div>
       </div>
-      <Media src="/images/treatment-room.jpg" alt="Treatment room at The Balanced Chiropractic Centre" label="Treatment room photo" />
+      <div class="steps">
+        <div class="step reveal">
+          <h3>Comprehensive assessment</h3>
+          <p>Full health history, thermography scan, spinal palpation, neurological tests and, if needed, in-house X-rays with motion to pinpoint the areas of restriction.</p>
+        </div>
+        <div class="step reveal reveal-delay-1">
+          <h3>Report of findings</h3>
+          <p>We sit down and walk you through your results: what’s going on, why it matters, and the path to correct it long term.</p>
+        </div>
+        <div class="step reveal reveal-delay-2">
+          <h3>Your care plan begins</h3>
+          <p>A clear, personalised plan with progress checks every 12 visits, so you always know where you’re at.</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- WHO WE HELP -->
-  <section class="section">
+  <section class="section section--mint panel">
     <div class="container">
-      <div class="center narrow">
-        <span class="eyebrow">Who we help</span>
-        <h2>Care for every stage of life</h2>
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Who we help</span>
+          <h2>Care for every stage of life</h2>
+        </div>
+        <a class="btn btn--dark" href="/who-we-help">See who we help<Icon name="arrow" /></a>
       </div>
-      <div class="grid grid-4" style="margin-top:36px">
-        <a class="card who" href="/who-we-help#families"><h3>Families & kids</h3><p>Gentle, age-appropriate care from little ones to grandparents.</p></a>
-        <a class="card who" href="/who-we-help#pregnancy"><h3>Pregnancy</h3><p>Support for your changing body through each trimester.</p></a>
-        <a class="card who" href="/who-we-help#athletes"><h3>Sports & athletes</h3><p>Move better, recover faster and keep training.</p></a>
-        <a class="card who" href="/who-we-help#chronic"><h3>Ongoing & chronic issues</h3><p>For the back, neck and headaches that keep coming back.</p></a>
+      <div class="grid grid-4">
+        {who.map((w, i) => (
+          <a class={`card card--hover who reveal reveal-delay-${i}`} href={w.href}>
+            <div class="icon"><Icon name={w.icon} /></div>
+            <h3>{w.title}</h3>
+            <p>{w.text}</p>
+            <span class="who__more">Learn more <Icon name="arrow" /></span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- TEAM / CLINIC -->
-  <section class="section section--sand">
+  <!-- TEAM -->
+  <section class="section">
     <div class="container split">
-      <Media src="/images/team.jpg" alt="The team at The Balanced Chiropractic Centre" label="Team photo" />
-      <div>
+      <Media src="/images/team.jpg" alt="The team at The Balanced Chiropractic Centre" label="Team photo" shape="tall" class="reveal" />
+      <div class="reveal reveal-delay-1">
         <span class="eyebrow">Meet the team</span>
         <h2>A family practice for the Yandina community</h2>
-        <p>Led by Dr Joshua Kassis, our team believes the body is designed to heal and thrive when the spine and nervous system are working well. We’re here to help you understand your health, not just treat your symptoms, and to support you for years, not just weeks.</p>
-        <a class="btn btn--ghost" href="/about">About us</a>
+        <p class="lead">Led by Dr Joshua Kassis, our team believes the body is designed to heal and thrive when the spine and nervous system are working well.</p>
+        <p>We’re here to help you understand your health, not just treat your symptoms, and to support you for years, not just weeks.</p>
+        <div class="btn-row">
+          <a class="btn btn--dark" href="/about">About us<Icon name="arrow" /></a>
+          {site.social.googleReviews && <a class="btn btn--ghost" href={site.social.googleReviews} target="_blank" rel="noopener">Read our Google reviews</a>}
+        </div>
       </div>
     </div>
   </section>
-
-  {site.social.googleReviews && (
-    <section class="section">
-      <div class="container center narrow">
-        <h2>See what our community says</h2>
-        <p class="lead">Read our reviews on Google.</p>
-        <a class="btn btn--ghost" href={site.social.googleReviews} target="_blank" rel="noopener">Read Google reviews</a>
-      </div>
-    </section>
-  )}
 
   <CtaBand />
 </Base>
 
 <style>
-  .hero { padding: clamp(40px, 6vw, 88px) 0; background: linear-gradient(180deg, var(--mist), var(--white)); }
-  .hero__trust { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: .92rem; font-weight: 600; color: var(--ink-soft); }
-  .hero__trust li::before { content: '✓ '; color: var(--brand); }
-  .who { text-decoration: none; color: inherit; transition: transform .15s ease; }
-  .who:hover { transform: translateY(-3px); color: inherit; }
+  /* Hero */
+  .hero { position: relative; min-height: min(100svh, 920px); display: flex; align-items: flex-end; color: #c4d4d5; margin: 0 12px; border-radius: 0 0 var(--radius-lg) var(--radius-lg); overflow: hidden; isolation: isolate; }
+  .hero__bg { position: absolute; inset: 0; z-index: -1;
+    background:
+      linear-gradient(180deg, rgba(12,29,32,.55) 0%, rgba(12,29,32,.2) 35%, rgba(12,29,32,.85) 100%),
+      var(--hero, radial-gradient(70% 60% at 80% 20%, #1f8a7f 0%, transparent 60%), radial-gradient(60% 60% at 10% 90%, #0f766e 0%, transparent 60%), radial-gradient(40% 40% at 60% 70%, rgba(140,227,199,.35) 0%, transparent 70%), #0c1d20) center / cover no-repeat;
+  }
+  .hero__inner { padding-top: 140px; padding-bottom: clamp(32px, 5vw, 56px); display: grid; gap: clamp(40px, 6vw, 72px); }
+  .hero h1 { color: var(--white); font-size: clamp(2.8rem, 8vw, 6.2rem); margin-bottom: .35em; }
+  .hero .lead { color: #c4d4d5; max-width: 560px; margin-bottom: 1.8em; }
+  .hero__copy { max-width: 860px; }
+  .hero__stats { max-width: 880px; }
+  .hero__todo { position: absolute; top: 96px; right: 24px; font-size: .72rem; color: rgba(255,255,255,.55); }
+
+  /* Bento */
+  .bento { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 20px; }
+  .bento__a { grid-column: 1; grid-row: 1; }
+  .bento__b { grid-column: 2; grid-row: 1; }
+  .bento__c { grid-column: 3; grid-row: 1 / span 2; display: flex; flex-direction: column; }
+  .bento :global(.bento__img) { grid-column: 1 / span 2; grid-row: 2; aspect-ratio: auto; min-height: 280px; }
+  .progress { display: flex; gap: 6px; margin-top: auto; padding-top: 32px; }
+  .progress span { flex: 1; height: 6px; border-radius: 6px; background: rgba(140,227,199,.25); }
+  .progress span:last-child { background: var(--mint); }
+  @media (max-width: 960px) {
+    .bento { grid-template-columns: 1fr 1fr; }
+    .bento > *, .bento :global(.bento__img) { grid-row: auto !important; }
+    .bento__c { grid-column: 1 / span 2; }
+    .bento :global(.bento__img) { grid-column: 1 / span 2; }
+  }
+  @media (max-width: 620px) {
+    .bento { grid-template-columns: 1fr; }
+    .bento > *, .bento :global(.bento__img) { grid-column: auto !important; }
+    .hero__stats { grid-template-columns: repeat(3, 1fr); }
+    .hero__stats .stat { padding: 14px 12px; }
+    .hero__stats .stat strong { font-size: 1rem; }
+    .hero__stats .stat span { font-size: .72rem; line-height: 1.35; display: block; margin-top: 4px; }
+  }
+  @media (max-width: 700px) {
+    .hero { min-height: 0; }
+    .hero__inner { padding-top: 120px; padding-bottom: 92px; }
+  }
+
+  .feature-list { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 16px; }
+  .feature-list li { display: flex; gap: 16px; align-items: flex-start; }
+  .feature-list :global(svg) { flex-shrink: 0; width: 44px; height: 44px; padding: 11px; border-radius: 14px; background: var(--mint-soft); color: var(--brand); }
+  .feature-list strong { display: block; color: var(--ink); font-family: var(--font-head); }
+  .feature-list span { font-size: .95rem; color: var(--muted); }
+
+  .journey { background: radial-gradient(60% 80% at 100% 0%, rgba(140,227,199,.18), transparent 60%), var(--ink); padding: clamp(56px, 8vw, 104px) 0; color: #b9c9cb; }
+  .journey h2 { color: var(--white); }
+
+  .sticky-col { position: sticky; top: 120px; }
+  @media (max-width: 960px) { .sticky-col { position: static; } }
+
+  .who { text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+  .who:hover { color: inherit; }
+  .who__more { margin-top: auto; padding-top: 18px; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: .9rem; color: var(--brand); }
+  .who__more :global(svg) { width: 16px; height: 16px; transition: transform .25s var(--ease); }
+  .who:hover .who__more :global(svg) { transform: translateX(4px); }
 </style>

@@ -4,6 +4,8 @@ import Media from '../components/Media.astro';
 import Video from '../components/Video.astro';
 import BookButton from '../components/BookButton.astro';
 import CtaBand from '../components/CtaBand.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 
 const faqs = [
@@ -30,27 +32,20 @@ const faqs = [
 ];
 ---
 <Base title="New Patients" description="What to expect at your first visit to The Balanced Chiropractic Centre in Yandina: comprehensive assessment, thermography scan, in-house X-ray and a clear report of findings.">
-  <section class="section section--mist">
-    <div class="container split">
-      <div>
-        <span class="eyebrow">New patients</span>
-        <h1>Welcome. Here’s exactly what to expect.</h1>
-        <p class="lead">No guesswork, no rushing. Your first two visits are all about finding the real cause and giving you a clear plan forward.</p>
-        <div class="btn-row">
-          <BookButton label="Book New Patient Consult" />
-          {site.intakeFormUrl && <a class="btn btn--ghost" href={site.intakeFormUrl} target="_blank" rel="noopener">Complete intake form</a>}
-        </div>
-      </div>
-      <Media src="/images/reception.jpg" alt="Reception at The Balanced Chiropractic Centre" label="Reception desk photo" />
+  <PageHero eyebrow="New patients" title="Welcome. Here’s exactly <span class='hl'>what to expect.</span>" lead="No guesswork, no rushing. Your first two visits are all about finding the real cause and giving you a clear plan forward.">
+    <div class="btn-row" slot="actions">
+      <BookButton label="Book new patient consult" />
+      {site.intakeFormUrl && <a class="btn btn--glass" href={site.intakeFormUrl} target="_blank" rel="noopener">Complete intake form</a>}
     </div>
-  </section>
+    <Media slot="aside" src="/images/reception.jpg" alt="Reception at The Balanced Chiropractic Centre" label="Reception desk photo" />
+  </PageHero>
 
   <section class="section">
     <div class="container">
       <div class="grid grid-2" style="align-items:start">
-        <div class="card">
+        <div class="card card--soft reveal">
           <span class="pill">Visit 1</span>
-          <h2 style="margin-top:14px">Comprehensive assessment</h2>
+          <h2 style="margin-top:18px;font-size:clamp(1.6rem,3vw,2.2rem)">Comprehensive assessment</h2>
           <ul class="checklist">
             <li><strong>Full health history:</strong> your symptoms, past injuries, lifestyle and goals</li>
             <li><strong>Thermography nerve scan:</strong> thermal imaging with AI-assisted analysis to identify hotspots along your spine</li>
@@ -59,9 +54,9 @@ const faqs = [
             <li><strong>In-house X-rays with motion studies</strong> if clinically required, to pinpoint the exact areas of restriction</li>
           </ul>
         </div>
-        <div class="card">
+        <div class="card card--dark reveal reveal-delay-1">
           <span class="pill">Visit 2</span>
-          <h2 style="margin-top:14px">Report of findings</h2>
+          <h2 style="margin-top:18px;font-size:clamp(1.6rem,3vw,2.2rem)">Report of findings</h2>
           <ul class="checklist">
             <li>We walk you through your scans, X-rays and exam results in plain English</li>
             <li>We explain exactly what’s going on and why it’s been coming back</li>
@@ -73,7 +68,7 @@ const faqs = [
     </div>
   </section>
 
-  <section class="section section--sand">
+  <section class="section section--cream panel">
     <div class="container">
       <div class="center narrow">
         <span class="eyebrow">Watch</span>
@@ -97,14 +92,14 @@ const faqs = [
     </div>
   </section>
 
-  <section class="section section--mist">
+  <section class="section section--mint panel">
     <div class="container narrow">
-      <div class="center">
+      <div class="center reveal">
         <span class="eyebrow">Before you arrive</span>
         <h2>Save time on the day</h2>
         <p class="lead">Complete your new patient forms online before your first visit so we can spend more time on you.</p>
         {site.intakeFormUrl
-          ? <a class="btn btn--primary" href={site.intakeFormUrl} target="_blank" rel="noopener">Complete intake form</a>
+          ? <a class="btn btn--dark" href={site.intakeFormUrl} target="_blank" rel="noopener">Complete intake form<Icon name="arrow" /></a>
           : <p class="fine-print">(Jotform intake link goes here: add it in src/config/site.ts)</p>}
       </div>
     </div>

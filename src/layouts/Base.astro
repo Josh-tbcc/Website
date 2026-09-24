@@ -11,8 +11,10 @@ interface Props {
   /** Landing-page mode: no main nav or footer links, so ad traffic stays focused */
   landing?: boolean;
   noindex?: boolean;
+  /** Header floats transparently over a full-bleed hero */
+  overlayHeader?: boolean;
 }
-const { title, description = site.description, landing = false, noindex = false } = Astro.props;
+const { title, description = site.description, landing = false, noindex = false, overlayHeader = false } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | Chiropractor Yandina, Sunshine Coast`;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const a = site.address;
@@ -41,11 +43,12 @@ const schema = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={`${site.url}/images/og-image.jpg`} />
-    <meta name="theme-color" content="#16323a" />
+    <meta name="theme-color" content="#0c1d20" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
     {site.metaPixelId && (
@@ -74,7 +77,7 @@ const schema = {
       <header class="landing-header">
         <div class="container"><strong>{site.name}</strong><span>{a.suburb}, Sunshine Coast</span></div>
       </header>
-    ) : <Header />}
+    ) : <Header overlay={overlayHeader} />}
     <main>
       <slot />
     </main>
@@ -91,6 +94,15 @@ const schema = {
     )}
 
     <script is:inline>
+      // Fade sections in as they scroll into view
+      (function () {
+        var els = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window)) { els.forEach(function (el) { el.classList.add('is-in'); }); return; }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -8% 0px' });
+        els.forEach(function (el) { io.observe(el); });
+      })();
       // Tell Meta when someone heads to booking
       document.addEventListener('click', function (e) {
         var el = e.target.closest && e.target.closest('[data-book]');
@@ -98,9 +110,9 @@ const schema = {
       });
     </script>
     <style>
-      .landing-header { background: var(--ink); color: var(--white); padding: 14px 0; }
-      .landing-header .container { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: .95rem; }
-      .landing-header span { color: #9fc3c6; }
+      .landing-header { background: var(--ink); color: var(--white); padding: 14px 0; font-family: var(--font-head); }
+      .landing-header .container { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: .92rem; }
+      .landing-header span { color: var(--mint); }
       .landing-footer { background: #0f2429; color: #8aa3a6; padding: 28px 0; font-size: .8rem; text-align: center; }
       .landing-footer a { color: #d9ecee; }
     </style>

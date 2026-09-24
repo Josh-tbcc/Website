@@ -13,10 +13,11 @@ const { offer } = site;
 >
   <!-- HERO + FORM -->
   <section class="lp-hero">
+    <div class="panel lp-hero__panel on-dark">
     <div class="container lp-grid">
       <div class="lp-copy">
         <span class="eyebrow">Yandina · Sunshine Coast</span>
-        <h1>Back or neck pain that keeps coming back?</h1>
+        <h1>Back or neck pain that <span class="hl">keeps coming back?</span></h1>
         <p class="lead">It isn’t random, and it’s rarely just tight muscles. It’s a pattern your spine and nervous system have adapted to. Let’s measure what’s actually going on.</p>
         <div class="price-tag">
           <span class="price-tag__price">{offer.price}</span>
@@ -61,10 +62,11 @@ const { offer } = site;
         </form>
       </div>
     </div>
+    </div>
   </section>
 
   <!-- VIDEO -->
-  <section class="section section--sand">
+  <section class="section">
     <div class="container">
       <div class="center narrow">
         <h2>See what happens at your assessment</h2>
@@ -90,7 +92,7 @@ const { offer } = site;
   </section>
 
   <!-- STEPS -->
-  <section class="section section--mist">
+  <section class="section section--mint panel">
     <div class="container narrow">
       <h2 class="center">How it works</h2>
       <div class="steps" style="margin-top:28px">
@@ -149,11 +151,14 @@ const { offer } = site;
 </script>
 
 <style>
-  .lp-hero { background: linear-gradient(180deg, var(--mist), var(--white)); padding: clamp(32px, 5vw, 72px) 0; }
+  .lp-hero { padding-top: 12px; }
+  .lp-hero__panel { background: radial-gradient(70% 90% at 100% 0%, rgba(140,227,199,.2), transparent 60%), radial-gradient(60% 80% at 0% 100%, rgba(15,118,110,.5), transparent 60%), var(--ink); color: #b9c9cb; padding: clamp(40px, 6vw, 88px) 0; }
+  .lp-copy h1 { color: var(--white); font-size: clamp(2.3rem, 5vw, 3.8rem); }
+  .lp-form { box-shadow: 0 30px 80px -20px rgba(0,0,0,.5); border: 0; }
   .lp-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
   .lp-form h2 { font-size: 1.6rem; }
-  .price-tag { display: inline-flex; align-items: baseline; gap: 12px; background: var(--ink); color: var(--white); padding: 12px 20px; border-radius: 12px; margin: 6px 0 22px; }
-  .price-tag__price { font-family: var(--font-head); font-size: 2.2rem; font-weight: 700; color: #ffd2bd; }
+  .price-tag { display: inline-flex; align-items: center; gap: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: var(--white); padding: 10px 22px 10px 10px; border-radius: 999px; margin: 6px 0 26px; }
+  .price-tag__price { font-family: var(--font-head); font-size: 1.6rem; font-weight: 800; color: var(--ink); background: var(--mint); border-radius: 999px; padding: 6px 18px; letter-spacing: -0.03em; }
   .price-tag__label { font-weight: 600; }
   .lp-sticky { display: none; }
   @media (max-width: 900px) {

@@ -1,5 +1,6 @@
 ---
-interface Props { label?: string; variant?: 'primary' | 'ghost' | 'light'; block?: boolean }
+import Icon from './Icon.astro';
+interface Props { label?: string; variant?: 'primary' | 'ghost' | 'light' | 'dark' | 'glass'; block?: boolean }
 const { label = 'Book Online', variant = 'primary', block = false } = Astro.props;
 ---
-<a href="/book" class={`btn btn--${variant}${block ? ' btn--block' : ''}`} data-book>{label}</a>
+<a href="/book" class={`btn btn--${variant}${block ? ' btn--block' : ''}`} data-book>{label}<Icon name="arrow" /></a>
