@@ -69,7 +69,7 @@ export const site = {
   },
 
   // Tracking
-  metaPixelId: '', // TODO: from Daina / Meta Events Manager
+  metaPixelId: '1928557301455756', // Meta Events Manager
   // Carried over from the old website so reporting and ad conversions keep working
   google: {
     analyticsId: 'G-FJ2HLLB4CW',
