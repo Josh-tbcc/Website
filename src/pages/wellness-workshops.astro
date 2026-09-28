@@ -15,14 +15,17 @@ const topics = [
   ['leaf', 'Daily habits that add up', 'Easy, realistic routines for movement, rest and recovery that the whole family can do together.'],
 ];
 const faqs = [
+  ['Is it free?', 'Yes. The workshops are completely free, for you and everyone you bring.'],
+  ['How long does it run?', 'About 30 minutes, starting at 6:00pm, so it’s easy to fit in after work and still be home for dinner.'],
+  ['Can I bring my kids?', 'Absolutely. Kids are welcome, so bring the whole family.'],
   ['Do I need to be a patient?', 'Not at all. The workshops are open to everyone, whether you’ve seen a chiropractor before or not. Bring anyone who might benefit.'],
   ['Who should I bring?', 'Your partner, parents, kids, friends, workmates: anyone you’d like to feel better and stay well. Health habits are much easier to stick to when the people around you are on board too.'],
   ['Do I need to book?', 'Please RSVP so we can save enough seats and have everything ready for your group. You can use the form on this page or give us a call.'],
   ['Where is it held?', `Right here at the clinic: ${a.street}, ${a.suburb}. ${site.directions}`],
 ];
 ---
-<Base title="Wellness Workshops" description="Relaxed, practical wellness workshops at The Balanced Chiropractic Centre in Yandina, on the first Wednesday of every month at 6pm. Bring your partner, family and friends.">
-  <PageHero eyebrow="Wellness workshops" title="An evening for your health, <span class='hl'>and theirs.</span>" lead="Join us on the first Wednesday of every month at 6pm for a relaxed, practical workshop on how your body works and the simple habits that help it thrive. Bring your partner, family and friends.">
+<Base title="Wellness Workshops" description="Free, 30-minute wellness workshops at The Balanced Chiropractic Centre in Yandina, on the first Wednesday of every month at 6pm. Bring your partner, family and friends.">
+  <PageHero eyebrow="Free wellness workshops" title="An evening for your health, <span class='hl'>and theirs.</span>" lead="Join us on the first Wednesday of every month at 6pm for a free, relaxed 30-minute workshop on how your body works and the simple habits that help it thrive. Bring your partner, family and friends.">
     <div class="btn-row" slot="actions">
       <a class="btn btn--primary" href="#rsvp">Save your seats<Icon name="arrow" /></a>
       <a class="btn btn--glass" href={tel}><Icon name="phone" />{site.phone}</a>
@@ -41,8 +44,8 @@ const faqs = [
         </div>
         <div class="card reveal reveal-delay-1">
           <div class="icon"><Icon name="clock" /></div>
-          <h3>Starts at 6:00pm</h3>
-          <p>Come straight from work. Arrive a few minutes early to grab a seat and say hello.</p>
+          <h3>6:00pm, about 30 minutes</h3>
+          <p>Free to attend. Come straight from work, and arrive a few minutes early to grab a seat and say hello.</p>
         </div>
         <div class="card reveal reveal-delay-2">
           <div class="icon"><Icon name="pin" /></div>
@@ -85,7 +88,7 @@ const faqs = [
         <p>That’s why every workshop is made for groups. Bring your partner so you’re both on the same page. Bring your parents, your kids or a friend who’s been putting up with a sore back for too long. Everyone leaves with ideas they can use together.</p>
         <ul class="checklist">
           <li>Partners and spouses</li>
-          <li>Parents, grandparents and older kids</li>
+          <li>Kids of all ages, parents and grandparents</li>
           <li>Friends, neighbours and workmates</li>
           <li>Anyone curious about feeling and moving better</li>
         </ul>
