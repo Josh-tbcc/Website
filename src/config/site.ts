@@ -80,7 +80,6 @@ export const site = {
       phoneCalls: 'AW-17082728725/3OP8CN6W8M0aEJWC19E_',  // Google call tracking number swap
     },
     siteVerification: 'FyXMmglyjM-CvcYUw9WajstrFkisKs7XKRxmD94XKr0', // Search Console
-    tagManagerId: '', // old site used GTM-TDC7N4B — only add if the container is yours
   },
 
   // Videos live in public/videos (<name>.mp4 + <name>.jpg cover, optional .vtt captions)
