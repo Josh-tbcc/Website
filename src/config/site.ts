@@ -21,7 +21,8 @@ export const site = {
     postcode: '4561',
   },
   directions: 'Next door to Lawn Espresso, a short walk from Yandina Station.',
-  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=5%2F18+Farrell+St+Yandina+QLD+4561',
+  mapsUrl: 'https://maps.google.com/maps?cid=11232953959727105599', // Google Business Profile
+  geo: { lat: -26.5608631, lng: 152.9569166 },
   mapsEmbed:
     'https://www.google.com/maps?q=5%2F18+Farrell+St+Yandina+QLD+4561&output=embed',
 
@@ -39,11 +40,10 @@ export const site = {
   // stay on thebalancedchiro.com.au. Never put API keys in this file —
   // the website is public.
   booking: {
-    // Preferred: paste Zurili's embed code (the <script>/<iframe> snippet)
-    // between the backticks.
-    embedCode: ``, // TODO
-    // Alternative: Zurili's booking page link, shown in a frame on our page.
-    url: '',
+    // Optional: Zurili embed snippet (takes priority over `url` if set).
+    embedCode: ``,
+    // Zurili booking page, shown in a frame on our own page (same as the old site).
+    url: 'https://app.zurili.com/home/site/647fb02a8af8ff2940bd050a',
     embed: true, // false = open the booking link in a new tab instead
     newPatientLabel: 'New Patient Consultation (30 min)',
   },
@@ -70,7 +70,18 @@ export const site = {
 
   // Tracking
   metaPixelId: '', // TODO: from Daina / Meta Events Manager
-  googleAnalyticsId: '', // optional, e.g. G-XXXXXXX
+  // Carried over from the old website so reporting and ad conversions keep working
+  google: {
+    analyticsId: 'G-FJ2HLLB4CW',
+    adsIds: ['AW-17082728725', 'AW-18002778320'],
+    conversions: {
+      bookingPage: 'AW-17082728725/sda7CLHf7c0aEJWC19E_', // someone opens the booking page
+      phoneClick: 'AW-17082728725/vtAsCLTf7c0aEJWC19E_',  // someone taps the phone number
+      phoneCalls: 'AW-17082728725/3OP8CN6W8M0aEJWC19E_',  // Google call tracking number swap
+    },
+    siteVerification: 'FyXMmglyjM-CvcYUw9WajstrFkisKs7XKRxmD94XKr0', // Search Console
+    tagManagerId: '', // old site used GTM-TDC7N4B — only add if the container is yours
+  },
 
   // Videos live in public/videos (<name>.mp4 + <name>.jpg cover, optional .vtt captions)
   videos: {
@@ -83,9 +94,9 @@ export const site = {
   },
 
   social: {
-    facebook: '', // TODO
-    instagram: '', // TODO
-    googleReviews: '', // TODO: Google Business Profile reviews link
+    facebook: 'https://www.facebook.com/people/The-Balanced-Chiropractic-Centre-Yandina/100092608928255/',
+    instagram: 'https://www.instagram.com/thebalancedchiropracticcentre/',
+    googleReviews: 'https://maps.google.com/maps?cid=11232953959727105599'
   },
 };
 

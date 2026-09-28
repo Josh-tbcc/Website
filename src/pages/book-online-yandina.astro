@@ -33,6 +33,9 @@ const { embedCode, url, embed, newPatientLabel } = site.booking;
       )}
     </div>
   </section>
+  <script is:inline define:vars={{ conv: site.google.conversions.bookingPage }}>
+    if (conv && window.gtag) window.gtag('event', 'conversion', { send_to: conv });
+  </script>
 </Base>
 <style>
   .book-tips { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 640px; }
@@ -43,5 +46,5 @@ const { embedCode, url, embed, newPatientLabel } = site.booking;
   .booking-embed { min-height: 700px; }
   .booking-embed :global(iframe) { width: 100%; min-height: 900px; border: 0; }
   .booking-frame { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
-  .booking-frame iframe { width: 100%; height: 900px; border: 0; }
+  .booking-frame iframe { width: 100%; height: 1200px; border: 0; display: block; }
 </style>

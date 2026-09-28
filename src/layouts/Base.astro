@@ -18,6 +18,8 @@ const { title, description = site.description, landing = false, noindex = false,
 const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | Chiropractor Yandina, Sunshine Coast`;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const a = site.address;
+const g = site.google;
+const gtagIds = [g.analyticsId, ...g.adsIds].filter(Boolean);
 
 const schema = {
   '@context': 'https://schema.org',
@@ -25,7 +27,12 @@ const schema = {
   name: site.name,
   url: site.url,
   telephone: site.phone,
+  image: `${site.url}/images/hero.jpg`,
+  logo: `${site.url}/images/icon.png`,
   address: { '@type': 'PostalAddress', streetAddress: a.street, addressLocality: a.suburb, addressRegion: a.state, postalCode: a.postcode, addressCountry: 'AU' },
+  geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
+  hasMap: site.mapsUrl,
+  sameAs: [site.social.facebook, site.social.instagram, site.mapsUrl].filter(Boolean),
   areaServed: ['Yandina', 'Sunshine Coast', 'Nambour', 'Coolum Beach', 'Eumundi', 'Maleny', 'Peregian Beach'],
 };
 ---
@@ -62,15 +69,28 @@ const schema = {
         fbq('init', pixelId); fbq('track', 'PageView');
       </script>
     )}
-    {site.googleAnalyticsId && (
+    {g.siteVerification && <meta name="google-site-verification" content={g.siteVerification} />}
+    {gtagIds.length > 0 && (
       <>
-        <script async src={`https://www.googletagmanager.com/gtag/js?id=${site.googleAnalyticsId}`}></script>
-        <script is:inline define:vars={{ gaId: site.googleAnalyticsId }}>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtagIds[0]}`}></script>
+        <script is:inline define:vars={{ ids: gtagIds, conv: g.conversions, phone: site.phone }}>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date()); gtag('config', gaId);
+          window.gtag = gtag;
+          gtag('js', new Date());
+          ids.forEach(function (id) { gtag('config', id); });
+          if (conv.phoneCalls) gtag('config', conv.phoneCalls, { phone_conversion_number: phone });
+          document.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a[href^="tel:"]');
+            if (a && conv.phoneClick) gtag('event', 'conversion', { send_to: conv.phoneClick });
+          });
         </script>
       </>
+    )}
+    {g.tagManagerId && (
+      <script is:inline define:vars={{ gtm: g.tagManagerId }}>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer',gtm);
+      </script>
     )}
   </head>
   <body>
