@@ -36,7 +36,7 @@ const tel = `tel:${site.phone.replace(/\s/g, '')}`;
     </nav>
     <div class="site-header__cta">
       <a href={tel} class="call" aria-label={`Call ${site.phone}`}><Icon name="phone" /></a>
-      <BookButton variant="dark" />
+      <BookButton />
       <button class="menu-toggle" aria-controls="nav-list" aria-expanded="false" aria-label="Open menu">
         <span></span><span></span>
       </button>
@@ -52,8 +52,8 @@ const tel = `tel:${site.phone.replace(/\s/g, '')}`;
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
     padding: 6px 10px 6px 22px; border-radius: 999px;
     background: rgba(255,255,255,.82); backdrop-filter: saturate(1.6) blur(16px); -webkit-backdrop-filter: saturate(1.6) blur(16px);
-    border: 1px solid rgba(12,29,32,.06);
-    box-shadow: 0 8px 30px -12px rgba(12,29,32,.18);
+    border: 1px solid rgba(60,45,30,.08);
+    box-shadow: 0 8px 30px -14px rgba(60,45,30,.22);
     transition: background .3s, box-shadow .3s, border-color .3s;
   }
   .site-header--overlay:not(.is-scrolled) .site-header__bar { background: rgba(255,255,255,.92); }
@@ -67,7 +67,7 @@ const tel = `tel:${site.phone.replace(/\s/g, '')}`;
 
   .nav ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; }
   .nav a { display: block; padding: 9px 13px; border-radius: 999px; text-decoration: none; color: var(--ink); font-weight: 600; font-size: .92rem; white-space: nowrap; transition: background .2s, color .2s; }
-  .nav a:hover { background: rgba(12,29,32,.06); }
+  .nav a:hover { background: var(--sand); }
   .nav a[aria-current='page'] { background: var(--mint-soft); color: var(--brand-dark); }
   .nav__mobile-extra { display: none; }
 

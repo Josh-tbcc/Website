@@ -13,7 +13,7 @@ const { offer } = site;
 >
   <!-- HERO + FORM -->
   <section class="lp-hero">
-    <div class="panel lp-hero__panel on-dark">
+    <div class="panel lp-hero__panel">
     <div class="container lp-grid">
       <div class="lp-copy">
         <span class="eyebrow">Yandina · Sunshine Coast</span>
@@ -152,13 +152,13 @@ const { offer } = site;
 
 <style>
   .lp-hero { padding-top: 12px; }
-  .lp-hero__panel { background: radial-gradient(70% 90% at 100% 0%, rgba(28,174,229,.2), transparent 60%), radial-gradient(60% 80% at 0% 100%, rgba(108,179,80,.5), transparent 60%), var(--ink); color: #b9c9cb; padding: clamp(40px, 6vw, 88px) 0; }
-  .lp-copy h1 { color: var(--white); font-size: clamp(2.3rem, 5vw, 3.8rem); }
-  .lp-form { box-shadow: 0 30px 80px -20px rgba(0,0,0,.5); border: 0; }
+  .lp-hero__panel { background: radial-gradient(60% 80% at 100% 0%, rgba(255,255,255,.7), transparent 60%), radial-gradient(50% 70% at 0% 100%, rgba(207,227,194,.45), transparent 60%), var(--sand); padding: clamp(40px, 6vw, 88px) 0; }
+  .lp-copy h1 { font-size: clamp(2.3rem, 5vw, 3.8rem); }
+  .lp-form { box-shadow: var(--shadow); border: 0; }
   .lp-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
   .lp-form h2 { font-size: 1.6rem; }
-  .price-tag { display: inline-flex; align-items: center; gap: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); color: var(--white); padding: 10px 22px 10px 10px; border-radius: 999px; margin: 6px 0 26px; }
-  .price-tag__price { font-family: var(--font-head); font-size: 1.6rem; font-weight: 800; color: var(--ink); background: var(--mint); border-radius: 999px; padding: 6px 18px; letter-spacing: -0.03em; }
+  .price-tag { display: inline-flex; align-items: center; gap: 14px; background: var(--white); border: 1px solid var(--line); color: var(--ink); padding: 10px 22px 10px 10px; border-radius: 999px; margin: 6px 0 26px; }
+  .price-tag__price { font-family: var(--font-head); font-size: 1.6rem; font-weight: 800; color: var(--ink); background: var(--accent); border-radius: 999px; padding: 6px 18px; letter-spacing: -0.03em; }
   .price-tag__label { font-weight: 600; }
   .lp-sticky { display: none; }
   @media (max-width: 900px) {

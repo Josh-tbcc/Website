@@ -50,13 +50,13 @@ const schema = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={`${site.url}/images/hero.jpg`} />
-    <meta name="theme-color" content="#0f1c24" />
+    <meta name="theme-color" content="#f1e9dd" />
     <script is:inline>document.documentElement.classList.add('js');</script>
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
     {site.metaPixelId && (
@@ -129,11 +129,11 @@ const schema = {
       });
     </script>
     <style>
-      .landing-header { background: var(--ink); color: var(--white); padding: 14px 0; font-family: var(--font-head); }
+      .landing-header { background: var(--sand); color: var(--ink); padding: 14px 0; font-family: var(--font-head); }
       .landing-header .container { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: .92rem; }
-      .landing-header span { color: var(--mint); }
-      .landing-footer { background: #0f2429; color: #8aa3a6; padding: 28px 0; font-size: .8rem; text-align: center; }
-      .landing-footer a { color: #d9ecee; }
+      .landing-header span { color: var(--brand); }
+      .landing-footer { background: var(--cream); color: var(--muted); padding: 28px 0; font-size: .8rem; text-align: center; border-top: 1px solid var(--line); }
+      .landing-footer a { color: var(--ink); }
     </style>
   </body>
 </html>

@@ -1,6 +1,4 @@
 ---
-import fs from 'node:fs';
-import path from 'node:path';
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
 import Video from '../components/Video.astro';
@@ -9,7 +7,6 @@ import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 
-const heroImg = fs.existsSync(path.join(process.cwd(), 'public/images/hero.jpg')) ? '/images/hero.jpg' : null;
 const conditions = [
   ['Back pain', '/back-pain'], ['Neck pain', '/neck-pain'], ['Headaches', '/headaches'], ['Sciatica', '/sciatica'],
   ['Hip pain', '/hip-pain'], ['Posture', '/poor-posture'], ['Pregnancy', '/pregnancy-chiropractic'], ['Arthritis', '/arthritis'],
@@ -24,8 +21,7 @@ const who = [
 ---
 <Base overlayHeader>
   <!-- HERO -->
-  <section class:list={['hero on-dark', { 'hero--photo': heroImg }]} style={heroImg ? `--hero:url(${heroImg})` : undefined}>
-    <div class="hero__bg" aria-hidden="true"></div>
+  <section class="hero">
     <div class="container hero__inner">
       <div class="hero__copy reveal">
         <span class="eyebrow">Chiropractor · Yandina</span>
@@ -44,8 +40,14 @@ const who = [
         <div class="stat"><strong>AI thermal scan</strong><span>Thermpix nerve imaging</span></div>
         <div class="stat"><strong>Every 12 visits</strong><span>progress re-measured</span></div>
       </div>
+      <div class="hero__visual reveal reveal-delay-1">
+        <Media src="/images/hero.jpg" alt="Dr Josh taking a ThermPix thermal scan of a patient’s spine" label="Hero photo" shape="tall" eager class="hero__photo" />
+        <div class="hero__badge">
+          <span class="hero__badge-icon"><Icon name="scan" /></span>
+          <span><strong>Measured, not guessed</strong>Scan, exam &amp; X-ray if needed</span>
+        </div>
+      </div>
     </div>
-    {!heroImg && <span class="hero__todo">Hero photo to add: public/images/hero.jpg</span>}
   </section>
 
   <!-- CONDITIONS RIBBON -->
@@ -198,27 +200,36 @@ const who = [
 
 <style>
   /* Hero */
-  .hero { position: relative; min-height: min(100svh, 920px); display: flex; align-items: flex-end; color: #c4d4d5; margin: 0 12px; border-radius: 0 0 var(--radius-lg) var(--radius-lg); overflow: hidden; isolation: isolate; }
-  .hero__bg { position: absolute; inset: 0; z-index: -1;
+  .hero {
+    margin: 0 12px; border-radius: 0 0 var(--radius-lg) var(--radius-lg);
     background:
-      linear-gradient(180deg, rgba(12,29,32,.55) 0%, rgba(12,29,32,.2) 35%, rgba(12,29,32,.85) 100%),
-      var(--hero, radial-gradient(70% 60% at 80% 20%, #1486bb 0%, transparent 60%), radial-gradient(60% 60% at 10% 90%, #4f9a36 0%, transparent 60%), radial-gradient(40% 40% at 60% 70%, rgba(28,174,229,.35) 0%, transparent 70%), #0c1d20) center / cover no-repeat;
+      radial-gradient(55% 70% at 100% 0%, rgba(255,255,255,.75), transparent 60%),
+      radial-gradient(45% 60% at 0% 100%, rgba(207,227,194,.5), transparent 60%),
+      var(--sand);
   }
-  .hero--photo .hero__bg {
-    background:
-      linear-gradient(90deg, rgba(15,28,36,.88) 0%, rgba(15,28,36,.6) 45%, rgba(15,28,36,.15) 100%),
-      linear-gradient(180deg, rgba(15,28,36,.45) 0%, rgba(15,28,36,0) 30%, rgba(15,28,36,.75) 100%),
-      var(--hero) 72% 22% / cover no-repeat, #0f1c24;
+  .hero__inner { padding-top: 150px; padding-bottom: clamp(48px, 6vw, 88px); display: grid; grid-template-columns: 1.1fr .9fr; grid-template-areas: 'copy visual' 'stats visual'; gap: 0 clamp(32px, 5vw, 80px); align-items: center; }
+  .hero__copy { grid-area: copy; align-self: end; }
+  .hero__visual { grid-area: visual; }
+  .hero__stats { grid-area: stats; align-self: start; }
+  .hero h1 { font-size: clamp(3rem, 7vw, 5.8rem); margin-bottom: .35em; }
+  .hero .lead { max-width: 540px; margin-bottom: 1.8em; }
+  .hero__stats { margin-top: clamp(32px, 5vw, 56px); max-width: 620px; }
+  .hero__visual { position: relative; }
+  .hero :global(.hero__photo) { border-radius: 260px 260px var(--radius-lg) var(--radius-lg); box-shadow: var(--shadow); max-width: 520px; margin-left: auto; }
+  .hero__badge {
+    position: absolute; left: 0; bottom: 36px; display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,.95); backdrop-filter: blur(10px); border-radius: 18px; padding: 12px 18px 12px 12px;
+    box-shadow: var(--shadow); font-size: .82rem; color: var(--muted); line-height: 1.35;
   }
-  @media (max-width: 700px) {
-    .hero--photo .hero__bg { background: linear-gradient(180deg, rgba(15,28,36,.55) 0%, rgba(15,28,36,.8) 45%, rgba(15,28,36,.95) 100%), var(--hero) 80% 0% / cover no-repeat, #0f1c24; }
+  .hero__badge strong { display: block; color: var(--ink); font-family: var(--font-head); font-size: .92rem; }
+  .hero__badge-icon { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: var(--mint); color: var(--brand-dark); flex-shrink: 0; }
+  .hero__badge-icon :global(svg) { width: 20px; height: 20px; }
+  @media (max-width: 900px) {
+    .hero__inner { grid-template-columns: 1fr; grid-template-areas: 'copy' 'visual' 'stats'; row-gap: 32px; padding-top: 120px; }
+    .hero__stats { margin-top: 0; }
+    .hero :global(.hero__photo) { margin: 0 auto; max-width: 440px; }
+    .hero__badge { left: 50%; transform: translateX(-50%); bottom: 20px; white-space: nowrap; }
   }
-  .hero__inner { padding-top: 140px; padding-bottom: clamp(32px, 5vw, 56px); display: grid; gap: clamp(40px, 6vw, 72px); }
-  .hero h1 { color: var(--white); font-size: clamp(2.8rem, 8vw, 6.2rem); margin-bottom: .35em; }
-  .hero .lead { color: #c4d4d5; max-width: 560px; margin-bottom: 1.8em; }
-  .hero__copy { max-width: 860px; }
-  .hero__stats { max-width: 880px; }
-  .hero__todo { position: absolute; top: 96px; right: 24px; font-size: .72rem; color: rgba(255,255,255,.55); }
 
   /* Bento */
   .bento { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 20px; }
@@ -228,8 +239,8 @@ const who = [
   .bento :global(.bento__img) { grid-column: 1 / span 2; grid-row: 2; aspect-ratio: auto; min-height: 280px; }
   .bento :global(.bento__img img) { position: absolute; inset: 0; }
   .progress { display: flex; gap: 6px; margin-top: auto; padding-top: 32px; }
-  .progress span { flex: 1; height: 6px; border-radius: 6px; background: rgba(28,174,229,.25); }
-  .progress span:last-child { background: var(--mint); }
+  .progress span { flex: 1; height: 6px; border-radius: 6px; background: var(--sand-2); }
+  .progress span:last-child { background: var(--accent); }
   @media (max-width: 960px) {
     .bento { grid-template-columns: 1fr 1fr; }
     .bento > *, .bento :global(.bento__img) { grid-row: auto !important; }
@@ -243,10 +254,6 @@ const who = [
     .hero__stats .stat { padding: 14px 12px; }
     .hero__stats .stat strong { font-size: 1rem; }
     .hero__stats .stat span { font-size: .72rem; line-height: 1.35; display: block; margin-top: 4px; }
-  }
-  @media (max-width: 700px) {
-    .hero { min-height: 0; }
-    .hero__inner { padding-top: 120px; padding-bottom: 92px; }
   }
 
   .feature-list { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 16px; }
