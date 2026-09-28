@@ -32,7 +32,7 @@ export const site = {
     { days: 'Wednesday', time: '2:30pm – 6:00pm' },
     { days: 'Thursday', time: '7:00am – 10:00am, 2:30pm – 6:00pm' },
     { days: 'Friday', time: '7:00am – 10:00am' },
-    { days: 'Saturday', time: 'Closed' },
+    { days: 'Saturday', time: 'Free Spinal Assessment at the Yandina Country Markets from 7:00am – 12:00pm' },
     { days: 'Sunday', time: 'Closed' },
   ],
 
