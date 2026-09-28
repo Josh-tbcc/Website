@@ -89,6 +89,9 @@ const schema = {
     )}
   </head>
   <body>
+    {site.metaPixelId && (
+      <noscript><img height="1" width="1" style="display:none" alt="" src={`https://www.facebook.com/tr?id=${site.metaPixelId}&ev=PageView&noscript=1`} /></noscript>
+    )}
     {landing ? (
       <header class="landing-header">
         <div class="container"><strong>{site.name}</strong><span>{a.suburb}, Sunshine Coast</span></div>
