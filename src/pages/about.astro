@@ -4,6 +4,7 @@ import Media from '../components/Media.astro';
 import Video from '../components/Video.astro';
 import CtaBand from '../components/CtaBand.astro';
 import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
 import { site, team } from '../config/site';
 
 const values = [
@@ -48,7 +49,9 @@ const values = [
             <Media src={m.photo} alt={m.name} label={`${m.name} headshot`} shape="tall" />
             <h3 style="margin-top:22px">{m.name}</h3>
             <p class="pill">{m.role}</p>
+            {m.credentials && <p class="fine-print" style="margin:8px 0 0">{m.credentials}</p>}
             <p style="margin-top:12px">{m.bio}</p>
+            {m.page && <a class="btn btn--ghost" href={m.page}>Meet {m.name.split(' ').slice(0, 2).join(' ')}<Icon name="arrow" /></a>}
           </div>
         ))}
       </div>

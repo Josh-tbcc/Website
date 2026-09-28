@@ -75,10 +75,10 @@ export const site = {
   // Videos live in public/videos (<name>.mp4 + <name>.jpg cover, optional .vtt captions)
   videos: {
     welcome: 'new-patient-welcome',        // Dr Josh: what to expect at your first visit
-    thermpixLoop: 'thermpix-benefits',     // music-only ThermPix reel (plays silently on loop)
     thermography: 'inflammation-scanner',  // Dr Josh explains the ThermPix scanner
     thorough: 'thorough-care',             // how we investigate and plan long-term care
     brandStory: 'brand-story',             // why Dr Josh opened the clinic
+    david: 'dr-david',                     // Dr David introduction (add public/videos/dr-david.mp4)
     offer: 'three-technologies',           // 3 technologies (offer section cut out)
   },
 
@@ -93,13 +93,16 @@ export const team = [
   {
     name: 'Dr Joshua Kassis',
     role: 'Principal Chiropractor & Founder',
+    credentials: 'B.Chiro, M.Chiro (Macquarie University)',
     photo: '/images/dr-josh.jpg',
     bio: 'Josh founded The Balanced Chiropractic Centre to give the Yandina community a different kind of chiropractic: one that measures before it treats and works to correct the underlying pattern, not just the symptom of the day. He is passionate about family wellness and educating people on how their nervous system shapes their health.',
   },
   {
-    name: 'Dr David',
+    name: 'Dr David Rowan',
     role: 'Chiropractor',
+    credentials: 'B.Chiro Sc, M.Chiro (CQU)',
     photo: '/images/dr-david.jpg',
-    bio: 'TODO: David’s bio — background, study, what he loves about chiropractic and life outside the clinic.',
+    page: '/dr-david-rowan',
+    bio: 'A former Glasgow police officer turned chiropractor, Dr David is known for his friendly, relatable manner and the time he takes to understand each person. Meet him and the first thing you’ll notice is the Scottish accent. Then how easy he is to talk to.',
   },
 ];

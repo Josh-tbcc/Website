@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Media from '../components/Media.astro';
+import Video from '../components/Video.astro';
+import BookButton from '../components/BookButton.astro';
+import CtaBand from '../components/CtaBand.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+import { site } from '../config/site';
+
+const hasVideo = fs.existsSync(path.join(process.cwd(), 'public/videos', `${site.videos.david}.mp4`));
+---
+<Base title="Meet Dr David Rowan, Chiropractor Yandina" description="Meet Dr David Rowan, chiropractor at The Balanced Chiropractic Centre in Yandina, offering friendly, personalised care for individuals and families on the Sunshine Coast.">
+  <PageHero eyebrow="Meet the team" title="Dr David <span class='hl'>Rowan</span>" lead="Known for his friendly, relatable manner and the time he takes to understand each person. Rather than running every patient through the same routine, Dr David considers your individual needs and what you hope to achieve through care.">
+    <div class="btn-row" slot="actions">
+      <BookButton label="Book with Dr David" />
+    </div>
+    <Media slot="aside" src="/images/dr-david.jpg" alt="Dr David Rowan, chiropractor" label="Dr David portrait" shape="tall" />
+  </PageHero>
+
+  <section class="section">
+    <div class="container narrow center reveal">
+      <p class="quote">“Seeing people make positive changes in their lives is what I love most about being a chiropractor.”</p>
+      <p class="fine-print">Dr David Rowan · B.Chiro Sc, M.Chiro</p>
+    </div>
+  </section>
+
+  <section class="section section--cream panel">
+    <div class="container split">
+      <div class="reveal">
+        <span class="eyebrow">Getting on the chiropractic path</span>
+        <h2>From Glasgow police officer to chiropractor</h2>
+        <p>As a kid in Scotland, Dr David was told not to crack his knuckles because it would cause arthritis. Years later, that throwaway warning was still niggling at him enough that he set out to find out whether it was even true.</p>
+        <p>Before chiropractic, Dr David served as a police officer in Glasgow. He moved to Australia to marry his now-wife, and while he waited for his permanent residency to come through, joining the Queensland Police Service wasn’t an option. So he did something else with that time instead: started over and built a career he was genuinely passionate about.</p>
+        <p>He studied at CQU, where a handful of people left a real mark on him, including Ken Lorne, Omar, Ben and John.</p>
+      </div>
+      {hasVideo
+        ? <Video file={site.videos.david} vertical title="Meet Dr David Rowan" />
+        : <Media src="/images/david-adjusting.jpg" alt="Dr David adjusting a patient at The Balanced Chiropractic Centre" label="Dr David adjusting" shape="tall" class="reveal" />}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <Media src="/images/david-care.jpg" alt="Dr David providing chiropractic care" label="Dr David providing care" shape="tall" class="reveal" />
+      <div class="reveal">
+        <span class="eyebrow">Finding fulfilment helping others</span>
+        <h2>Care that fits your goals</h2>
+        <p>For Dr David, the reward comes from helping people work towards their individual health goals.</p>
+        <p>His own health journey has shaped how he practises today. Like a lot of Scottish men, he’ll admit he didn’t look after himself much in his earlier years. His diet wasn’t great, and while his police career kept him active, becoming a chiropractor changed the way he thinks about looking after his own health.</p>
+        <p>Meet Dr David and the first thing you’ll probably notice is the Scottish accent. Then how easy he is to talk to.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--mint panel">
+    <div class="container grid grid-2" style="align-items:start">
+      <div class="reveal">
+        <span class="eyebrow">Family first</span>
+        <h2>At home on the Sunshine Coast</h2>
+        <p>Dr David and his wife Laura met overseas. She’s originally from Sydney, and in 2018 he made the move to the Sunshine Coast to marry her. Their daughter Harley arrived in 2020, and their son William followed in 2023.</p>
+        <p>Laura owns and runs a busy psychology clinic in Maroochydore, and Dr David couldn’t be prouder of how she manages being a mum of two, a business owner and, as he puts it, his number one cheerleader.</p>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="eyebrow">In his spare time</span>
+        <h2>Motorbikes, beaches and the kids</h2>
+        <p>Outside the practice, Dr David’s time belongs to Harley and William, and he wouldn’t have it any other way.</p>
+        <p>When he does get a spare moment, you might find him on his motorbike making the most of the Sunshine Coast weather, or down at the beach, the pool, or out on the water.</p>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Book in with Dr David" text={`Dr David would love to welcome you and your family to ${site.name}. Book online or call the team.`} />
+</Base>
+<style>
+  .quote { font-family: var(--font-head); font-weight: 700; font-size: clamp(1.5rem, 3vw, 2.2rem); letter-spacing: -0.02em; line-height: 1.3; color: var(--ink); margin-bottom: 12px; }
+</style>
