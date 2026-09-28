@@ -14,12 +14,14 @@ export interface Condition {
   focus: string[];
   photo: string;
   photoAlt: string;
+  video?: { file: string; title: string; blurb: string };
   faqs: { q: string; a: string }[];
 }
 
 export const conditions: Condition[] = [
   {
     slug: 'back-pain',
+    video: { file: 'emptying-the-bucket', title: 'Why back pain overflows: the bucket analogy', blurb: 'Dr Josh explains how everyday stress builds up in your spine, and the three things we check to find what’s really going on.' },
     name: 'Back pain',
     h1: 'Back pain that keeps <span class="hl">coming back?</span>',
     metaTitle: 'Back Pain Chiropractor Yandina',
@@ -52,6 +54,7 @@ export const conditions: Condition[] = [
   },
   {
     slug: 'neck-pain',
+    video: { file: 'tech-neck', title: 'Tech neck: three things you can do', blurb: 'Simple changes to how you use your phone and computer, and when to get your neck checked.' },
     name: 'Neck pain',
     h1: 'Neck pain and <span class="hl">stiffness</span>',
     metaTitle: 'Neck Pain Chiropractor Yandina',
@@ -84,6 +87,7 @@ export const conditions: Condition[] = [
   },
   {
     slug: 'headaches',
+    video: { file: 'three-signs', title: 'Three signs it’s time to see a chiropractor', blurb: 'Including headaches and neck pain that just won’t go away.' },
     name: 'Headaches',
     h1: 'Headaches and <span class="hl">tension</span>',
     metaTitle: 'Headache Chiropractor Yandina',
@@ -116,6 +120,7 @@ export const conditions: Condition[] = [
   },
   {
     slug: 'sciatica',
+    video: { file: 'three-technologies', title: 'Three technologies for lower back pain and sciatica', blurb: 'The scan, spinal assessment and X-ray we use to see what’s behind lower back and leg pain.' },
     name: 'Sciatica',
     h1: 'Sciatica and <span class="hl">leg pain</span>',
     metaTitle: 'Sciatica Chiropractor Yandina',
@@ -210,6 +215,7 @@ export const conditions: Condition[] = [
   },
   {
     slug: 'poor-posture',
+    video: { file: 'office-tips', title: 'Three quick posture tips for office workers', blurb: 'Easy habits to reset your posture during the workday.' },
     name: 'Poor posture',
     h1: 'It’s not just your posture. <span class="hl">It’s the pattern.</span>',
     metaTitle: 'Posture Correction Chiropractor Yandina',

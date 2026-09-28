@@ -106,9 +106,9 @@ const who = [
 
   <!-- THERMOGRAPHY -->
   <section class="section">
-    <div class="container split">
+    <div class="container video-split video-split--flip">
       <div class="reveal">
-        <Video id={site.videos.thermography} title="Thermography scan at The Balanced Chiropractic Centre" label="Thermography scan video" fallback="/images/thermal-back.jpg" fallbackAlt="Thermpix thermal image of a patient’s back on the scanner screen" position="center 45%" />
+        <Video file={site.videos.thermography} vertical title="Dr Josh explains the ThermPix inflammation scanner" />
       </div>
       <div class="reveal reveal-delay-1">
         <span class="eyebrow">Thermography nerve scan</span>
@@ -178,8 +178,8 @@ const who = [
 
   <!-- TEAM -->
   <section class="section">
-    <div class="container split">
-      <Media src="/images/dr-josh.jpg" alt="Dr Joshua Kassis, chiropractor at The Balanced Chiropractic Centre" label="Dr Josh photo" shape="tall" class="reveal" />
+    <div class="container video-split video-split--flip">
+      <div class="reveal"><Video file={site.videos.thorough} vertical title="Dr Josh on how we investigate and plan your care" /></div>
       <div class="reveal reveal-delay-1">
         <span class="eyebrow">Meet the team</span>
         <h2>A family practice for the Yandina community</h2>

@@ -5,6 +5,7 @@ import Media from '../components/Media.astro';
 import BookButton from '../components/BookButton.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
+import Video from '../components/Video.astro';
 import { conditions, type Condition } from '../config/conditions';
 
 export function getStaticPaths() {
@@ -46,6 +47,19 @@ const faqSchema = {
       </div>
     </div>
   </section>
+
+  {c.video && (
+    <section class="section section--tight">
+      <div class="container video-split video-split--flip">
+        <Video file={c.video.file} vertical title={c.video.title} />
+        <div class="reveal">
+          <span class="eyebrow">Watch: Dr Josh explains</span>
+          <h2>{c.video.title}</h2>
+          <p class="lead">{c.video.blurb}</p>
+        </div>
+      </div>
+    </section>
+  )}
 
   <section class="section section--cream panel">
     <div class="container split">

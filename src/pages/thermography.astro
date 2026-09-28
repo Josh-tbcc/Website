@@ -11,7 +11,7 @@ import { site } from '../config/site';
 <Base title="Thermography Nerve Scan" description="Thermpix thermal imaging with AI-assisted analysis at The Balanced Chiropractic Centre, Yandina. An objective look at where your nervous system is under stress.">
   <PageHero eyebrow="Thermography nerve scan" title="Clarity starts with <span class='hl'>measurement.</span>" lead="Thermography imaging identifies specific hotspots on your body and spine. It gives us an objective indication of which areas need attention, so your care is based on data, not guesswork.">
     <div class="btn-row" slot="actions"><BookButton label="Book a consult & scan" /></div>
-    <div slot="aside"><Video id={site.videos.thermography} title="Thermography scan at The Balanced Chiropractic Centre" label="Thermography scan video" fallback="/images/thermal-scanning.jpg" fallbackAlt="Dr Josh performing a Thermpix thermography scan" position="center 22%" /></div>
+    <div slot="aside" class="hero-reel"><Video file={site.videos.thermpixLoop} vertical ambient title="ThermPix scanner in use at The Balanced Chiropractic Centre" /></div>
   </PageHero>
 
   <section class="section">
@@ -37,6 +37,18 @@ import { site } from '../config/site';
           <p>We combine your scan with your history, exam and X-rays (if needed) to pinpoint the areas to focus on, and show you the results in your report of findings.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container video-split">
+      <div class="reveal">
+        <span class="eyebrow">Watch</span>
+        <h2>Dr Josh explains the ThermPix scanner</h2>
+        <p class="lead">See how the scan shows where inflammation and stress are sitting in your body, and how we compare scans over time to track your progress.</p>
+        <a class="btn btn--dark" href="/book-online-yandina" data-book>Book a consult & scan<Icon name="arrow" /></a>
+      </div>
+      <Video file={site.videos.thermography} vertical title="Dr Josh explains the ThermPix inflammation scanner" />
     </div>
   </section>
 
@@ -66,3 +78,7 @@ import { site } from '../config/site';
 
   <CtaBand title="Find out what your scan shows" />
 </Base>
+<style>
+  .hero-reel { max-width: 320px; margin-inline: auto; }
+  .hero-reel :global(.media--vertical) { max-height: 520px; }
+</style>

@@ -20,10 +20,12 @@ New website for **thebalancedchiro.com.au**, built with [Astro](https://astro.bu
 
 ## Editing details
 
-Almost everything (phone, hours, booking link, Meta Pixel, video IDs, team bios)
+Almost everything (phone, hours, booking embed, Meta Pixel, videos, team bios)
 is in **`src/config/site.ts`**. Search that file for `TODO` to see what's still missing.
 
 Old website addresses that no longer exist are redirected in **`public/_redirects`**.
+
+Videos live in **`public/videos/`** (`name.mp4` plus a `name.jpg` cover image and optional `name.vtt` captions) and are chosen in the `videos` section of `src/config/site.ts`. Keep them compressed (720p, a few MB each).
 
 Photos go in **`public/images/`**. Each grey placeholder on the site shows the exact file name it's waiting for.
 

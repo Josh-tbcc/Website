@@ -24,13 +24,17 @@ const values = [
     </div>
   </section>
 
-  {site.videos.intro && (
-    <section class="section">
-      <div class="container" style="max-width:900px">
-        <Video id={site.videos.intro} title="Welcome from Dr Josh" />
+  <section class="section section--cream panel">
+    <div class="container video-split">
+      <div class="reveal">
+        <span class="eyebrow">Our story</span>
+        <h2>Why Dr Josh opened The Balanced Chiropractic Centre</h2>
+        <p class="lead">From helping injured animals as a kid to building a clinic around thorough testing, re-measuring progress and investing in the best technology.</p>
+        <p>We opened in 2023, transforming a former local pharmacy into a modern, wellness-focused chiropractic centre, so families in Yandina and across the Sunshine Coast could find the true cause of their health concerns.</p>
       </div>
-    </section>
-  )}
+      <Video file={site.videos.brandStory} vertical title="Dr Josh on why he opened The Balanced Chiropractic Centre" />
+    </div>
+  </section>
 
   <section class="section">
     <div class="container">

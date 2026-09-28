@@ -72,10 +72,14 @@ export const site = {
   metaPixelId: '', // TODO: from Daina / Meta Events Manager
   googleAnalyticsId: '', // optional, e.g. G-XXXXXXX
 
-  // Videos — paste YouTube video IDs (the part after v=)
+  // Videos live in public/videos (<name>.mp4 + <name>.jpg cover, optional .vtt captions)
   videos: {
-    thermography: '', // TODO: thermal scan explainer
-    intro: '', // optional: welcome video from Dr Josh
+    welcome: 'new-patient-welcome',        // Dr Josh: what to expect at your first visit
+    thermpixLoop: 'thermpix-benefits',     // music-only ThermPix reel (plays silently on loop)
+    thermography: 'inflammation-scanner',  // Dr Josh explains the ThermPix scanner
+    thorough: 'thorough-care',             // how we investigate and plan long-term care
+    brandStory: 'brand-story',             // why Dr Josh opened the clinic
+    offer: 'three-technologies',           // 3 technologies (offer section cut out)
   },
 
   social: {
