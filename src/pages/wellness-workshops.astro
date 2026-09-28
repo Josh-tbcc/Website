@@ -1,0 +1,208 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import CtaBand from '../components/CtaBand.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+
+const a = site.address;
+const tel = `tel:${site.phone.replace(/\s/g, '')}`;
+const topics = [
+  ['spine', 'How your nervous system works', 'Why your spine and nervous system shape how you move, sleep, handle stress and feel day to day.'],
+  ['activity', 'Posture in a screen-filled world', 'What desks, phones and long drives do to your body, and simple ways to undo it at home and at work.'],
+  ['heart', 'Stress and your body', 'How everyday stress builds up physically, and practical habits to help your body recover.'],
+  ['leaf', 'Daily habits that add up', 'Easy, realistic routines for movement, rest and recovery that the whole family can do together.'],
+];
+const faqs = [
+  ['Do I need to be a patient?', 'Not at all. The workshops are open to everyone, whether you’ve seen a chiropractor before or not. Bring anyone who might benefit.'],
+  ['Who should I bring?', 'Your partner, parents, kids, friends, workmates: anyone you’d like to feel better and stay well. Health habits are much easier to stick to when the people around you are on board too.'],
+  ['Do I need to book?', 'Please RSVP so we can save enough seats and have everything ready for your group. You can use the form on this page or give us a call.'],
+  ['Where is it held?', `Right here at the clinic: ${a.street}, ${a.suburb}. ${site.directions}`],
+];
+---
+<Base title="Wellness Workshops" description="Relaxed, practical wellness workshops at The Balanced Chiropractic Centre in Yandina, on the first Wednesday of every month at 6pm. Bring your partner, family and friends.">
+  <PageHero eyebrow="Wellness workshops" title="An evening for your health, <span class='hl'>and theirs.</span>" lead="Join us on the first Wednesday of every month at 6pm for a relaxed, practical workshop on how your body works and the simple habits that help it thrive. Bring your partner, family and friends.">
+    <div class="btn-row" slot="actions">
+      <a class="btn btn--primary" href="#rsvp">Save your seats<Icon name="arrow" /></a>
+      <a class="btn btn--glass" href={tel}><Icon name="phone" />{site.phone}</a>
+    </div>
+    <Media slot="aside" src="/images/workshop-host.jpg" alt="Dr Josh, who runs our monthly wellness workshops" label="Workshop photo" shape="tall" />
+  </PageHero>
+
+  <!-- WHEN / WHERE -->
+  <section class="section section--tight">
+    <div class="container">
+      <div class="grid grid-3 facts">
+        <div class="card reveal">
+          <div class="icon"><Icon name="calendar" /></div>
+          <h3>First Wednesday, every month</h3>
+          <p>Next workshop: <strong data-next-date>the first Wednesday of next month</strong></p>
+        </div>
+        <div class="card reveal reveal-delay-1">
+          <div class="icon"><Icon name="clock" /></div>
+          <h3>Starts at 6:00pm</h3>
+          <p>Come straight from work. Arrive a few minutes early to grab a seat and say hello.</p>
+        </div>
+        <div class="card reveal reveal-delay-2">
+          <div class="icon"><Icon name="pin" /></div>
+          <h3>At the clinic in Yandina</h3>
+          <p>{a.street}, {a.suburb} {a.state} {a.postcode}. <a href={site.mapsUrl} target="_blank" rel="noopener">Get directions</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU'LL LEARN -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">What we cover</span>
+          <h2>Practical, down-to-earth and <span class="hl">easy to follow</span></h2>
+        </div>
+        <p>No jargon and no hard sell. Just clear explanations and simple things you can start doing the very next day. Topics rotate, so there’s always something new.</p>
+      </div>
+      <div class="grid grid-4">
+        {topics.map(([icon, t, d], i) => (
+          <div class={`card card--hover reveal reveal-delay-${i}`}>
+            <div class="icon"><Icon name={icon} /></div>
+            <h3>{t}</h3>
+            <p>{d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BRING YOUR PEOPLE -->
+  <section class="section section--cream panel">
+    <div class="container split">
+      <div class="reveal">
+        <span class="eyebrow">Bring your people</span>
+        <h2>Health is a family affair</h2>
+        <p class="lead">The habits that keep us well are the ones we share with the people we live, work and spend time with.</p>
+        <p>That’s why every workshop is made for groups. Bring your partner so you’re both on the same page. Bring your parents, your kids or a friend who’s been putting up with a sore back for too long. Everyone leaves with ideas they can use together.</p>
+        <ul class="checklist">
+          <li>Partners and spouses</li>
+          <li>Parents, grandparents and older kids</li>
+          <li>Friends, neighbours and workmates</li>
+          <li>Anyone curious about feeling and moving better</li>
+        </ul>
+      </div>
+      <div class="people reveal reveal-delay-1">
+        <div class="people__card"><Icon name="heart" /><strong>Your partner</strong><span>Build healthy routines together at home.</span></div>
+        <div class="people__card"><Icon name="users" /><strong>Your family</strong><span>From the kids’ school bags to grandparents’ mobility.</span></div>
+        <div class="people__card"><Icon name="activity" /><strong>Your friends</strong><span>The mate who’s always “a bit stiff”? Bring them.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="section" id="rsvp">
+    <div class="container split rsvp">
+      <div class="reveal">
+        <span class="eyebrow">RSVP</span>
+        <h2>Save seats for you and your guests</h2>
+        <p class="lead">Let us know you’re coming and how many people you’re bringing, so we can have enough seats ready.</p>
+        <p>Prefer to call? Ring us on <a href={tel}>{site.phone}</a> and we’ll pop you on the list.</p>
+        <ul class="upcoming" data-upcoming aria-label="Upcoming workshops"></ul>
+      </div>
+      <div class="card rsvp__form reveal reveal-delay-1">
+        <form class="form" name="workshop-rsvp" method="POST" action="/wellness-workshops/thank-you" data-netlify="true" netlify-honeypot="company" id="rsvp-form">
+          <input type="hidden" name="form-name" value="workshop-rsvp" />
+          <p class="hidden"><label>Don’t fill this in: <input name="company" /></label></p>
+          <label>Which workshop?
+            <select name="workshop" required data-workshop-select>
+              <option value="Next workshop (first Wednesday of the month)">Next workshop (first Wednesday of the month)</option>
+            </select>
+          </label>
+          <label>Your name<input name="name" autocomplete="name" required /></label>
+          <label>Mobile<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required /></label>
+          <label>Email<input name="email" type="email" autocomplete="email" /></label>
+          <label>How many people are coming, including you?
+            <select name="guests" required>
+              <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6+</option>
+            </select>
+          </label>
+          <label>Who are you bringing? <span class="opt">(optional)</span><input name="guest_names" placeholder="e.g. my husband and mum" /></label>
+          <button class="btn btn--primary btn--block" type="submit">Save my seats</button>
+          <p class="fine-print">We’ll only use your details to confirm your RSVP and remind you before the night. See our <a href="/privacy">privacy policy</a>.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--cream panel">
+    <div class="container narrow">
+      <h2 class="center">Good to know</h2>
+      <div style="margin-top:24px">
+        {faqs.map(([q, ans]) => <details class="faq"><summary>{q}</summary><p>{ans}</p></details>)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Can’t wait until the next workshop?" text="Book a new patient consultation and we’ll assess what’s going on for you personally." />
+</Base>
+
+<script is:inline>
+  (function () {
+    // Workshops run on the first Wednesday of every month at 6pm (Queensland time)
+    function firstWednesday(y, m) {
+      var d = new Date(y, m, 1);
+      d.setDate(1 + ((3 - d.getDay() + 7) % 7));
+      d.setHours(18, 0, 0, 0);
+      return d;
+    }
+    var now = new Date(), dates = [];
+    for (var i = 0; dates.length < 3 && i < 5; i++) {
+      var d = firstWednesday(now.getFullYear(), now.getMonth() + i);
+      if (d.getTime() + 2 * 3600e3 > now.getTime()) dates.push(d);
+    }
+    var fmt = function (d) { return d.toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' }); };
+    var label = function (d) { return fmt(d) + ', 6:00pm'; };
+    var next = document.querySelector('[data-next-date]');
+    if (next && dates[0]) next.textContent = label(dates[0]);
+    var list = document.querySelector('[data-upcoming]');
+    if (list) list.innerHTML = dates.map(function (d, i) {
+      return '<li><span>' + (i === 0 ? 'Next' : 'Then') + '</span>' + label(d) + '</li>';
+    }).join('');
+    var sel = document.querySelector('[data-workshop-select]');
+    if (sel && dates.length) sel.innerHTML = dates.map(function (d) {
+      var t = label(d); return '<option value="' + t + '">' + t + '</option>';
+    }).join('');
+
+    var form = document.getElementById('rsvp-form');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('button[type=submit]');
+      btn.disabled = true; btn.textContent = 'Sending…';
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
+        .catch(function () {})
+        .then(function () {
+          if (window.fbq) window.fbq('track', 'CompleteRegistration', { content_name: 'Wellness workshop' });
+          location.href = '/wellness-workshops/thank-you';
+        });
+    });
+  })();
+</script>
+
+<style>
+  .facts .card h3 { margin-bottom: .35em; }
+  .facts .card p { margin: 0; }
+  .people { display: grid; gap: 14px; }
+  .people__card { display: grid; grid-template-columns: auto 1fr; column-gap: 16px; align-items: center; background: var(--white); border-radius: var(--radius); padding: 20px 22px; box-shadow: var(--shadow-sm); }
+  .people__card :global(svg) { grid-row: span 2; width: 48px; height: 48px; padding: 12px; border-radius: 14px; background: var(--mint); color: var(--brand-dark); }
+  .people__card strong { font-family: var(--font-head); color: var(--ink); }
+  .people__card span { font-size: .95rem; color: var(--muted); }
+  .people__card:nth-child(2) { margin-left: clamp(0px, 4vw, 48px); }
+  .rsvp { align-items: start; }
+  .rsvp__form { box-shadow: var(--shadow); border: 0; }
+  .opt { font-weight: 500; color: var(--muted); }
+  .upcoming { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 10px; }
+  .upcoming :global(li) { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 16px; background: var(--sand); color: var(--ink); font-weight: 600; }
+  .upcoming :global(li span) { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--brand); min-width: 44px; }
+  #rsvp { scroll-margin-top: 90px; }
+</style>

@@ -11,6 +11,7 @@ New website for **thebalancedchiro.com.au**, built with [Astro](https://astro.bu
 | Thermal Scan | `/thermography` | Thermpix scan explained |
 | X-Ray | `/in-house-x-ray` | In-house full-spine and motion X-ray explained |
 | Who We Help | `/who-we-help` | Families, kids, pregnancy, athletes, chronic issues, wellness |
+| Workshops | `/wellness-workshops` | Monthly wellness workshop (first Wednesday, 6pm) with RSVP form |
 | About | `/about` | Mission, team, values |
 | Contact | `/contact-us` | Address, hours, map |
 | Book Online | `/book-online-yandina` | Zurili booking embedded on our own page (new + existing patients) |

@@ -85,9 +85,9 @@ const hasPhoto = (src: string) => fs.existsSync(path.join(process.cwd(), 'public
 <style>
   section[id] { scroll-margin-top: 90px; }
   .jump { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-  .jump a { padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(255,255,255,.2); color: var(--white); text-decoration: none; font-weight: 600; font-size: .9rem; transition: background .2s; }
+  .jump a { padding: 9px 16px; border-radius: 999px; border: 1px solid rgba(28,174,229,.45); background: var(--white); color: #0e9bd3; text-decoration: none; font-weight: 700; font-size: .9rem; transition: background .2s, color .2s; }
   .cond-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 24px; }
   .cond-links a { padding: 7px 14px; border-radius: 999px; background: var(--mint-soft); color: var(--brand-dark); text-decoration: none; font-weight: 600; font-size: .88rem; }
   .cond-links a:hover { background: var(--brand); color: var(--white); }
-  .jump a:hover { background: rgba(255,255,255,.12); color: var(--white); }
+  .jump a:hover { background: var(--logo-blue); border-color: var(--logo-blue); color: var(--white); }
 </style>

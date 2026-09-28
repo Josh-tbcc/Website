@@ -2,7 +2,7 @@
 /book                         /book-online-yandina   301
 /contact                      /contact-us            301
 /wellness-referral-program    /about                 301
-/workshops                    /about                 301
+/workshops                    /wellness-workshops 301
 /about-us                     /about                 301
 /our-team                     /about                 301
 /services                     /who-we-help           301
@@ -22,8 +22,8 @@
 /advanced-inflammation-scanning /thermography        301
 /migraines                    /headaches             301
 /dizziness-and-vertigo        /who-we-help           301
-/health-classes               /about                 301
-/vital-shift-health-seminar   /about                 301
+/health-classes               /wellness-workshops 301
+/vital-shift-health-seminar   /wellness-workshops 301
 /new-practice-members         /new-patients          301
 /info/privacy                 /privacy               301
 /info/*                       /privacy               301
