@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import Video from '../components/Video.astro';
+import BookButton from '../components/BookButton.astro';
+import CtaBand from '../components/CtaBand.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+---
+<Base title="In-House X-Ray" description="On-site digital X-ray at The Balanced Chiropractic Centre, Yandina. Full-spine and motion X-rays when clinically required, explained to you in plain English.">
+  <PageHero eyebrow="In-house X-ray" title="See what’s happening <span class='hl'>inside.</span>" lead="When your history and exam show they’re needed, we take X-rays right here in the clinic. They show the structure of your spine and discs, so we know exactly what we’re working with before we start.">
+    <div class="btn-row" slot="actions"><BookButton label="Book a consultation" /></div>
+    <div slot="aside" class="hero-photo"><Media src="/images/xray-machine.jpg" alt="Dr Josh with the in-house X-ray machine at The Balanced Chiropractic Centre" label="X-ray machine photo" shape="square" /></div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="center narrow">
+        <span class="eyebrow">How it works</span>
+        <h2>Imaging that guides your care</h2>
+      </div>
+      <div class="grid grid-3" style="margin-top:36px">
+        <div class="card card--hover reveal">
+          <div class="icon"><Icon name="xray" /></div>
+          <h3>Full-spine X-rays</h3>
+          <p>If clinically required, a specific set of full-spine X-rays shows what’s happening at a deeper level: the alignment of your spine and the health of your discs.</p>
+        </div>
+        <div class="card card--hover reveal">
+          <div class="icon"><Icon name="scan" /></div>
+          <h3>Motion studies</h3>
+          <p>X-rays taken in motion help us isolate the areas that aren’t moving as they should, so we know which segment to adjust and in which direction.</p>
+        </div>
+        <div class="card card--hover reveal">
+          <div class="icon"><Icon name="chart" /></div>
+          <h3>Explained to you</h3>
+          <p>At your report of findings we put your X-rays up on screen and walk you through them alongside your thermal scan and exam results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container video-split">
+      <div class="reveal">
+        <span class="eyebrow">Watch</span>
+        <h2>Dr Josh on why we X-ray</h2>
+        <p class="lead">Why a specific set of full-spine and motion X-rays helps us find the area that isn’t moving and correct it in the right direction.</p>
+        <a class="btn btn--dark" href="/book-online-yandina" data-book>Book a consultation<Icon name="arrow" /></a>
+      </div>
+      <Video file={site.videos.xray} vertical title="Dr Josh explains full-spine and motion X-rays" />
+    </div>
+  </section>
+
+  <section class="section section--cream panel">
+    <div class="container split">
+      <Media src="/images/xray-review.jpg" alt="Dr Josh pointing out findings on a spinal X-ray" label="X-ray review photo" shape="square" />
+      <div>
+        <span class="eyebrow">Why in-house</span>
+        <h2>No separate trip. No waiting around.</h2>
+        <p>Having X-ray on site means you don’t need to book in somewhere else and come back with films. If imaging is needed, it’s usually done on the same day as your consultation.</p>
+        <ul class="checklist">
+          <li>Digital X-ray on site in Yandina</li>
+          <li>Only taken when clinically justified</li>
+          <li>Reviewed with you in plain English</li>
+          <li>Combined with your thermal scan and exam</li>
+        </ul>
+        <a class="btn btn--ghost" href="/thermography">About the thermal scan<Icon name="arrow" /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <p class="fine-print">X-rays are only taken when clinically indicated, after a full health history and physical examination, and we keep radiation exposure as low as reasonably achievable. If you’ve had recent imaging, bring it along. If your results show anything outside the scope of chiropractic care, we’ll refer you to the appropriate health professional.</p>
+    </div>
+  </section>
+
+  <CtaBand title="Get a clear picture of your spine" />
+</Base>
+<style>
+  .hero-photo { max-width: 420px; margin-inline: auto; }
+</style>

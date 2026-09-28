@@ -86,6 +86,7 @@ export const site = {
   videos: {
     welcome: 'new-patient-welcome',        // Dr Josh: what to expect at your first visit
     thermography: 'inflammation-scanner',  // Dr Josh explains the ThermPix scanner
+    xray: 'xray-explained',                // Dr Josh on full-spine and motion X-rays
     thorough: 'thorough-care',             // how we investigate and plan long-term care
     brandStory: 'brand-story',             // why Dr Josh opened the clinic
     david: 'dr-david',                     // Dr David introduction (add public/videos/dr-david.mp4)

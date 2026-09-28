@@ -28,3 +28,6 @@
 /info/privacy                 /privacy               301
 /info/*                       /privacy               301
 /sitemap                      /sitemap-index.xml     301
+/x-ray  /in-house-x-ray  301
+/xray  /in-house-x-ray  301
+/x-rays  /in-house-x-ray  301

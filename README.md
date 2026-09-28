@@ -9,6 +9,7 @@ New website for **thebalancedchiro.com.au**, built with [Astro](https://astro.bu
 | Home | `/` | Main site: long-term care message, thermography, new patient process |
 | New Patients | `/new-patients` | Visit 1 & 2 explained, intake form, FAQs |
 | Thermal Scan | `/thermography` | Thermpix scan explained |
+| X-Ray | `/in-house-x-ray` | In-house full-spine and motion X-ray explained |
 | Who We Help | `/who-we-help` | Families, kids, pregnancy, athletes, chronic issues, wellness |
 | About | `/about` | Mission, team, values |
 | Contact | `/contact-us` | Address, hours, map |
