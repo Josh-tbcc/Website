@@ -54,7 +54,10 @@ import { site } from '../config/site';
 
   <section class="section section--cream panel">
     <div class="container split">
-      <Media src="/images/thermography-scan.jpg" alt="Thermpix scanner showing a thermal image of a patient’s upper back" label="Thermpix scan image" shape="tall" />
+      <figure class="ba">
+        <Media src="/images/thermal-before-after.jpg" alt="Two ThermPix scans of the same patient’s upper back, taken before and after a period of care" label="Before and after scans" shape="wide" />
+        <figcaption class="fine-print">Example ThermPix scans from our clinic, taken at the start of care and at a later re-scan. Individual results vary.</figcaption>
+      </figure>
       <div>
         <span class="eyebrow">Why it matters</span>
         <h2>Pain tells you something’s wrong. The scan helps show where.</h2>
@@ -80,5 +83,7 @@ import { site } from '../config/site';
 </Base>
 <style>
   .hero-reel { max-width: 320px; margin-inline: auto; }
+  .ba { margin: 0; }
+  .ba figcaption { margin-top: 10px; }
   .hero-reel :global(.media--vertical) { max-height: 520px; }
 </style>
