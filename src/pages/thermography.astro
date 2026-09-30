@@ -29,7 +29,7 @@ import { site } from '../config/site';
         <div class="card card--hover reveal">
           <div class="icon"><Icon name="sparkle" /></div>
           <h3>AI-assisted analysis</h3>
-          <p>Integrated AI analysis highlights temperature patterns and asymmetries, helping us spot hotspots that suggest areas of stress and irritation.</p>
+          <p>Integrated AI analysis highlights temperature patterns and asymmetries, helping us spot hotspots that suggest areas of stress and inflammation.</p>
         </div>
         <div class="card card--hover reveal">
           <div class="icon"><Icon name="chart" /></div>
@@ -55,7 +55,7 @@ import { site } from '../config/site';
   <section class="section section--cream panel">
     <div class="container split">
       <figure class="ba">
-        <Media src="/images/thermal-before-after.jpg" alt="Two ThermPix scans of the same patient’s upper back, taken before and after a period of care" label="Before and after scans" shape="wide" />
+        <Media src="/images/thermal-before-after.jpg" alt="Two ThermPix scans of the same patient’s upper back, taken before and after a period of care" label="Before and after scans" shape="wide" class="ba-img" />
         <figcaption class="fine-print">Example ThermPix scans from our clinic, taken at the start of care and at a later re-scan. Individual results vary.</figcaption>
       </figure>
       <div>
@@ -85,5 +85,6 @@ import { site } from '../config/site';
   .hero-reel { max-width: 320px; margin-inline: auto; }
   .ba { margin: 0; }
   .ba figcaption { margin-top: 10px; }
+  .ba :global(.ba-img) { aspect-ratio: 740 / 525; }
   .hero-reel :global(.media--vertical) { max-height: 520px; }
 </style>

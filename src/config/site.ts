@@ -103,10 +103,10 @@ export const site = {
 export const team = [
   {
     name: 'Dr Joshua Kassis',
-    role: 'Principal Chiropractor & Founder',
+    role: 'Chiropractor',
     credentials: 'B.Chiro, M.Chiro (Macquarie University)',
     photo: '/images/dr-josh.jpg',
-    bio: 'Josh founded The Balanced Chiropractic Centre to give the Yandina community a different kind of chiropractic: one that measures before it treats and works to correct the underlying pattern, not just the symptom of the day. He is passionate about family wellness and educating people on how their nervous system shapes their health.',
+    bio: 'Dr Josh is passionate about giving the Yandina community a different kind of chiropractic: one that measures before it treats and works to correct the underlying pattern, not just the symptom of the day. He loves family wellness and educating people on how their nervous system shapes their health.',
   },
   {
     name: 'Dr David Rowan',
@@ -114,6 +114,6 @@ export const team = [
     credentials: 'B.Chiro Sc, M.Chiro (CQU)',
     photo: '/images/dr-david.jpg',
     page: '/dr-david-rowan',
-    bio: 'A former Glasgow police officer turned chiropractor, Dr David is known for his friendly, relatable manner and the time he takes to understand each person. Meet him and the first thing you’ll notice is the Scottish accent. Then how easy he is to talk to.',
+    bio: 'A former Glasgow police officer with a Master of Chiropractic, Dr David brings calm, thorough care to every visit. He uses the same comprehensive assessment every patient at our clinic receives, from thermal scans to in-house X-ray, and builds a clear plan around your goals. Patients value his honesty, his attention to detail and the time he takes to explain what’s going on. And yes, the Scottish accent.',
   },
 ];

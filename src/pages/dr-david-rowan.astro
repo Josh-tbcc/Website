@@ -12,7 +12,7 @@ import { site } from '../config/site';
 const hasVideo = fs.existsSync(path.join(process.cwd(), 'public/videos', `${site.videos.david}.mp4`));
 ---
 <Base title="Meet Dr David Rowan, Chiropractor Yandina" description="Meet Dr David Rowan, chiropractor at The Balanced Chiropractic Centre in Yandina, offering friendly, personalised care for individuals and families on the Sunshine Coast.">
-  <PageHero eyebrow="Meet the team" title="Dr David <span class='hl'>Rowan</span>" lead="Known for his friendly, relatable manner and the time he takes to understand each person. Rather than running every patient through the same routine, Dr David considers your individual needs and what you hope to achieve through care.">
+  <PageHero eyebrow="Meet the team" title="Dr David <span class='hl'>Rowan</span>" lead="Known for his friendly, relatable manner and the time he takes to understand each person, Dr David tailors your care to your individual needs and what you hope to achieve.">
     <div class="btn-row" slot="actions">
       <BookButton label="Book with Dr David" />
     </div>
@@ -33,7 +33,6 @@ const hasVideo = fs.existsSync(path.join(process.cwd(), 'public/videos', `${site
         <h2>From Glasgow police officer to chiropractor</h2>
         <p>As a kid in Scotland, Dr David was told not to crack his knuckles because it would cause arthritis. Years later, that throwaway warning was still niggling at him enough that he set out to find out whether it was even true.</p>
         <p>Before chiropractic, Dr David served as a police officer in Glasgow. He moved to Australia to marry his now-wife, and while he waited for his permanent residency to come through, joining the Queensland Police Service wasn’t an option. So he did something else with that time instead: started over and built a career he was genuinely passionate about.</p>
-        <p>He studied at CQU, where a handful of people left a real mark on him, including Ken Lorne, Omar, Ben and John.</p>
       </div>
       {hasVideo
         ? <Video file={site.videos.david} vertical title="Meet Dr David Rowan" />
@@ -48,7 +47,8 @@ const hasVideo = fs.existsSync(path.join(process.cwd(), 'public/videos', `${site
         <span class="eyebrow">Finding fulfilment helping others</span>
         <h2>Care that fits your goals</h2>
         <p>For Dr David, the reward comes from helping people work towards their individual health goals.</p>
-        <p>His own health journey has shaped how he practises today. Like a lot of Scottish men, he’ll admit he didn’t look after himself much in his earlier years. His diet wasn’t great, and while his police career kept him active, becoming a chiropractor changed the way he thinks about looking after his own health.</p>
+        <p>His own health journey has shaped how he practises today. Back in Scotland, he first saw a chiropractor for a sore neck, and along the way his sleep and headaches improved too. That experience opened his eyes to how much the spine and nervous system affect everyday health.</p>
+        <p>Since then, he’s seen regular chiropractic care make a real difference for his own family and the people around him, helping them move better, feel better and keep up with the things they love. It’s why he’s so passionate about helping every patient look after their health for the long term.</p>
         <p>Meet Dr David and the first thing you’ll probably notice is the Scottish accent. Then how easy he is to talk to.</p>
       </div>
     </div>
@@ -65,7 +65,7 @@ const hasVideo = fs.existsSync(path.join(process.cwd(), 'public/videos', `${site
       <div class="reveal reveal-delay-1">
         <span class="eyebrow">In his spare time</span>
         <h2>Motorbikes, beaches and the kids</h2>
-        <p>Outside the practice, Dr David’s time belongs to Harley and William, and he wouldn’t have it any other way.</p>
+        <p>Outside the practice, Dr David’s time belongs to Laura, Harley and William, and he wouldn’t have it any other way.</p>
         <p>When he does get a spare moment, you might find him on his motorbike making the most of the Sunshine Coast weather, or down at the beach, the pool, or out on the water.</p>
       </div>
     </div>
