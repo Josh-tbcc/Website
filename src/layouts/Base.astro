@@ -102,6 +102,8 @@ if (extra) schema.push(...(Array.isArray(extra) ? extra : [extra]).map((x) => ({
     <meta name="theme-color" content="#f1e9dd" />
     <script is:inline>document.documentElement.classList.add('js');</script>
     <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="alternate" type="application/rss+xml" title="The Balanced Chiropractic Centre Blog" href="/blog/rss.xml" />
+    <slot name="head" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

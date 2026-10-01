@@ -1,0 +1,113 @@
+---
+import Base from '../../layouts/Base.astro';
+import Media from '../../components/Media.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import NewsletterSignup from '../../components/NewsletterSignup.astro';
+import Icon from '../../components/Icon.astro';
+import { render } from 'astro:content';
+import { site, team } from '../../config/site';
+import { conditions } from '../../config/conditions';
+import { publishedPosts, formatDate, readingTime, type Post } from '../../utils/posts';
+
+export async function getStaticPaths() {
+  const posts = await publishedPosts();
+  return posts.map((post, i) => ({ params: { slug: post.id }, props: { post, more: posts.filter((p) => p.id !== post.id).slice(0, 3) } }));
+}
+const { post, more } = Astro.props as { post: Post; more: Post[] };
+const { Content } = await render(post);
+const d = post.data;
+const related = d.related.map((slug) => conditions.find((c) => c.slug === slug)).filter(Boolean);
+const url = `${site.url}/blog/${post.id}/`;
+const author = team[0];
+---
+<Base
+  title={d.title}
+  crumb={d.title}
+  description={d.description}
+  image={d.image}
+  schema={{
+    '@type': 'BlogPosting',
+    headline: d.title,
+    description: d.description,
+    image: `${site.url}${d.image}`,
+    datePublished: d.date.toISOString(),
+    dateModified: d.date.toISOString(),
+    mainEntityOfPage: url,
+    author: { '@type': 'Person', name: author.name, jobTitle: 'Chiropractor' },
+    publisher: { '@id': `${site.url}/#clinic` },
+    keywords: d.tags.join(', '),
+  }}
+>
+  <article>
+    <header class="post-hero">
+      <div class="container narrow">
+        <a class="back" href="/blog"><Icon name="arrow" />All articles</a>
+        <h1>{d.title}</h1>
+        <p class="lead">{d.description}</p>
+        <p class="meta">{formatDate(d.date)} · {readingTime(post.body)} min read · The Balanced Chiropractic Centre, Yandina</p>
+      </div>
+      <div class="container post-hero__img">
+        <Media src={d.image} alt={d.imageAlt} shape="wide" eager />
+      </div>
+    </header>
+
+    <div class="container narrow prose">
+      <Content />
+      <p class="note">This article is general information only and isn’t a substitute for advice about your own health. If you have severe, worsening or unusual symptoms, please see your GP. Individual results vary.</p>
+      {related.length > 0 && (
+        <div class="related">
+          <h2>Related</h2>
+          <div class="related__links">{related.map((c) => <a href={`/${c!.slug}`}>{c!.name}<Icon name="arrow" /></a>)}</div>
+        </div>
+      )}
+    </div>
+  </article>
+
+  <section class="section section--tight">
+    <div class="container"><NewsletterSignup /></div>
+  </section>
+
+  {more.length > 0 && (
+    <section class="section section--tight">
+      <div class="container">
+        <h2 style="font-size:1.6rem">More articles</h2>
+        <div class="grid grid-3" style="margin-top:20px">
+          {more.map((p) => (
+            <a class="card card--hover more" href={`/blog/${p.id}/`}>
+              <span class="meta">{formatDate(p.data.date)}</span>
+              <h3>{p.data.title}</h3>
+              <p>{p.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CtaBand />
+</Base>
+<style>
+  .post-hero { padding: clamp(40px, 6vw, 72px) 0 0; }
+  .post-hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); margin-top: 18px; }
+  .post-hero__img { max-width: 1040px; margin-top: 28px; }
+  .back { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: .9rem; text-decoration: none; }
+  .back :global(svg) { width: 15px; height: 15px; transform: rotate(180deg); }
+  .meta { font-size: .85rem; color: var(--muted); }
+  .prose { padding-top: clamp(32px, 5vw, 56px); padding-bottom: clamp(24px, 4vw, 40px); font-size: 1.08rem; }
+  .prose :global(h2) { font-size: clamp(1.5rem, 3vw, 2rem); margin-top: 1.6em; }
+  .prose :global(h3) { margin-top: 1.4em; }
+  .prose :global(ul), .prose :global(ol) { padding-left: 1.3em; margin: 0 0 1.2em; }
+  .prose :global(li) { margin-bottom: .45em; }
+  .prose :global(blockquote) { margin: 1.4em 0; padding: 18px 22px; border-radius: var(--radius); background: var(--sand); }
+  .prose :global(blockquote p) { margin: 0; }
+  .note { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted); }
+  .related { margin-top: 28px; }
+  .related h2 { font-size: 1.3rem; margin: 0 0 12px; }
+  .related__links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .related__links a { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--line); text-decoration: none; color: var(--ink); font-weight: 600; font-size: .92rem; }
+  .related__links a :global(svg) { width: 14px; height: 14px; color: var(--brand); }
+  .more { text-decoration: none; color: inherit; }
+  .more h3 { margin: 8px 0 .4em; }
+  .more p { font-size: .95rem; color: var(--muted); margin: 0; }
+  .more .meta { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); }
+</style>

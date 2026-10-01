@@ -3,6 +3,7 @@ User-agent: *
 Allow: /
 Disallow: /offer/thank-you
 Disallow: /wellness-workshops/thank-you
+Disallow: /blog/subscribed
 
 User-agent: GPTBot
 Allow: /

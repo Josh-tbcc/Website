@@ -1,0 +1,30 @@
+---
+// Newsletter sign-up. Submissions are collected in Netlify Forms ("newsletter")
+// and can be imported into the email service (see docs/BLOG-AND-NEWSLETTER.md).
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+---
+<div class:list={['news card', { 'news--compact': compact }]}>
+  <div>
+    <span class="eyebrow">Fortnightly health tips</span>
+    <h2 class="news__title">Get our blog in your inbox</h2>
+    <p>Practical tips on posture, pain, stress and staying active, every second week. No spam, unsubscribe any time.</p>
+  </div>
+  <form class="form news__form" name="newsletter" method="POST" action="/blog/subscribed" data-netlify="true" netlify-honeypot="company">
+    <input type="hidden" name="form-name" value="newsletter" />
+    <p class="hidden"><label>Don’t fill this in: <input name="company" /></label></p>
+    <label>First name<input name="first_name" autocomplete="given-name" required /></label>
+    <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+    <label class="news__consent"><input type="checkbox" name="consent" value="yes" required /> Yes, email me the fortnightly blog from The Balanced Chiropractic Centre.</label>
+    <button class="btn btn--primary" type="submit">Subscribe</button>
+  </form>
+</div>
+<style>
+  .news { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px, 4vw, 48px); align-items: center; background: var(--sand); border: 0; }
+  .news__title { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .news p { margin-bottom: 0; }
+  .news__consent { display: flex !important; grid-template-columns: none; gap: 10px; align-items: flex-start; font-weight: 500 !important; font-size: .88rem !important; }
+  .news__consent input { width: auto; margin-top: 4px; }
+  .news--compact { grid-template-columns: 1fr; }
+  @media (max-width: 760px) { .news { grid-template-columns: 1fr; } }
+</style>

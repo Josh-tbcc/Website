@@ -6,6 +6,8 @@ import BookButton from '../components/BookButton.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
+import { publishedPosts, formatDate } from '../utils/posts';
+const latestPosts = (await publishedPosts()).slice(0, 3);
 
 const conditions = [
   ['Lower back pain', '/back-pain'], ['Neck pain', '/neck-pain'], ['Headaches', '/headaches'], ['Sciatica', '/sciatica'],
@@ -206,6 +208,30 @@ const who = [
     </div>
   </section>
 
+  <!-- BLOG -->
+  {latestPosts.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">From the blog</span>
+            <h2>Health tips from your local chiropractors</h2>
+          </div>
+          <a class="btn btn--dark" href="/blog">All articles<Icon name="arrow" /></a>
+        </div>
+        <div class="grid grid-3">
+          {latestPosts.map((p, i) => (
+            <a class={`card card--hover blogcard reveal reveal-delay-${i}`} href={`/blog/${p.id}/`}>
+              <span class="blogcard__date">{formatDate(p.data.date)}</span>
+              <h3>{p.data.title}</h3>
+              <p>{p.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- FAQ -->
   <section class="section section--cream panel">
     <div class="container narrow">
@@ -291,6 +317,10 @@ const who = [
   .sticky-col { position: sticky; top: 120px; }
   @media (max-width: 960px) { .sticky-col { position: static; } }
 
+  .blogcard { text-decoration: none; color: inherit; }
+  .blogcard h3 { margin: 10px 0 .4em; }
+  .blogcard p { font-size: .95rem; color: var(--muted); margin: 0; }
+  .blogcard__date { font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--brand); }
   .who { text-decoration: none; color: inherit; display: flex; flex-direction: column; }
   .who:hover { color: inherit; }
   .who__more { margin-top: auto; padding-top: 18px; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: .9rem; color: var(--brand); }
