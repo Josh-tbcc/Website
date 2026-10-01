@@ -13,31 +13,29 @@
      *New repository secret*: name `NETLIFY_BUILD_HOOK`, value = the URL.
   That's it. GitHub runs `.github/workflows/scheduled-publish.yml` at 5:30am every day.
 
-## Fortnightly email to patients (replaces Perfect Patients' newsletter)
+## Fortnightly email to patients (sent from Spinalogic)
 
-Use an email marketing service that supports **RSS-to-email** (sometimes called an
-"RSS campaign" or "blog digest"), such as MailerLite, Mailchimp or Brevo. Check the
-plan you choose includes RSS campaigns.
+Spinalogic's **Email marketing** feature emails patients straight from your patient list,
+so there's nothing extra to set up or upload.
 
-1. Create an account and a list (audience) called "Patients".
-2. Create an **RSS campaign** using the feed
-   `https://thebalancedchiro.com.au/blog/rss.xml`, set to send **every 2 weeks**
-   (e.g. Thursday 7am). It will automatically email each new post to the list.
-3. Add the clinic logo, address and an unsubscribe link (the service does this).
+1. In Spinalogic, create a patient group for the newsletter (e.g. patients who have
+   agreed to emails).
+2. Every fortnight, when a new post goes live, send the ready-made email for that post
+   from `docs/NEWSLETTER-EMAILS.md`. Each one has the subject line, a short intro and the
+   link to the full article. It takes a couple of minutes.
+3. Use the same feature for one-off bulk emails (holiday hours, workshop reminders,
+   reactivation emails to patients you haven't seen in a while).
 
-### Adding patients to the list
+### Consent
 
-Under the **Spam Act 2003** you need consent before emailing someone marketing content.
+Under the **Spam Act 2003** you need consent before emailing someone marketing content,
+and every email needs an unsubscribe option.
 
-- Add a tick box to the Jotform intake form: *"Yes, I'd like to receive the fortnightly
-  health tips email from The Balanced Chiropractic Centre."* Only add patients who tick it.
-- Reception adds new consenting patients to the list (one at a time, or a CSV import
-  each week). Only add **name and email**. Never upload health information to the
-  email service.
-- People who sign up on the website appear in Netlify → **Forms → newsletter**.
-  Export them as CSV and import them into the list (or connect the two with Zapier).
-- Bulk one-off emails (e.g. holiday hours, workshop reminders) are sent from the same
-  service as a normal campaign.
+- Add a tick box to the intake form: *"Yes, I'd like to receive the fortnightly health
+  tips email from The Balanced Chiropractic Centre."* Only include patients who tick it.
+- People who sign up on the website (not yet patients) appear in Netlify →
+  **Forms → newsletter**. Reception can add them in Spinalogic if it allows non-patient
+  contacts, or reply to them directly.
 
 ## Adding a new post
 
