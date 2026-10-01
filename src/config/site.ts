@@ -9,7 +9,7 @@ export const site = {
   url: 'https://thebalancedchiro.com.au',
   tagline: 'Health from within',
   description:
-    'Family chiropractic in Yandina on the Sunshine Coast. Thermal nerve scans, in-house X-ray and a clear plan to correct the cause — not just chase the pain.',
+    'Family chiropractor in Yandina, near Nambour on the Sunshine Coast. Care for lower back pain, neck pain, headaches and more, with thermal scans and in-house X-ray.',
 
   // Contact
   phone: '07 3496 9345',
@@ -24,7 +24,7 @@ export const site = {
   mapsUrl: 'https://maps.google.com/maps?cid=11232953959727105599', // Google Business Profile
   geo: { lat: -26.5608631, lng: 152.9569166 },
   // Suburbs we serve (used in Google business details and the Contact page)
-  areaServed: ['Yandina', 'Eumundi', 'Nambour', 'North Arm', 'Bli Bli', 'Coolum Beach', 'Peregian Beach', 'Maleny', 'Sunshine Coast'],
+  areaServed: ['Yandina', 'Yandina Creek', 'Nambour', 'Kulangoor', 'North Arm', 'Ninderry', 'Valdora', 'Eumundi', 'Bli Bli', 'Pacific Paradise', 'Cooroy', 'Coolum Beach', 'Sunshine Coast'],
   mapsEmbed:
     'https://www.google.com/maps?q=5%2F18+Farrell+St+Yandina+QLD+4561&output=embed',
 

@@ -18,7 +18,6 @@
 /dr-joshua-kassis             /about                 301
 /chiropractic-care            /who-we-help           301
 /pediatric-chiropractic       /who-we-help#families  301
-/sports-chiropractic          /who-we-help#athletes  301
 /advanced-inflammation-scanning /thermography        301
 /migraines                    /headaches             301
 /dizziness-and-vertigo        /who-we-help           301
@@ -31,3 +30,6 @@
 /x-ray  /in-house-x-ray  301
 /xray  /in-house-x-ray  301
 /x-rays  /in-house-x-ray  301
+/nambour  /chiropractor-nambour  301
+/areas  /areas-we-serve  301
+/chiropractor-sunshine-coast  /areas-we-serve  301

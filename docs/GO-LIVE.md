@@ -166,3 +166,22 @@ These steps happen outside the website:
 4. **Directories**: make sure the clinic name, address and phone are written exactly the same
    on Facebook, Instagram, HealthEngine, Yellow Pages, True Local and any other listings.
 5. Give it 2–6 weeks. Rankings usually wobble briefly after a site move, then settle.
+
+### Showing up in AI assistants (ChatGPT, Claude, Perplexity, Google AI answers)
+
+AI assistants answer "chiropractor near me" questions by searching the web and quoting
+sites, reviews and directories they trust. The site is ready for them: plain-English FAQ
+answers, clinic facts in Google's structured format, a summary for AI tools at
+`/llms.txt`, and `robots.txt` explicitly allowing AI crawlers. To give yourself the best chance:
+
+1. **Bing Webmaster Tools** (bing.com/webmasters): sign in, choose **Import from Google
+   Search Console**, and submit the sitemap. ChatGPT's search relies heavily on Bing.
+2. **Google reviews**: steady new reviews that mention the suburb and the problem in the
+   patient's own words (e.g. "lower back pain", "Nambour") carry the most weight for both
+   Google Maps and AI answers. Never offer incentives for reviews (AHPRA).
+3. **Consistent listings**: same name, address, phone and website on Google, Apple Maps
+   (Apple Business Connect), Bing Places, Facebook, Instagram, HealthEngine, HotDoc,
+   Yellow Pages, True Local and Hotfrog.
+4. **Local mentions**: a listing or article on local Sunshine Coast sites (community groups,
+   Yandina markets, local sports clubs you support) helps AI tools connect your clinic to
+   the area.

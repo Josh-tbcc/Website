@@ -94,10 +94,11 @@ const faqSchema = {
       <div class="other">
         {others.map((o) => <a href={`/${o.slug}`}>{o.name}</a>)}
       </div>
+      <p class="fine-print" style="margin-top:20px">Our Yandina clinic sees people for {c.name.toLowerCase()} from Nambour, Yandina Creek, Kulangoor, North Arm, Eumundi, Bli Bli, Pacific Paradise, Cooroy, Coolum and across the Sunshine Coast. <a href="/areas-we-serve">See the areas we serve</a>.</p>
     </div>
   </section>
 
-  <CtaBand title={`Let’s find out what’s behind your ${c.name.toLowerCase()}`} />
+  <CtaBand title={/[&]|sports/i.test(c.name) ? 'Let’s find out what’s really going on' : `Let’s find out what’s behind your ${c.name.toLowerCase()}`} />
 </Base>
 
 <style>

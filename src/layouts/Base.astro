@@ -24,7 +24,7 @@ const { title, description = site.description, landing = false, noindex = false,
 // Keep titles short enough that Google shows them in full (~60 characters)
 const fullTitle = title
   ? `${title} | ${title.length + site.name.length + 3 <= 62 ? site.name : site.shortName}`
-  : `Chiropractor Yandina | ${site.name}`;
+  : `Chiropractor Yandina & Nambour, Sunshine Coast | ${site.shortName}`;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL(image, site.url).href;
 const a = site.address;

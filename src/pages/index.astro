@@ -8,9 +8,20 @@ import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 
 const conditions = [
-  ['Back pain', '/back-pain'], ['Neck pain', '/neck-pain'], ['Headaches', '/headaches'], ['Sciatica', '/sciatica'],
-  ['Hip pain', '/hip-pain'], ['Posture', '/poor-posture'], ['Pregnancy', '/pregnancy-chiropractic'], ['Arthritis', '/arthritis'],
-  ['Stress & tension', '/stress'], ['Kids & families', '/who-we-help#families'], ['Sports & athletes', '/who-we-help#athletes'],
+  ['Lower back pain', '/back-pain'], ['Neck pain', '/neck-pain'], ['Headaches', '/headaches'], ['Sciatica', '/sciatica'],
+  ['Shoulder pain', '/shoulder-pain'], ['Knee pain', '/knee-pain'], ['Upper back pain', '/mid-back-pain'], ['Hip pain', '/hip-pain'],
+  ['Posture', '/poor-posture'], ['Chronic pain', '/chronic-pain'], ['Pregnancy', '/pregnancy-chiropractic'], ['Whiplash', '/whiplash'],
+  ['Arthritis', '/arthritis'], ['Jaw pain', '/jaw-pain'], ['Stress & tension', '/stress'], ['Kids & families', '/who-we-help#families'],
+  ['Sports', '/sports-chiropractic'],
+];
+const a = site.address;
+// Plain, factual answers that Google and AI assistants can quote directly
+const homeFaqs = [
+  ['Where can I find a chiropractor near me on the Sunshine Coast?', `The Balanced Chiropractic Centre is a family chiropractic clinic at ${a.street}, ${a.suburb} ${a.state}, about 10 minutes from Nambour and Eumundi. Every new patient has a thorough assessment including a Thermpix thermography scan, and in-house X-ray if clinically required, followed by a clear report of findings.`],
+  ['Can a chiropractor help with lower back pain, neck pain and headaches?', 'Lower back pain, neck pain and tension-type or neck-related headaches are among the most common reasons people see us. We assess how your spine is moving and how your nervous system is adapting, then build a staged plan around your goals. Individual results vary.'],
+  ['What happens at my first visit?', 'Your first visit is a 30-minute comprehensive assessment: health history, thermography scan, spinal and neurological tests, and X-rays on site if clinically required. On your second visit we explain your results and recommendations in plain English.'],
+  ['Which areas do you serve?', 'Yandina, Yandina Creek, Nambour, Kulangoor, North Arm, Eumundi, Bli Bli, Pacific Paradise, Cooroy, Coolum Beach and the wider Sunshine Coast hinterland.'],
+  ['Do I need a referral to see a chiropractor?', `No. You can book online or call ${site.phone}. Our chiropractors are Dr Joshua Kassis and Dr David Rowan.`],
 ];
 const who = [
   { icon: 'users', title: 'Families & kids', text: 'Gentle, age-appropriate care from little ones to grandparents.', href: '/who-we-help#families' },
@@ -19,7 +30,7 @@ const who = [
   { icon: 'spine', title: 'Ongoing issues', text: 'For the back, neck and headaches that keep coming back.', href: '/who-we-help#chronic' },
 ];
 ---
-<Base overlayHeader>
+<Base overlayHeader schema={{ '@type': 'FAQPage', mainEntity: homeFaqs.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: ans } })) }}>
   <!-- HERO -->
   <section class="hero">
     <div class="container hero__inner">
@@ -192,6 +203,20 @@ const who = [
           {site.social.googleReviews && <a class="btn btn--ghost" href={site.social.googleReviews} target="_blank" rel="noopener">Read our Google reviews</a>}
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section--cream panel">
+    <div class="container narrow">
+      <div class="center">
+        <span class="eyebrow">Questions</span>
+        <h2>Chiropractic in Yandina &amp; Nambour</h2>
+      </div>
+      <div style="margin-top:24px">
+        {homeFaqs.map(([q, ans]) => <details class="faq"><summary>{q}</summary><p>{ans}</p></details>)}
+      </div>
+      <p class="center" style="margin-top:24px"><a href="/areas-we-serve">Areas we serve</a> · <a href="/chiropractor-nambour">Chiropractor Nambour</a></p>
     </div>
   </section>
 
