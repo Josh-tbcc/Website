@@ -60,7 +60,7 @@ const groups = [
 ];
 const hasPhoto = (src: string) => fs.existsSync(path.join(process.cwd(), 'public', src));
 ---
-<Base title="Who We Help" description="Family chiropractic in Yandina for kids, pregnancy, athletes, chronic back and neck issues and long-term wellness.">
+<Base title="Family & Pregnancy Chiropractor Yandina" crumb="Who We Help" description="Family chiropractic in Yandina for kids, pregnancy, athletes, chronic back and neck issues and long-term wellness.">
   <PageHero eyebrow="Who we help" title="Chiropractic for <span class='hl'>every stage of life.</span>" lead="Every body is different, so every plan is different. What stays the same is our process: assess thoroughly, explain clearly, and support you for the long term.">
     <nav class="jump" slot="actions" aria-label="Jump to section">
       {groups.map((g) => <a href={`#${g.id}`}>{g.title}</a>)}

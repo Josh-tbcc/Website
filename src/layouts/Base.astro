@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { site } from '../config/site';
+import { site, team } from '../config/site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileBookBar from '../components/MobileBookBar.astro';
@@ -13,28 +13,71 @@ interface Props {
   noindex?: boolean;
   /** Header floats transparently over a full-bleed hero */
   overlayHeader?: boolean;
+  /** Share image for Facebook/Google (path under /public) */
+  image?: string;
+  /** Extra structured data for this page (FAQ, people, etc.) */
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  /** Short page name for the breadcrumb trail (defaults to title) */
+  crumb?: string;
 }
-const { title, description = site.description, landing = false, noindex = false, overlayHeader = false } = Astro.props;
-const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | Chiropractor Yandina, Sunshine Coast`;
+const { title, description = site.description, landing = false, noindex = false, overlayHeader = false, image = '/images/hero.jpg', crumb } = Astro.props;
+// Keep titles short enough that Google shows them in full (~60 characters)
+const fullTitle = title
+  ? `${title} | ${title.length + site.name.length + 3 <= 62 ? site.name : site.shortName}`
+  : `Chiropractor Yandina | ${site.name}`;
 const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(image, site.url).href;
 const a = site.address;
 const g = site.google;
 const gtagIds = [g.analyticsId, ...g.adsIds].filter(Boolean);
 
-const schema = {
+// "7:00am – 10:00am, 2:30pm – 6:00pm" -> [['07:00','10:00'], ['14:30','18:00']]
+const to24 = (t: string) => {
+  const m = t.trim().match(/^(\d{1,2}):(\d{2})(am|pm)$/i);
+  if (!m) return null;
+  let h = +m[1] % 12; if (m[3].toLowerCase() === 'pm') h += 12;
+  return `${String(h).padStart(2, '0')}:${m[2]}`;
+};
+const openingHours = site.hours.flatMap((h) =>
+  h.time.split(',').map((range) => range.split(/[–-]/).map(to24))
+    .filter((r) => r.length === 2 && r[0] && r[1])
+    .map(([opens, closes]) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens, closes })),
+);
+
+const clinicId = `${site.url}/#clinic`;
+const schema: Record<string, unknown>[] = [{
   '@context': 'https://schema.org',
   '@type': 'Chiropractic',
+  '@id': clinicId,
   name: site.name,
+  description: site.description,
   url: site.url,
   telephone: site.phone,
+  email: site.email,
+  priceRange: '$$',
   image: `${site.url}/images/hero.jpg`,
   logo: `${site.url}/images/icon.png`,
+  openingHoursSpecification: openingHours,
+  employee: team.map((m) => ({ '@type': 'Person', name: m.name, jobTitle: 'Chiropractor', image: `${site.url}${m.photo}`, ...(m.page ? { url: `${site.url}${m.page}` } : {}) })),
   address: { '@type': 'PostalAddress', streetAddress: a.street, addressLocality: a.suburb, addressRegion: a.state, postalCode: a.postcode, addressCountry: 'AU' },
   geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
   hasMap: site.mapsUrl,
   sameAs: [site.social.facebook, site.social.instagram, site.mapsUrl].filter(Boolean),
-  areaServed: ['Yandina', 'Sunshine Coast', 'Nambour', 'Coolum Beach', 'Eumundi', 'Maleny', 'Peregian Beach'],
-};
+  areaServed: site.areaServed.map((name) => ({ '@type': 'Place', name })),
+}];
+if (Astro.url.pathname === '/') {
+  schema.push({ '@context': 'https://schema.org', '@type': 'WebSite', '@id': `${site.url}/#website`, url: site.url, name: site.name, publisher: { '@id': clinicId }, inLanguage: 'en-AU' });
+} else if (title && !noindex) {
+  schema.push({
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
+      { '@type': 'ListItem', position: 2, name: crumb ?? title, item: canonical },
+    ],
+  });
+}
+const extra = Astro.props.schema;
+if (extra) schema.push(...(Array.isArray(extra) ? extra : [extra]).map((x) => ({ '@context': 'https://schema.org', ...x })));
 ---
 <!doctype html>
 <html lang="en-AU">
@@ -49,7 +92,13 @@ const schema = {
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={`${site.url}/images/hero.jpg`} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_AU" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <meta name="theme-color" content="#f1e9dd" />
     <script is:inline>document.documentElement.classList.add('js');</script>
     <link rel="icon" href="/favicon.png" type="image/png" />
@@ -57,7 +106,7 @@ const schema = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    {schema.map((sd) => <script type="application/ld+json" set:html={JSON.stringify(sd)} />)}
 
     {site.metaPixelId && (
       <script is:inline define:vars={{ pixelId: site.metaPixelId }}>

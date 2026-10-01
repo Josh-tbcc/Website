@@ -4,7 +4,7 @@ import { site } from '../config/site';
 import PageHero from '../components/PageHero.astro';
 const { embedCode, url, embed, newPatientLabel } = site.booking;
 ---
-<Base title="Book Online Yandina" description="Book your chiropractor appointment online at The Balanced Chiropractic Centre, Yandina. New patient consultations and existing practice member appointments, Sunshine Coast.">
+<Base title="Book Online Yandina" crumb="Book Online" description="Book your chiropractor appointment online at The Balanced Chiropractic Centre, Yandina. New patient consultations and existing practice member appointments, Sunshine Coast.">
   <PageHero eyebrow="Book online" title="Choose a time <span class='hl'>that suits you.</span>">
     <div slot="actions" class="book-tips">
       <div><strong>New here?</strong><span>Select “{newPatientLabel}”</span></div>

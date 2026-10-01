@@ -5,7 +5,7 @@ import PageHero from '../components/PageHero.astro';
 import { site } from '../config/site';
 const a = site.address;
 ---
-<Base title="Contact Us" description={`Find The Balanced Chiropractic Centre at ${a.street}, ${a.suburb}. Hours, phone and directions.`}>
+<Base title="Contact Our Yandina Chiropractor" crumb="Contact" description={`Find The Balanced Chiropractic Centre at ${a.street}, ${a.suburb}. Hours, phone and directions.`}>
   <PageHero eyebrow="Contact" title="Visit us in <span class='hl'>Yandina.</span>" lead="Easy to reach from Nambour, Coolum, Eumundi, Maleny and across the Sunshine Coast hinterland." />
   <section class="section">
     <div class="container grid grid-2" style="align-items:start">
@@ -23,6 +23,7 @@ const a = site.address;
       <div class="map">
         <iframe src={site.mapsEmbed} title="Map to The Balanced Chiropractic Centre" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
+      <p class="areas fine-print" style="grid-column:1/-1">Chiropractic care for families from {site.areaServed.filter((x) => x !== 'Sunshine Coast').join(', ')} and across the Sunshine Coast.</p>
     </div>
   </section>
 </Base>

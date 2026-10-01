@@ -24,7 +24,7 @@ const faqs = [
   ['Where is it held?', `Right here at the clinic: ${a.street}, ${a.suburb}. ${site.directions}`],
 ];
 ---
-<Base title="Wellness Workshops" description="Free, 30-minute wellness workshops at The Balanced Chiropractic Centre in Yandina, on the first Wednesday of every month at 6pm. Bring your partner, family and friends.">
+<Base title="Free Wellness Workshops Yandina" crumb="Wellness Workshops" image="/images/workshop-host.jpg" schema={{ '@type': 'FAQPage', mainEntity: faqs.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: ans } })) }} description="Free, 30-minute wellness workshops at The Balanced Chiropractic Centre in Yandina, on the first Wednesday of every month at 6pm. Bring your partner, family and friends.">
   <PageHero eyebrow="Free wellness workshops" title="An evening for your health, <span class='hl'>and theirs.</span>" lead="Join us on the first Wednesday of every month at 6pm for a free, relaxed 30-minute workshop on how your body works and the simple habits that help it thrive. Bring your partner, family and friends.">
     <div class="btn-row" slot="actions">
       <a class="btn btn--primary" href="#rsvp">Save your seats<Icon name="arrow" /></a>

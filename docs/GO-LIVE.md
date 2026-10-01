@@ -145,3 +145,24 @@ AHPRA advertising guidelines. The site has been written with this in mind:
 - **The $49 offer** states it's for new patients and what's included, with no pressure or time-limit language.
 
 Please run any new ad copy or page wording past these rules before publishing.
+
+## SEO checklist (after the domain points to Netlify)
+
+The website itself is set up for search: keyword page titles ("… Chiropractor Yandina"),
+descriptions, Google business details (hours, phone, practitioners, suburbs served),
+FAQ and breadcrumb data, a sitemap, and permanent redirects from every old page address.
+These steps happen outside the website:
+
+1. **Google Search Console** (search.google.com/search-console): open the
+   thebalancedchiro.com.au property (it's already verified by the tag on the site),
+   go to **Sitemaps** and submit `sitemap-index.xml`. Then use **URL inspection** on the
+   home page and click **Request indexing**.
+2. **Google Business Profile**: check the website link is `https://thebalancedchiro.com.au`,
+   the hours match the site, and add the booking link
+   `https://thebalancedchiro.com.au/book-online-yandina`. Post photos and ask happy patients
+   for reviews regularly (reviews are the biggest local ranking factor).
+3. **Check rich results**: paste a condition page (e.g. /back-pain) into
+   search.google.com/test/rich-results to confirm the FAQ and business details are read.
+4. **Directories**: make sure the clinic name, address and phone are written exactly the same
+   on Facebook, Instagram, HealthEngine, Yellow Pages, True Local and any other listings.
+5. Give it 2–6 weeks. Rankings usually wobble briefly after a site move, then settle.

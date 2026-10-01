@@ -20,8 +20,7 @@ const faqSchema = {
   mainEntity: c.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 };
 ---
-<Base title={c.metaTitle} description={c.metaDescription}>
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<Base title={c.metaTitle} description={c.metaDescription} crumb={c.name} image={c.photo} schema={faqSchema}>
 
   <PageHero eyebrow={`${c.name} · Chiropractor Yandina`} title={c.h1} lead={c.intro}>
     <div class="btn-row" slot="actions">

@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /offer/thank-you
+Disallow: /wellness-workshops/thank-you
 
 Sitemap: https://thebalancedchiro.com.au/sitemap-index.xml

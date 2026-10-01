@@ -23,6 +23,8 @@ export const site = {
   directions: 'Next door to Lawn Espresso, a short walk from Yandina Station.',
   mapsUrl: 'https://maps.google.com/maps?cid=11232953959727105599', // Google Business Profile
   geo: { lat: -26.5608631, lng: 152.9569166 },
+  // Suburbs we serve (used in Google business details and the Contact page)
+  areaServed: ['Yandina', 'Eumundi', 'Nambour', 'North Arm', 'Bli Bli', 'Coolum Beach', 'Peregian Beach', 'Maleny', 'Sunshine Coast'],
   mapsEmbed:
     'https://www.google.com/maps?q=5%2F18+Farrell+St+Yandina+QLD+4561&output=embed',
 
