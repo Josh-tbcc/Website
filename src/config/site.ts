@@ -9,7 +9,7 @@ export const site = {
   url: 'https://thebalancedchiro.com.au',
   tagline: 'Health from within',
   description:
-    'Family chiropractor in Yandina, near Nambour on the Sunshine Coast. Care for lower back pain, neck pain, headaches and more, with thermal scans and in-house X-ray.',
+    'Family chiropractor in Yandina and surrounding suburbs on the Sunshine Coast. Care for lower back pain, neck pain, headaches and more, with thermal scans and in-house X-ray.',
 
   // Contact
   phone: '07 3496 9345',
