@@ -108,13 +108,14 @@ const who = [
           <h3>Correction</h3>
           <p>Once we’ve helped ease your symptoms, we work on the underlying pattern: restoring motion, improving how your spine carries load and how your nervous system adapts.</p>
         </div>
-        <div class="card card--dark bento__c reveal reveal-delay-2">
+        <div class="card bento__c reveal reveal-delay-2">
           <span class="num">PHASE 03</span>
           <h3>Strength & wellness</h3>
           <p>To help your progress last and keep your body strong, we use specific corrective exercises, home care and regular check-ins, so your symptoms are less likely to return.</p>
           <div class="progress" aria-hidden="true"><span></span><span></span><span></span></div>
         </div>
         <Media src="/images/treatment-room.jpg" alt="Treatment room at The Balanced Chiropractic Centre" label="Treatment room photo" class="bento__img reveal" />
+        <Media src="/images/phase3-checkup.jpg" alt="Dr David checking a patient’s leg length and balance at a progress check" label="Phase 3 photo" class="bento__img2 reveal reveal-delay-2" />
       </div>
     </div>
   </section>
@@ -286,21 +287,24 @@ const who = [
   .bento { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 20px; }
   .bento__a { grid-column: 1; grid-row: 1; }
   .bento__b { grid-column: 2; grid-row: 1; }
-  .bento__c { grid-column: 3; grid-row: 1 / span 2; display: flex; flex-direction: column; }
-  .bento :global(.bento__img) { grid-column: 1 / span 2; grid-row: 2; aspect-ratio: auto; min-height: 280px; }
-  .bento :global(.bento__img img) { position: absolute; inset: 0; }
+  .bento__c { grid-column: 3; grid-row: 1; display: flex; flex-direction: column; }
+  .bento :global(.bento__img) { grid-column: 1 / span 2; grid-row: 2; aspect-ratio: auto; min-height: 320px; }
+  .bento :global(.bento__img2) { grid-column: 3; grid-row: 2; aspect-ratio: auto; min-height: 320px; }
+  .bento :global(.bento__img img), .bento :global(.bento__img2 img) { position: absolute; inset: 0; }
+  .bento :global(.bento__img2 img) { object-position: 50% 30%; }
   .progress { display: flex; gap: 6px; margin-top: auto; padding-top: 32px; }
   .progress span { flex: 1; height: 6px; border-radius: 6px; background: var(--sand-2); }
   .progress span:last-child { background: var(--accent); }
   @media (max-width: 960px) {
     .bento { grid-template-columns: 1fr 1fr; }
-    .bento > *, .bento :global(.bento__img) { grid-row: auto !important; }
+    .bento > *, .bento :global(.bento__img), .bento :global(.bento__img2) { grid-row: auto !important; }
     .bento__c { grid-column: 1 / span 2; }
-    .bento :global(.bento__img) { grid-column: 1 / span 2; }
+    .bento :global(.bento__img) { grid-column: 1; }
+    .bento :global(.bento__img2) { grid-column: 2; }
   }
   @media (max-width: 620px) {
     .bento { grid-template-columns: 1fr; }
-    .bento > *, .bento :global(.bento__img) { grid-column: auto !important; }
+    .bento > *, .bento :global(.bento__img), .bento :global(.bento__img2) { grid-column: auto !important; }
     .hero__stats { grid-template-columns: repeat(3, 1fr); }
     .hero__stats .stat { padding: 14px 12px; }
     .hero__stats .stat strong { font-size: 1rem; }
