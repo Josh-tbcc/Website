@@ -525,8 +525,8 @@ export const conditions: Condition[] = [
       'Gentle techniques suited to each stage of pregnancy',
       'Post-natal care as your body recovers',
     ],
-    photo: '/images/wellness.jpg',
-    photoAlt: 'Gentle chiropractic care at The Balanced Chiropractic Centre',
+    photo: '/images/pregnancy-care.jpg',
+    photoAlt: 'Dr Josh adjusting a patient lying on a pregnancy pillow on the chiropractic table',
     faqs: [
       { q: 'Is chiropractic safe during pregnancy?', a: 'We adapt our techniques and positioning for each stage of pregnancy and work alongside your midwife or doctor. Always let us know about any pregnancy complications.' },
       { q: 'When can I start after giving birth?', a: 'It depends on your birth and recovery. We’re happy to discuss timing with you and your care team.' },
