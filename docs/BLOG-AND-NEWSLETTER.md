@@ -5,13 +5,15 @@
 - Posts are Markdown files in `src/content/blog/`. Each has a `date` at the top.
 - A post appears on the website (and in the email feed) once its date has passed.
   Twelve posts are written, one per fortnight from September 2026 to February 2027.
-- The live site rebuilds itself every morning so new posts go live on the right day.
+- On the morning a post is due, the live site rebuilds itself so the post goes live that day
+  (about 10:15am). On days with no post nothing runs, which keeps Netlify usage low.
   **One-time setup:**
   1. Netlify → Site configuration → Build & deploy → **Build hooks** → *Add build hook*
-     (name it "Daily publish", branch `main`). Copy the URL.
+     (name it "Blog publish", branch `main`). Copy the URL.
   2. GitHub → the Website repository → Settings → Secrets and variables → Actions →
      *New repository secret*: name `NETLIFY_BUILD_HOOK`, value = the URL.
-  That's it. GitHub runs `.github/workflows/scheduled-publish.yml` at 5:30am every day.
+  That's it. GitHub checks `.github/workflows/scheduled-publish.yml` each morning and only
+  triggers a build when a post is dated today.
 
 ## Fortnightly email to patients (sent from Spinalogic)
 

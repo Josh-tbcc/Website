@@ -1,19 +1,31 @@
-# Rebuilds the live site every morning so blog posts go live on their date.
+# Rebuilds the live site on the morning a blog post is due, so it goes live on its date.
+# Only triggers a Netlify build when a post is dated today, to keep build usage low.
 # Setup: in Netlify, Site configuration → Build & deploy → Build hooks → Add build hook,
 # then in GitHub, Settings → Secrets and variables → Actions → New secret
 # named NETLIFY_BUILD_HOOK with the hook URL.
 name: Publish scheduled blog posts
 on:
   schedule:
-    - cron: '30 19 * * *' # 5:30am Queensland time
+    - cron: '15 0 * * *' # 10:15am Queensland time (post dates take effect at 10am)
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Rebuild even if no post is due today'
+        type: boolean
+        default: false
 jobs:
   rebuild:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Netlify build
+      - uses: actions/checkout@v4
+      - name: Trigger Netlify build if a post is due
         env:
           HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+          FORCE: ${{ inputs.force }}
         run: |
           if [ -z "$HOOK" ]; then echo "NETLIFY_BUILD_HOOK secret not set, skipping"; exit 0; fi
+          today=$(date -u +%F)
+          due=$(grep -lE "^date: ['\"]?${today}" src/content/blog/*.md || true)
+          if [ -z "$due" ] && [ "$FORCE" != "true" ]; then echo "No post dated $today, skipping build"; exit 0; fi
+          echo "Publishing: ${due:-forced rebuild}"
           curl -fsS -X POST -d '{}' "$HOOK"
