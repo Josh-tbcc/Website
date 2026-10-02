@@ -8,10 +8,10 @@ import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 ---
-<Base title="In-House Spinal X-Ray Yandina" crumb="X-Ray" image="/images/xray-machine.jpg" description="On-site digital X-ray at The Balanced Chiropractic Centre, Yandina. Full-spine and motion X-rays when clinically required, explained to you in plain English.">
+<Base title="In-House Spinal X-Ray Yandina" crumb="X-Ray" image="/images/xray-room.jpg" description="On-site digital X-ray at The Balanced Chiropractic Centre, Yandina. Full-spine and motion X-rays when clinically required, explained to you in plain English.">
   <PageHero eyebrow="In-house X-ray" title="See what’s happening <span class='hl'>inside.</span>" lead="When your history and exam show they’re needed, we take X-rays right here in the clinic. They show the structure of your spine and discs, so we know exactly what we’re working with before we start.">
     <div class="btn-row" slot="actions"><BookButton label="Book a consultation" /></div>
-    <div slot="aside" class="hero-photo"><Media src="/images/xray-machine.jpg" alt="Dr Josh with the in-house X-ray machine at The Balanced Chiropractic Centre" label="X-ray machine photo" shape="square" /></div>
+    <Media slot="aside" src="/images/xray-room.jpg" alt="Dr Josh taking a spinal X-ray in the clinic’s in-house X-ray room" label="X-ray room photo" eager />
   </PageHero>
 
   <section class="section">
@@ -78,6 +78,3 @@ import { site } from '../config/site';
 
   <CtaBand title="Get a clear picture of your spine" />
 </Base>
-<style>
-  .hero-photo { max-width: 420px; margin-inline: auto; }
-</style>
