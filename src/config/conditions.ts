@@ -463,8 +463,8 @@ export const conditions: Condition[] = [
       'Care focused on restoring movement',
       'Corrective exercises and workstation advice, with progress re-measured every 12 visits',
     ],
-    photo: '/images/thermal-scanning.jpg',
-    photoAlt: 'Dr Josh performing a postural and thermography assessment',
+    photo: '/images/posture-check.jpg',
+    photoAlt: 'Dr Josh checking a patient’s posture and shoulder alignment',
     faqs: [
       { q: 'How long does posture correction take?', a: 'Posture patterns develop over years, so meaningful change takes consistent care over months. We re-measure regularly so you can track progress.' },
     ],

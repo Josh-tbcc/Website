@@ -37,7 +37,7 @@ const faqs = [
       <BookButton label="Book new patient consult" />
       {site.intakeFormUrl && <a class="btn btn--glass" href={site.intakeFormUrl} target="_blank" rel="noopener">Complete intake form</a>}
     </div>
-    <Media slot="aside" src="/images/reception.jpg" alt="Reception at The Balanced Chiropractic Centre" label="Reception desk photo" />
+    <Media slot="aside" src="/images/np-consult.jpg" alt="Dr Josh chatting with a new patient during their consultation" label="Consultation photo" eager />
   </PageHero>
 
   <section class="section">
@@ -59,6 +59,7 @@ const faqs = [
     <div class="container">
       <div class="grid grid-2" style="align-items:start">
         <div class="card card--soft reveal">
+          <img class="visit-img" src="/images/np-exam.jpg" alt="Dr Josh checking a patient’s posture and spine" width="1200" height="800" loading="lazy" />
           <span class="pill">Visit 1</span>
           <h2 style="margin-top:18px;font-size:clamp(1.6rem,3vw,2.2rem)">Comprehensive assessment</h2>
           <ul class="checklist">
@@ -70,6 +71,7 @@ const faqs = [
           </ul>
         </div>
         <div class="card card--dark reveal reveal-delay-1">
+          <img class="visit-img" src="/images/np-report.jpg" alt="Dr Josh walking a patient through their spinal X-ray" width="1200" height="800" loading="lazy" />
           <span class="pill">Visit 2</span>
           <h2 style="margin-top:18px;font-size:clamp(1.6rem,3vw,2.2rem)">Report of findings</h2>
           <ul class="checklist">
@@ -119,3 +121,6 @@ const faqs = [
 
   <CtaBand />
 </Base>
+<style>
+  .visit-img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: calc(var(--radius) - 6px); margin-bottom: 20px; display: block; }
+</style>
