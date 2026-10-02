@@ -8,10 +8,10 @@ import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 ---
-<Base title="Thermography Nerve Scan" description="Thermpix thermal imaging with AI-assisted analysis at The Balanced Chiropractic Centre, Yandina. An objective look at where your nervous system is under stress.">
+<Base title="Thermography & Inflammation Scan Yandina" crumb="Thermal Scan" image="/images/thermal-scanning.jpg" description="Thermpix thermography (inflammation scan) with AI-assisted analysis in Yandina, near Nambour. Highlights heat patterns that suggest inflammation and nervous system stress.">
   <PageHero eyebrow="Thermography nerve scan" title="Clarity starts with <span class='hl'>measurement.</span>" lead="Thermography imaging identifies specific hotspots on your body and spine. It gives us an objective indication of which areas need attention, so your care is based on data, not guesswork.">
     <div class="btn-row" slot="actions"><BookButton label="Book a consult & scan" /></div>
-    <div slot="aside"><Video id={site.videos.thermography} title="Thermography scan at The Balanced Chiropractic Centre" label="Thermography scan video" /></div>
+    <div slot="aside" class="hero-reel"><Media src="/images/thermal-scanning.jpg" alt="Dr Josh performing a ThermPix thermography scan" label="ThermPix scan photo" shape="tall" /></div>
   </PageHero>
 
   <section class="section">
@@ -29,7 +29,7 @@ import { site } from '../config/site';
         <div class="card card--hover reveal">
           <div class="icon"><Icon name="sparkle" /></div>
           <h3>AI-assisted analysis</h3>
-          <p>Integrated AI analysis highlights temperature patterns and asymmetries, helping us spot hotspots that suggest areas of stress and irritation.</p>
+          <p>Integrated AI analysis highlights temperature patterns and asymmetries, helping us spot hotspots that suggest areas of stress and inflammation.</p>
         </div>
         <div class="card card--hover reveal">
           <div class="icon"><Icon name="chart" /></div>
@@ -40,9 +40,24 @@ import { site } from '../config/site';
     </div>
   </section>
 
+  <section class="section">
+    <div class="container video-split">
+      <div class="reveal">
+        <span class="eyebrow">Watch</span>
+        <h2>Dr Josh explains the ThermPix scanner</h2>
+        <p class="lead">See how the scan shows where inflammation and stress are sitting in your body, and how we compare scans over time to track your progress.</p>
+        <a class="btn btn--dark" href="/book-online-yandina" data-book>Book a consult & scan<Icon name="arrow" /></a>
+      </div>
+      <Video file={site.videos.thermography} vertical title="Dr Josh explains the ThermPix inflammation scanner" />
+    </div>
+  </section>
+
   <section class="section section--cream panel">
     <div class="container split">
-      <Media src="/images/thermography-scan.jpg" alt="Example thermography scan image, patient details removed" label="Example Thermpix scan image (de-identified)" />
+      <figure class="ba">
+        <Media src="/images/thermal-before-after.jpg" alt="Two ThermPix scans of the same patient’s upper back, taken before and after a period of care" label="Before and after scans" shape="wide" class="ba-img" />
+        <figcaption class="fine-print">Example ThermPix scans from our clinic, taken at the start of care and at a later re-scan. Individual results vary.</figcaption>
+      </figure>
       <div>
         <span class="eyebrow">Why it matters</span>
         <h2>Pain tells you something’s wrong. The scan helps show where.</h2>
@@ -66,3 +81,10 @@ import { site } from '../config/site';
 
   <CtaBand title="Find out what your scan shows" />
 </Base>
+<style>
+  .hero-reel { max-width: 320px; margin-inline: auto; }
+  .ba { margin: 0; }
+  .ba figcaption { margin-top: 10px; }
+  .ba :global(.ba-img) { aspect-ratio: 740 / 525; }
+  .hero-reel :global(.media--vertical) { max-height: 520px; }
+</style>

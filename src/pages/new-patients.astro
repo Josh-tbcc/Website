@@ -31,7 +31,7 @@ const faqs = [
   },
 ];
 ---
-<Base title="New Patients" description="What to expect at your first visit to The Balanced Chiropractic Centre in Yandina: comprehensive assessment, thermography scan, in-house X-ray and a clear report of findings.">
+<Base title="New Patient Chiropractor Yandina" crumb="New Patients" image="/images/np-assessment.jpg" schema={{ '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }} description="What to expect at your first visit to The Balanced Chiropractic Centre in Yandina: comprehensive assessment, thermography scan, in-house X-ray and a clear report of findings.">
   <PageHero eyebrow="New patients" title="Welcome. Here’s exactly <span class='hl'>what to expect.</span>" lead="No guesswork, no rushing. Your first two visits are all about finding the real cause and giving you a clear plan forward.">
     <div class="btn-row" slot="actions">
       <BookButton label="Book new patient consult" />
@@ -39,6 +39,21 @@ const faqs = [
     </div>
     <Media slot="aside" src="/images/reception.jpg" alt="Reception at The Balanced Chiropractic Centre" label="Reception desk photo" />
   </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Watch before you visit</span>
+          <h2>A welcome from Dr Josh</h2>
+        </div>
+        <p class="lead">Three minutes on what happens at your first appointment, the technology we use, and how we build care around your goals.</p>
+      </div>
+      <div class="reveal" style="max-width:960px;margin:0 auto">
+        <Video file={site.videos.welcome} title="Welcome from Dr Josh: what to expect at your first visit" />
+      </div>
+    </div>
+  </section>
 
   <section class="section">
     <div class="container">
@@ -51,7 +66,7 @@ const faqs = [
             <li><strong>Thermography nerve scan:</strong> thermal imaging with AI-assisted analysis to identify hotspots along your spine</li>
             <li><strong>Full spinal palpation</strong> to feel how each segment is moving</li>
             <li><strong>Neurological and orthopaedic tests</strong></li>
-            <li><strong>In-house X-rays with motion studies</strong> if clinically required, to pinpoint the exact areas of restriction</li>
+            <li><strong><a href="/in-house-x-ray">In-house X-rays with motion studies</a></strong> if clinically required, to pinpoint the exact areas of restriction</li>
           </ul>
         </div>
         <div class="card card--dark reveal reveal-delay-1">
@@ -61,21 +76,9 @@ const faqs = [
             <li>We walk you through your scans, X-rays and exam results in plain English</li>
             <li>We explain exactly what’s going on and why it’s been coming back</li>
             <li>We map out the path to correct it long term, including how long it’s likely to take</li>
-            <li>You ask every question you have. Bring your partner if you like.</li>
+            <li>You ask every question you have. We encourage you to bring your partner or anyone involved in your healthcare decisions. When the people closest to you understand and support your care, it makes a real difference.</li>
           </ul>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section--cream panel">
-    <div class="container">
-      <div class="center narrow">
-        <span class="eyebrow">Watch</span>
-        <h2>A patient’s journey in our office</h2>
-      </div>
-      <div style="max-width:900px;margin:28px auto 0">
-        <Video id={site.videos.patientJourney} title="A patient’s journey at The Balanced Chiropractic Centre" label="“Journey of patient in our office” video" />
       </div>
     </div>
   </section>
@@ -85,10 +88,10 @@ const faqs = [
       <div>
         <span class="eyebrow">After your report</span>
         <h2>A plan with milestones, not a guessing game</h2>
-        <p>Your care plan is built around your results and your goals. We re-assess your posture and progress every 12 visits, and at major reviews we compare fresh results against where you started, so you can see how your spine and nervous system have changed.</p>
+        <p>Your care plan is built around your results and your goals. We re-assess your thermography scan and progress exams every 12 visits, and at major reviews we compare fresh results against where you started, so you can see how your spine and nervous system have changed.</p>
         <p>Most people come to us for pain. Many stay because they discover how much better they can feel, move and function when their body is working the way it’s designed to.</p>
       </div>
-      <Media src="/images/adjusting-table.jpg" alt="Adjusting table at The Balanced Chiropractic Centre" label="Adjusting table / session photo" />
+      <Media src="/images/np-assessment.jpg" alt="Dr Josh checking a patient’s spine while reviewing their thermal scan" label="Assessment photo" shape="tall" />
     </div>
   </section>
 

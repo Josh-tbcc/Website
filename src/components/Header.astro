@@ -7,35 +7,51 @@ import Icon from './Icon.astro';
 
 interface Props { overlay?: boolean }
 const { overlay = false } = Astro.props;
-const nav = [
+type NavItem = { href: string; label: string; children?: { href: string; label: string }[] };
+const nav: NavItem[] = [
   { href: '/new-patients', label: 'New Patients' },
-  { href: '/thermography', label: 'Thermal Scan' },
+  { href: '/thermography', label: 'Scans & X-Ray', children: [
+    { href: '/thermography', label: 'Thermal Scan' },
+    { href: '/in-house-x-ray', label: 'In-House X-Ray' },
+  ] },
   { href: '/who-we-help', label: 'Who We Help' },
+  { href: '/wellness-workshops', label: 'Workshops' },
+  { href: '/blog', label: 'Blog' },
   { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/contact-us', label: 'Contact' },
 ];
 const current = Astro.url.pathname.replace(/\/$/, '');
-const logo = ['logo.svg', 'logo.png'].find((f) => fs.existsSync(path.join(process.cwd(), 'public/images', f)));
+const isCurrent = (href: string) => current === href || current.startsWith(href + '/');
+const logo = ['logo-header.webp', 'logo.svg', 'logo.webp', 'logo.png'].find((f) => fs.existsSync(path.join(process.cwd(), 'public/images', f)));
 const tel = `tel:${site.phone.replace(/\s/g, '')}`;
 ---
 <header class:list={['site-header', { 'site-header--overlay': overlay }]} data-header>
   <div class="site-header__bar">
     <a href="/" class="brand" aria-label={`${site.name}, home`}>
       {logo
-        ? <img src={`/images/${logo}`} alt={site.name} height="44" />
+        ? <img class="brand__logo" src={`/images/${logo}`} alt={site.name} width="140" height="58" />
         : <span class="brand__mark">B</span><span class="brand__text">The Balanced<br /><strong>Chiropractic Centre</strong></span>}
     </a>
     <nav class="nav" aria-label="Main">
       <ul id="nav-list">
-        {nav.map((n) => (
-          <li><a href={n.href} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a></li>
+        {nav.map((n) => n.children ? (
+          <li class="has-sub">
+            <button type="button" class="sub-toggle" aria-expanded="false" aria-current={n.children.some((c) => isCurrent(c.href)) ? 'page' : undefined}>
+              {n.label}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <ul class="sub">
+              {n.children.map((c) => <li><a href={c.href} aria-current={isCurrent(c.href) ? 'page' : undefined}>{c.label}</a></li>)}
+            </ul>
+          </li>
+        ) : (
+          <li><a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a></li>
         ))}
         <li class="nav__mobile-extra"><a href={tel}>Call {site.phone}</a></li>
       </ul>
     </nav>
     <div class="site-header__cta">
       <a href={tel} class="call" aria-label={`Call ${site.phone}`}><Icon name="phone" /></a>
-      <BookButton variant="dark" />
+      <BookButton />
       <button class="menu-toggle" aria-controls="nav-list" aria-expanded="false" aria-label="Open menu">
         <span></span><span></span>
       </button>
@@ -49,29 +65,37 @@ const tel = `tel:${site.phone.replace(/\s/g, '')}`;
   .site-header__bar {
     max-width: var(--max); margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between; gap: 16px;
-    padding: 10px 10px 10px 20px; border-radius: 999px;
+    padding: 6px 10px 6px 22px; border-radius: 999px;
     background: rgba(255,255,255,.82); backdrop-filter: saturate(1.6) blur(16px); -webkit-backdrop-filter: saturate(1.6) blur(16px);
-    border: 1px solid rgba(12,29,32,.06);
-    box-shadow: 0 8px 30px -12px rgba(12,29,32,.18);
+    border: 1px solid rgba(60,45,30,.08);
+    box-shadow: 0 8px 30px -14px rgba(60,45,30,.22);
     transition: background .3s, box-shadow .3s, border-color .3s;
   }
-  .site-header--overlay:not(.is-scrolled) .site-header__bar { background: rgba(12,29,32,.25); border-color: rgba(255,255,255,.12); box-shadow: none; }
-  .site-header--overlay:not(.is-scrolled) .brand,
-  .site-header--overlay:not(.is-scrolled) .nav a,
-  .site-header--overlay:not(.is-scrolled) .call { color: var(--white); }
-  .site-header--overlay:not(.is-scrolled) .menu-toggle span { background: var(--white); }
-  .site-header--overlay:not(.is-scrolled) .brand__mark { background: var(--mint); color: var(--ink); }
+  .site-header--overlay:not(.is-scrolled) .site-header__bar { background: rgba(255,255,255,.92); }
 
+  .brand__logo { height: 58px; width: auto; }
+  @media (max-width: 520px) { .brand__logo { height: 48px; } }
   .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); line-height: 1.05; flex-shrink: 0; }
   .brand__mark { width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: var(--ink); color: var(--mint); font-family: var(--font-head); font-weight: 800; font-size: 1.15rem; }
   .brand__text { font-family: var(--font-head); font-size: .8rem; font-weight: 500; letter-spacing: -0.01em; }
   .brand__text strong { font-size: .95rem; font-weight: 800; }
 
   .nav ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; }
-  .nav a { display: block; padding: 9px 14px; border-radius: 999px; text-decoration: none; color: var(--ink); font-weight: 600; font-size: .92rem; transition: background .2s, color .2s; }
-  .nav a:hover { background: rgba(12,29,32,.06); }
+  .nav a { display: block; padding: 9px 13px; border-radius: 999px; text-decoration: none; color: var(--ink); font-weight: 600; font-size: .92rem; white-space: nowrap; transition: background .2s, color .2s; }
+  .nav a:hover { background: var(--sand); }
   .nav a[aria-current='page'] { background: var(--mint-soft); color: var(--brand-dark); }
   .nav__mobile-extra { display: none; }
+
+  /* Dropdown (Scans & X-Ray) */
+  .has-sub { position: relative; }
+  .sub-toggle { display: flex; align-items: center; gap: 4px; padding: 9px 13px; border-radius: 999px; border: 0; background: none; font: inherit; color: var(--ink); font-weight: 600; font-size: .92rem; white-space: nowrap; cursor: pointer; transition: background .2s, color .2s; }
+  .sub-toggle svg { width: 14px; height: 14px; transition: transform .2s; }
+  .sub-toggle:hover { background: var(--sand); }
+  .sub-toggle[aria-current='page'] { background: var(--mint-soft); color: var(--brand-dark); }
+  .nav .sub { position: absolute; top: calc(100% + 6px); left: 0; min-width: 200px; flex-direction: column; gap: 2px; padding: 8px; background: var(--white); border-radius: 18px; box-shadow: var(--shadow); display: none; z-index: 5; }
+  .nav .sub::before { content: ''; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
+  .has-sub:hover .sub, .has-sub:focus-within .sub, .has-sub.open .sub { display: flex; }
+  .has-sub:hover .sub-toggle svg, .has-sub.open .sub-toggle svg { transform: rotate(180deg); }
 
   .site-header__cta { display: flex; align-items: center; gap: 8px; }
   .site-header__cta :global(.btn) { padding: .85em 1.3em; font-size: .92rem; }
@@ -85,7 +109,7 @@ const tel = `tel:${site.phone.replace(/\s/g, '')}`;
   .menu-toggle[aria-expanded='true'] span:first-child { top: 21px; transform: rotate(45deg); }
   .menu-toggle[aria-expanded='true'] span:last-child { top: 21px; transform: rotate(-45deg); }
 
-  @media (max-width: 1060px) {
+  @media (max-width: 1300px) {
     .menu-toggle { display: block; }
     .call { display: none; }
     .nav ul {
@@ -94,8 +118,12 @@ const tel = `tel:${site.phone.replace(/\s/g, '')}`;
       background: var(--white); border-radius: 24px; box-shadow: var(--shadow);
     }
     .nav ul.open { display: flex; }
-    .nav li a, .site-header--overlay:not(.is-scrolled) .nav li a { color: var(--ink); padding: 14px 16px; font-size: 1.05rem; }
+    .nav li a, .sub-toggle { color: var(--ink); padding: 14px 16px; font-size: 1.05rem; }
     .nav__mobile-extra { display: block; }
+    .sub-toggle { width: 100%; justify-content: space-between; }
+    .nav .sub { position: static; display: flex; box-shadow: none; padding: 0 0 4px 16px; min-width: 0; }
+    .nav .sub a { font-size: .98rem; padding: 10px 16px; color: var(--text); }
+    .sub-toggle svg { display: none; }
   }
   @media (max-width: 520px) {
     .site-header__cta :global(.btn) { display: none; }
@@ -111,6 +139,19 @@ const tel = `tel:${site.phone.replace(/\s/g, '')}`;
     const open = list?.classList.toggle('open');
     btn.setAttribute('aria-expanded', String(!!open));
     header?.classList.toggle('is-scrolled', !!open || scrollY > 40);
+  });
+  // Dropdown: tap to open on touch screens, close when clicking elsewhere
+  document.querySelectorAll<HTMLElement>('.has-sub').forEach((item) => {
+    const t = item.querySelector('.sub-toggle');
+    t?.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      t.setAttribute('aria-expanded', String(open));
+    });
+  });
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('.has-sub.open').forEach((item) => {
+      if (!item.contains(e.target as Node)) { item.classList.remove('open'); item.querySelector('.sub-toggle')?.setAttribute('aria-expanded', 'false'); }
+    });
   });
   const onScroll = () => header?.classList.toggle('is-scrolled', scrollY > 40 || !!list?.classList.contains('open'));
   addEventListener('scroll', onScroll, { passive: true });

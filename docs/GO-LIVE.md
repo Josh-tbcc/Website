@@ -70,7 +70,7 @@ Netlify republishes automatically within a minute.
 | Setting | Where to get it |
 |---|---|
 | `phone`, `email`, `hours` | Current website |
-| `booking.url` | Zurili → Online Booking settings → your **public booking page link**. (We don't need API keys. Please **don't** paste API keys into the website, because anything on a website is public.) |
+| `booking.embedCode` | Zurili → Online Booking / website settings → **embed code** (a `<script>` or `<iframe>` snippet). Or copy it from the current booking page: open thebalancedchiro.com.au/book-online-yandina, right-click → **View Page Source**, search for `zurili`, and copy those lines. Never paste API keys into the website. |
 | `intakeFormUrl` | Jotform → your new patient form → Publish → copy link |
 | `metaPixelId` | Daina / Meta Events Manager → Data sources → Pixel ID (a long number) |
 | `videos.*` | Upload each video to YouTube (Unlisted is fine), copy the ID after `v=` in the link |
@@ -80,8 +80,8 @@ Photos: drop them into `public/images/` with the file names shown on the placeho
 (e.g. `hero.jpg`, `team.jpg`, `dr-josh.jpg`, `thermography-scan.jpg`, `logo.png`).
 Resize photos to about **2000px wide** first. Your originals are 7–10MB each, which is too slow for phones.
 
-> If Zurili's booking page refuses to load inside the site (some systems block that),
-> set `booking.embed` to `false` and the Book button will open Zurili in a new tab instead.
+> Booking stays on thebalancedchiro.com.au/book-online-yandina (good for SEO). If Zurili only
+> gives you a link rather than embed code, put it in `booking.url` and it shows in a frame on the page.
 
 ## Step 6: Point the domain at Netlify (go-live day)
 
@@ -130,7 +130,7 @@ data export is saved somewhere safe.
 - [ ] Google Business Profile → update the website link if needed (it's the same address, so usually nothing to change).
 - [ ] Google Search Console → add the site and submit `https://thebalancedchiro.com.au/sitemap-index.xml`.
 - [ ] Meta Events Manager → confirm `PageView`, `Lead` and `Schedule` events are firing.
-- [ ] Old Perfect Patients page links: send Claude the list of old URLs and we'll add redirects so Google traffic isn't lost.
+- [ ] Old page addresses: the booking, contact and condition pages keep their old addresses. Others (blog, workshops, referral program) redirect via `public/_redirects`. Check Google Search Console → Pages for any 404s after launch and add them there.
 
 ---
 
@@ -145,3 +145,43 @@ AHPRA advertising guidelines. The site has been written with this in mind:
 - **The $49 offer** states it's for new patients and what's included, with no pressure or time-limit language.
 
 Please run any new ad copy or page wording past these rules before publishing.
+
+## SEO checklist (after the domain points to Netlify)
+
+The website itself is set up for search: keyword page titles ("… Chiropractor Yandina"),
+descriptions, Google business details (hours, phone, practitioners, suburbs served),
+FAQ and breadcrumb data, a sitemap, and permanent redirects from every old page address.
+These steps happen outside the website:
+
+1. **Google Search Console** (search.google.com/search-console): open the
+   thebalancedchiro.com.au property (it's already verified by the tag on the site),
+   go to **Sitemaps** and submit `sitemap-index.xml`. Then use **URL inspection** on the
+   home page and click **Request indexing**.
+2. **Google Business Profile**: check the website link is `https://thebalancedchiro.com.au`,
+   the hours match the site, and add the booking link
+   `https://thebalancedchiro.com.au/book-online-yandina`. Post photos and ask happy patients
+   for reviews regularly (reviews are the biggest local ranking factor).
+3. **Check rich results**: paste a condition page (e.g. /back-pain) into
+   search.google.com/test/rich-results to confirm the FAQ and business details are read.
+4. **Directories**: make sure the clinic name, address and phone are written exactly the same
+   on Facebook, Instagram, HealthEngine, Yellow Pages, True Local and any other listings.
+5. Give it 2–6 weeks. Rankings usually wobble briefly after a site move, then settle.
+
+### Showing up in AI assistants (ChatGPT, Claude, Perplexity, Google AI answers)
+
+AI assistants answer "chiropractor near me" questions by searching the web and quoting
+sites, reviews and directories they trust. The site is ready for them: plain-English FAQ
+answers, clinic facts in Google's structured format, a summary for AI tools at
+`/llms.txt`, and `robots.txt` explicitly allowing AI crawlers. To give yourself the best chance:
+
+1. **Bing Webmaster Tools** (bing.com/webmasters): sign in, choose **Import from Google
+   Search Console**, and submit the sitemap. ChatGPT's search relies heavily on Bing.
+2. **Google reviews**: steady new reviews that mention the suburb and the problem in the
+   patient's own words (e.g. "lower back pain", "Nambour") carry the most weight for both
+   Google Maps and AI answers. Never offer incentives for reviews (AHPRA).
+3. **Consistent listings**: same name, address, phone and website on Google, Apple Maps
+   (Apple Business Connect), Bing Places, Facebook, Instagram, HealthEngine, HotDoc,
+   Yellow Pages, True Local and Hotfrog.
+4. **Local mentions**: a listing or article on local Sunshine Coast sites (community groups,
+   Yandina markets, local sports clubs you support) helps AI tools connect your clinic to
+   the area.

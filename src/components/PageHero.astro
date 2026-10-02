@@ -1,10 +1,10 @@
 ---
-// Dark rounded hero used on inner pages
+// Soft beige rounded hero used on inner pages
 interface Props { eyebrow: string; title: string; lead?: string }
 const { eyebrow, title, lead } = Astro.props;
 ---
 <section class="page-hero-wrap">
-  <div class="panel page-hero on-dark">
+  <div class="panel page-hero">
     <div class="container page-hero__inner">
       <div class="page-hero__copy reveal">
         <span class="eyebrow">{eyebrow}</span>
@@ -20,13 +20,13 @@ const { eyebrow, title, lead } = Astro.props;
   .page-hero-wrap { padding-top: 12px; }
   .page-hero {
     background:
-      radial-gradient(70% 90% at 100% 0%, rgba(140,227,199,.22), transparent 60%),
-      radial-gradient(60% 80% at 0% 100%, rgba(15,118,110,.5), transparent 60%),
-      var(--ink);
-    color: #b9c9cb;
+      radial-gradient(60% 80% at 100% 0%, rgba(255,255,255,.7), transparent 60%),
+      radial-gradient(50% 70% at 0% 100%, rgba(207,227,194,.45), transparent 60%),
+      var(--sand);
     padding: clamp(64px, 9vw, 120px) 0 clamp(56px, 7vw, 96px);
   }
-  .page-hero h1 { color: var(--white); font-size: clamp(2.4rem, 5.4vw, 4.2rem); }
+  .page-hero h1 { font-size: clamp(2.4rem, 5.2vw, 4rem); }
+  .page-hero__aside :global(.media) { box-shadow: var(--shadow); }
   .page-hero__inner { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
   .page-hero__inner:not(:has(.page-hero__aside)) { grid-template-columns: 1fr; }
   .page-hero__copy { max-width: 760px; }

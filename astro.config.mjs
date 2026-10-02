@@ -5,6 +5,6 @@ export default defineConfig({
   site: 'https://thebalancedchiro.com.au',
   trailingSlash: 'ignore',
   integrations: [
-    sitemap({ filter: (page) => !page.includes('/offer') }),
+    sitemap({ filter: (page) => !page.includes('/offer') && !page.includes('/thank-you') && !page.includes('/subscribed') }),
   ],
 });

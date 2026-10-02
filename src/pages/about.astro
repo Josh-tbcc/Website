@@ -4,6 +4,7 @@ import Media from '../components/Media.astro';
 import Video from '../components/Video.astro';
 import CtaBand from '../components/CtaBand.astro';
 import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
 import { site, team } from '../config/site';
 
 const values = [
@@ -13,9 +14,9 @@ const values = [
   ['Tribe', 'The best results come from long-term relationships and a community that supports each other.'],
 ];
 ---
-<Base title="About Us" description="Meet Dr Joshua Kassis and the team at The Balanced Chiropractic Centre, a family chiropractic practice in Yandina on the Sunshine Coast.">
+<Base title="Meet Our Yandina Chiropractors" crumb="About" image="/images/dr-josh.jpg" description="Meet Dr Joshua Kassis and the team at The Balanced Chiropractic Centre, a family chiropractic practice in Yandina on the Sunshine Coast.">
   <PageHero eyebrow="About us" title="Helping Yandina live healthier, <span class='hl'>for life.</span>" lead="Our mission is to empower families and our community to achieve lifelong health through chiropractic care, education and genuine connection.">
-    <Media slot="aside" src="/images/team.jpg" alt="The team at The Balanced Chiropractic Centre" label="Team photo" />
+    <Media slot="aside" src="/images/adjusting.jpg" alt="Dr Josh adjusting a patient at The Balanced Chiropractic Centre" label="Adjusting photo" />
   </PageHero>
 
   <section class="section">
@@ -24,13 +25,17 @@ const values = [
     </div>
   </section>
 
-  {site.videos.intro && (
-    <section class="section">
-      <div class="container" style="max-width:900px">
-        <Video id={site.videos.intro} title="Welcome from Dr Josh" />
+  <section class="section section--cream panel">
+    <div class="container video-split">
+      <div class="reveal">
+        <span class="eyebrow">Our story</span>
+        <h2>Why Dr Josh opened The Balanced Chiropractic Centre</h2>
+        <p class="lead">From helping injured animals as a kid to building a clinic around thorough testing, re-measuring progress and investing in the best technology.</p>
+        <p>We opened in 2023, transforming a former local pharmacy into a modern, wellness-focused chiropractic centre, so families in Yandina and across the Sunshine Coast could find the true cause of their health concerns.</p>
       </div>
-    </section>
-  )}
+      <Video file={site.videos.brandStory} vertical title="Dr Josh on why he opened The Balanced Chiropractic Centre" />
+    </div>
+  </section>
 
   <section class="section">
     <div class="container">
@@ -44,7 +49,9 @@ const values = [
             <Media src={m.photo} alt={m.name} label={`${m.name} headshot`} shape="tall" />
             <h3 style="margin-top:22px">{m.name}</h3>
             <p class="pill">{m.role}</p>
+            {m.credentials && <p class="fine-print" style="margin:8px 0 0">{m.credentials}</p>}
             <p style="margin-top:12px">{m.bio}</p>
+            {m.page && <a class="btn btn--ghost" href={m.page}>Meet {m.name.split(' ').slice(0, 2).join(' ')}<Icon name="arrow" /></a>}
           </div>
         ))}
       </div>

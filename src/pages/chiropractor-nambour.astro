@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import Media from '../components/Media.astro';
+import BookButton from '../components/BookButton.astro';
+import CtaBand from '../components/CtaBand.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../config/site';
+import { conditions } from '../config/conditions';
+
+const a = site.address;
+const reasons = [
+  ['scan', 'Thermal nerve scans', 'Every new patient assessment includes a Thermpix thermography scan with AI-assisted analysis, so your care starts with measurement, not guesswork.'],
+  ['xray', 'In-house X-ray', 'If X-rays are clinically required, we take them on site, so there’s no separate trip into Nambour for imaging.'],
+  ['users', 'A family practice', 'We look after babies to grandparents, pregnant mums, tradies, office workers and athletes from Nambour and the surrounding hinterland.'],
+  ['calendar', 'Early and after-work times', 'Morning sessions from 7am on Tuesdays, Thursdays and Fridays, and afternoon sessions until 6pm Monday to Thursday.'],
+];
+const faqs = [
+  ['Is there a chiropractor near Nambour?', `Yes. The Balanced Chiropractic Centre is at ${a.street}, ${a.suburb}, around 10 minutes’ drive north of Nambour. We see patients from Nambour, Kulangoor, Coes Creek, Burnside and across the Sunshine Coast hinterland.`],
+  ['What does a chiropractor in Nambour help with?', 'We commonly see people for lower back pain, neck pain, headaches, sciatica, shoulder and knee pain, posture concerns and ongoing pain, as well as pregnant mums, families and athletes who want to stay moving well.'],
+  ['Do I need a referral?', 'No. You can book a new patient consultation directly online or by calling us.'],
+  ['How do I book?', `Book online any time, or call ${site.phone}. Your first visit is a 30-minute comprehensive assessment.`],
+];
+---
+<Base
+  title="Chiropractor Nambour"
+  crumb="Chiropractor Nambour"
+  description="Looking for a chiropractor near Nambour? The Balanced Chiropractic Centre in Yandina is about 10 minutes away, with thermal scans, in-house X-ray and family care."
+  schema={{ '@type': 'FAQPage', mainEntity: faqs.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: ans } })) }}
+>
+  <PageHero eyebrow="Chiropractor near Nambour" title="Your local chiropractor, <span class='hl'>just up the road.</span>" lead="The Balanced Chiropractic Centre is around 10 minutes’ drive north of Nambour, in the heart of Yandina. Families from Nambour, Kulangoor, Coes Creek and Burnside come to us for thorough assessments and a clear plan.">
+    <div class="btn-row" slot="actions"><BookButton label="Book a consultation" /><a class="btn btn--glass" href={site.mapsUrl} target="_blank" rel="noopener"><Icon name="pin" />Get directions</a></div>
+    <Media slot="aside" src="/images/reception.jpg" alt="Reception at The Balanced Chiropractic Centre in Yandina" label="Reception photo" shape="tall" />
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div>
+          <span class="eyebrow">Why Nambour locals choose us</span>
+          <h2>Worth the short drive</h2>
+        </div>
+        <p>We’re a modern, family-focused clinic that measures before it treats, then explains everything in plain English.</p>
+      </div>
+      <div class="grid grid-4">
+        {reasons.map(([icon, t, d], i) => (
+          <div class={`card reveal reveal-delay-${i}`}>
+            <div class="icon"><Icon name={icon} /></div>
+            <h3>{t}</h3>
+            <p>{d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream panel">
+    <div class="container">
+      <div class="center narrow reveal">
+        <span class="eyebrow">What we help with</span>
+        <h2>Common reasons people from Nambour see us</h2>
+      </div>
+      <div class="cond reveal">
+        {conditions.map((c) => <a href={`/${c.slug}`}>{c.name}<Icon name="arrow" /></a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="reveal">
+        <span class="eyebrow">Getting here</span>
+        <h2>Easy to reach from Nambour</h2>
+        <p>We’re at <strong>{a.street}, {a.suburb} {a.state} {a.postcode}</strong>. {site.directions}</p>
+        <p>It’s around a 10-minute drive north of Nambour, and Yandina Station is a short walk away if you’re coming by train.</p>
+        <a class="btn btn--ghost" href={site.mapsUrl} target="_blank" rel="noopener">Open in Google Maps<Icon name="arrow" /></a>
+      </div>
+      <div class="card reveal reveal-delay-1">
+        <h3>Opening hours</h3>
+        <table class="hours-table">
+          {site.hours.map((h) => <tr><td>{h.days}</td><td>{h.time.split(', ').map((t, i) => <>{i > 0 && <br />}{t}</>)}</td></tr>)}
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cream panel">
+    <div class="container narrow">
+      <h2 class="center">Questions from Nambour patients</h2>
+      <div style="margin-top:24px">
+        {faqs.map(([q, ans]) => <details class="faq"><summary>{q}</summary><p>{ans}</p></details>)}
+      </div>
+      <p class="center" style="margin-top:28px"><a href="/areas-we-serve">See all the areas we serve</a></p>
+    </div>
+  </section>
+
+  <CtaBand title="Book your first visit from Nambour" />
+</Base>
+<style>
+  .cond { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 32px; }
+  .cond a { display: inline-flex; align-items: center; gap: 6px; padding: 11px 18px; border-radius: 999px; background: var(--white); border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; font-size: .95rem; }
+  .cond a :global(svg) { width: 14px; height: 14px; color: var(--brand); }
+  .cond a:hover { border-color: var(--brand); }
+  .hours-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .hours-table td { padding: 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .hours-table td:last-child { text-align: right; font-weight: 600; }
+</style>

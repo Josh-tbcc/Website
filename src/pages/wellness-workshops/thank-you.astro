@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../config/site';
+const tel = `tel:${site.phone.replace(/\s/g, '')}`;
+---
+<Base noindex title="You’re on the list">
+  <section class="section">
+    <div class="container narrow center">
+      <span class="eyebrow">You’re on the list</span>
+      <h1>Thanks! We’ve saved your seats.</h1>
+      <p class="lead">We’ll see you at 6:00pm (it runs for about 30 minutes) on the first Wednesday of the month at {site.address.street}, {site.address.suburb}. Our team will send you a reminder before the night.</p>
+      <p>Need to change your numbers? Call us on <a href={tel}>{site.phone}</a>.</p>
+      <div class="btn-row" style="justify-content:center;margin-top:28px">
+        <a class="btn btn--glass" href="/wellness-workshops">Back to workshops</a>
+        <a class="btn btn--primary" href="/">Explore the website</a>
+      </div>
+    </div>
+  </section>
+</Base>

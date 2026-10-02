@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBand from '../components/CtaBand.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import BookButton from '../components/BookButton.astro';
+import { site } from '../config/site';
+import { conditions } from '../config/conditions';
+
+// Approximate drive times from the clinic in Yandina
+const areas = [
+  { name: 'Yandina', time: 'Right here', text: `We’re on Farrell Street in the centre of town. ${site.directions}` },
+  { name: 'Yandina Creek', time: 'About 5–10 min', text: 'A quick drive in for families and acreage owners in Yandina Creek.' },
+  { name: 'Nambour', time: 'About 10 min', text: 'Just north of Nambour, away from the busy town centre.', href: '/chiropractor-nambour' },
+  { name: 'Kulangoor', time: 'About 10 min', text: 'A short drive up the road from Kulangoor and Coes Creek.' },
+  { name: 'North Arm', time: 'About 10 min', text: 'Close by for North Arm families and rural properties.' },
+  { name: 'Ninderry & Valdora', time: 'About 10 min', text: 'Easy to reach from the Ninderry and Valdora area.' },
+  { name: 'Eumundi', time: 'About 10–15 min', text: 'A short trip south from Eumundi and Doonan.' },
+  { name: 'Bli Bli', time: 'About 15 min', text: 'A straightforward drive from Bli Bli and the Maroochy River.' },
+  { name: 'Pacific Paradise', time: 'About 15–20 min', text: 'Convenient for Pacific Paradise, Mudjimba and Twin Waters.' },
+  { name: 'Cooroy', time: 'About 20 min', text: 'An easy run down the highway from Cooroy and Pomona.' },
+  { name: 'Coolum Beach', time: 'About 20 min', text: 'Over the hill from Coolum, Peregian and the coast.' },
+];
+const faqs = [
+  ['Where is The Balanced Chiropractic Centre?', `${site.address.street}, ${site.address.suburb} ${site.address.state} ${site.address.postcode}, on the Sunshine Coast. ${site.directions}`],
+  ['Which areas do you see patients from?', `Yandina, Yandina Creek, Nambour, Kulangoor, North Arm, Ninderry, Valdora, Eumundi, Bli Bli, Pacific Paradise, Cooroy, Coolum Beach and the wider Sunshine Coast.`],
+  ['What conditions do you help with?', `Common reasons people see us include ${conditions.slice(0, 8).map((c) => c.name.toLowerCase()).join(', ')} and more.`],
+];
+---
+<Base
+  title="Chiropractor Sunshine Coast: Areas We Serve"
+  crumb="Areas We Serve"
+  description="Chiropractor for Yandina, Nambour, Eumundi, Bli Bli, Cooroy, Kulangoor, Yandina Creek, Pacific Paradise and the Sunshine Coast hinterland. Book online."
+  schema={{ '@type': 'FAQPage', mainEntity: faqs.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: ans } })) }}
+>
+  <PageHero eyebrow="Areas we serve" title="Chiropractic care across the <span class='hl'>Sunshine Coast hinterland.</span>" lead="Our clinic is in Yandina, a short drive from Nambour, Eumundi, Bli Bli, Cooroy and the coast. Here’s how close we are to you.">
+    <div class="btn-row" slot="actions"><BookButton label="Book a consultation" /></div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid-3">
+        {areas.map((ar, i) => (
+          <div class={`card area reveal reveal-delay-${i % 3}`}>
+            <span class="area__time"><Icon name="pin" />{ar.time}</span>
+            <h2 class="area__name">Chiropractor {ar.name}</h2>
+            <p>{ar.text}</p>
+            {ar.href && <a href={ar.href}>More for {ar.name} patients<Icon name="arrow" /></a>}
+          </div>
+        ))}
+      </div>
+      <p class="fine-print" style="margin-top:20px">Drive times are approximate and depend on traffic.</p>
+    </div>
+  </section>
+
+  <section class="section section--cream panel">
+    <div class="container">
+      <div class="center narrow">
+        <span class="eyebrow">What we help with</span>
+        <h2>Care for the whole family</h2>
+      </div>
+      <div class="cond">
+        {conditions.map((c) => <a href={`/${c.slug}`}>{c.name}<Icon name="arrow" /></a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <h2 class="center">Good to know</h2>
+      <div style="margin-top:24px">
+        {faqs.map(([q, ans]) => <details class="faq"><summary>{q}</summary><p>{ans}</p></details>)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+<style>
+  .area h2.area__name { font-family: var(--font-head); font-weight: 700; font-size: 1.22rem; letter-spacing: -0.015em; margin: 12px 0 .4em; }
+  .area__time { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--brand); }
+  .area__time :global(svg) { width: 14px; height: 14px; }
+  .area a { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: .9rem; text-decoration: none; }
+  .area a :global(svg) { width: 14px; height: 14px; }
+  .cond { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 32px; }
+  .cond a { display: inline-flex; align-items: center; gap: 6px; padding: 11px 18px; border-radius: 999px; background: var(--white); border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; font-size: .95rem; }
+  .cond a :global(svg) { width: 14px; height: 14px; color: var(--brand); }
+  .cond a:hover { border-color: var(--brand); }
+</style>

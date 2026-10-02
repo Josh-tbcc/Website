@@ -7,44 +7,51 @@ export const site = {
   name: 'The Balanced Chiropractic Centre',
   shortName: 'Balanced Chiro',
   url: 'https://thebalancedchiro.com.au',
-  tagline: 'Chiropractic care built for the long term',
+  tagline: 'Health from within',
   description:
-    'Family chiropractic in Yandina on the Sunshine Coast. Thermal nerve scans, in-house X-ray and a clear plan to correct the cause — not just chase the pain.',
+    'Family chiropractor in Yandina, near Nambour on the Sunshine Coast. Care for lower back pain, neck pain, headaches and more, with thermal scans and in-house X-ray.',
 
   // Contact
-  phone: '07 0000 0000', // TODO: real phone number
-  email: 'hello@thebalancedchiro.com.au', // TODO: confirm reception email
+  phone: '07 3496 9345',
+  email: 'yandina@thebalancedchiro.com.au',
   address: {
-    street: 'Centre 5/18 Farrell St',
+    street: 'Shop 5, 18 Farrell St',
     suburb: 'Yandina',
     state: 'QLD',
     postcode: '4561',
   },
-  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=5%2F18+Farrell+St+Yandina+QLD+4561',
+  directions: 'Next door to Lawn Espresso, a short walk from Yandina Station.',
+  mapsUrl: 'https://maps.google.com/maps?cid=11232953959727105599', // Google Business Profile
+  geo: { lat: -26.5608631, lng: 152.9569166 },
+  // Suburbs we serve (used in Google business details and the Contact page)
+  areaServed: ['Yandina', 'Yandina Creek', 'Nambour', 'Kulangoor', 'North Arm', 'Ninderry', 'Valdora', 'Eumundi', 'Bli Bli', 'Pacific Paradise', 'Cooroy', 'Coolum Beach', 'Sunshine Coast'],
   mapsEmbed:
     'https://www.google.com/maps?q=5%2F18+Farrell+St+Yandina+QLD+4561&output=embed',
 
-  // TODO: copy the real hours from the current website
   hours: [
-    { days: 'Monday', time: '7:00am – 6:00pm' },
-    { days: 'Tuesday', time: '7:00am – 6:00pm' },
-    { days: 'Wednesday', time: '7:00am – 6:00pm' },
-    { days: 'Thursday', time: '7:00am – 6:00pm' },
-    { days: 'Friday', time: '7:00am – 12:00pm' },
-    { days: 'Saturday', time: 'By appointment' },
+    { days: 'Monday', time: '2:30pm – 6:00pm' },
+    { days: 'Tuesday', time: '7:00am – 10:00am, 2:30pm – 6:00pm' },
+    { days: 'Wednesday', time: '2:30pm – 6:00pm' },
+    { days: 'Thursday', time: '7:00am – 10:00am, 2:30pm – 6:00pm' },
+    { days: 'Friday', time: '7:00am – 10:00am' },
+    { days: 'Saturday', time: 'Free Spinal Assessment at the Yandina Country Markets from 7:00am – 12:00pm' },
     { days: 'Sunday', time: 'Closed' },
   ],
 
-  // Online booking (Zurili). Use the PUBLIC booking page link —
-  // never put API keys in this file, the website is public.
+  // Online booking (Zurili), shown inside /book-online-yandina so patients
+  // stay on thebalancedchiro.com.au. Never put API keys in this file —
+  // the website is public.
   booking: {
-    url: '', // TODO: Zurili public booking link, e.g. https://book.zurili.com/…
-    embed: true, // show the booking page inside /book (set false to just link out)
+    // Optional: Zurili embed snippet (takes priority over `url` if set).
+    embedCode: ``,
+    // Zurili booking page, shown in a frame on our own page (same as the old site).
+    url: 'https://app.zurili.com/home/site/647fb02a8af8ff2940bd050a',
+    embed: true, // false = open the booking link in a new tab instead
     newPatientLabel: 'New Patient Consultation (30 min)',
   },
 
   // Online intake form (Jotform)
-  intakeFormUrl: '', // TODO: Jotform new patient intake link
+  intakeFormUrl: 'https://form.jotform.com/262209246859062',
 
   // $49 Meta ad offer
   offer: {
@@ -64,34 +71,51 @@ export const site = {
   },
 
   // Tracking
-  metaPixelId: '', // TODO: from Daina / Meta Events Manager
-  googleAnalyticsId: '', // optional, e.g. G-XXXXXXX
+  metaPixelId: '1928557301455756', // Meta Events Manager
+  // Carried over from the old website so reporting and ad conversions keep working
+  google: {
+    analyticsId: 'G-FJ2HLLB4CW',
+    adsIds: ['AW-17082728725', 'AW-18002778320'],
+    conversions: {
+      bookingPage: 'AW-17082728725/sda7CLHf7c0aEJWC19E_', // someone opens the booking page
+      phoneClick: 'AW-17082728725/vtAsCLTf7c0aEJWC19E_',  // someone taps the phone number
+      phoneCalls: 'AW-17082728725/3OP8CN6W8M0aEJWC19E_',  // Google call tracking number swap
+    },
+    siteVerification: 'FyXMmglyjM-CvcYUw9WajstrFkisKs7XKRxmD94XKr0', // Search Console
+  },
 
-  // Videos — paste YouTube video IDs (the part after v=)
+  // Videos live in public/videos (<name>.mp4 + <name>.jpg cover, optional .vtt captions)
   videos: {
-    patientJourney: '', // TODO: "Journey of patient in our office"
-    thermography: '', // TODO: thermal scan explainer
-    intro: '', // optional: welcome video from Dr Josh
+    welcome: 'new-patient-welcome',        // Dr Josh: what to expect at your first visit
+    thermography: 'inflammation-scanner',  // Dr Josh explains the ThermPix scanner
+    xray: 'xray-explained',                // Dr Josh on full-spine and motion X-rays
+    thorough: 'thorough-care',             // how we investigate and plan long-term care
+    brandStory: 'brand-story',             // why Dr Josh opened the clinic
+    david: 'dr-david',                     // Dr David introduction (add public/videos/dr-david.mp4)
+    offer: 'three-technologies',           // 3 technologies (offer section cut out)
   },
 
   social: {
-    facebook: '', // TODO
-    instagram: '', // TODO
-    googleReviews: '', // TODO: Google Business Profile reviews link
+    facebook: 'https://www.facebook.com/people/The-Balanced-Chiropractic-Centre-Yandina/100092608928255/',
+    instagram: 'https://www.instagram.com/thebalancedchiropracticcentre/',
+    googleReviews: 'https://maps.google.com/maps?cid=11232953959727105599'
   },
 };
 
 export const team = [
   {
     name: 'Dr Joshua Kassis',
-    role: 'Principal Chiropractor & Founder',
+    role: 'Chiropractor',
+    credentials: 'B.Chiro, M.Chiro (Macquarie University)',
     photo: '/images/dr-josh.jpg',
-    bio: 'Josh founded The Balanced Chiropractic Centre to give the Yandina community a different kind of chiropractic: one that measures before it treats and works to correct the underlying pattern, not just the symptom of the day. He is passionate about family wellness and educating people on how their nervous system shapes their health.',
+    bio: 'Dr Josh is passionate about giving the Yandina community a different kind of chiropractic: one that measures before it treats and works to correct the underlying pattern, not just the symptom of the day. He loves family wellness and educating people on how their nervous system shapes their health.',
   },
   {
-    name: 'Dr David',
+    name: 'Dr David Rowan',
     role: 'Chiropractor',
+    credentials: 'B.Chiro Sc, M.Chiro (CQU)',
     photo: '/images/dr-david.jpg',
-    bio: 'TODO: David’s bio — background, study, what he loves about chiropractic and life outside the clinic.',
+    page: '/dr-david-rowan',
+    bio: 'A former Glasgow police officer with a Master of Chiropractic, Dr David brings calm, thorough care to every visit. He uses the same comprehensive assessment every patient at our clinic receives, from thermal scans to in-house X-ray, and builds a clear plan around your goals. Patients value his honesty, his attention to detail and the time he takes to explain what’s going on. And yes, the Scottish accent.',
   },
 ];

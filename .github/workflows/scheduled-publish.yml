@@ -1,0 +1,19 @@
+# Rebuilds the live site every morning so blog posts go live on their date.
+# Setup: in Netlify, Site configuration → Build & deploy → Build hooks → Add build hook,
+# then in GitHub, Settings → Secrets and variables → Actions → New secret
+# named NETLIFY_BUILD_HOOK with the hook URL.
+name: Publish scheduled blog posts
+on:
+  schedule:
+    - cron: '30 19 * * *' # 5:30am Queensland time
+  workflow_dispatch:
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Netlify build
+        env:
+          HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "NETLIFY_BUILD_HOOK secret not set, skipping"; exit 0; fi
+          curl -fsS -X POST -d '{}' "$HOOK"
