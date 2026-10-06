@@ -29,8 +29,51 @@ const { offer } = site;
         </ul>
       </div>
 
-      <div class="lp-photo">
-        <Media src="/images/np-consult.jpg" alt="Dr Josh chatting with a new patient during their consultation" label="Consultation photo" eager />
+      <div class="lp-slot" id="form-slot">
+      <div class="card lp-form" id="claim-card">
+        <button class="lp-dialog__close" type="button" data-close aria-label="Close">×</button>
+          <h2 id="claim-title">Claim your {offer.price} assessment</h2>
+          <p class="fine-print" style="margin-top:-6px">Leave your details and we’ll call to make sure we can help.</p>
+          <form
+            class="form"
+            name="offer-lead"
+            method="POST"
+            action="/offer/thank-you"
+            data-netlify="true"
+            netlify-honeypot="company"
+            id="lead-form"
+          >
+            <input type="hidden" name="form-name" value="offer-lead" />
+            <p class="hidden"><label>Don’t fill this in: <input name="company" /></label></p>
+            <div class="form-row">
+              <label>First name<input name="first_name" autocomplete="given-name" required /></label>
+              <label>Last name<input name="last_name" autocomplete="family-name" required /></label>
+            </div>
+            <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+            <label>Mobile<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required /></label>
+            <label>What made you interested in this offer?<textarea name="reason" rows="3" required></textarea></label>
+            <label>Do you work, live or will travel to Yandina?
+              <select name="travel" required>
+                <option value="">Select…</option>
+                <option>I am a Yandina local</option>
+                <option>Yes, I am happy to travel</option>
+                <option>Not sure, depends on the time</option>
+                <option>No</option>
+              </select>
+            </label>
+            <label>Your suburb<input name="suburb" autocomplete="address-level2" placeholder="e.g. Yandina" required /></label>
+            <label class="check"><input type="checkbox" name="marketing_consent" value="yes" /> <span>Send me occasional health tips and clinic offers by email or SMS. You can unsubscribe at any time.</span></label>
+            <input type="hidden" name="utm_source" />
+            <input type="hidden" name="utm_campaign" />
+            <input type="hidden" name="utm_medium" />
+            <input type="hidden" name="utm_content" />
+            <input type="hidden" name="utm_term" />
+            <input type="hidden" name="fbclid" />
+            <input type="hidden" name="gclid" />
+            <button class="btn btn--primary btn--block" type="submit">Claim My {offer.price} Assessment</button>
+            <p class="fine-print">By submitting you agree to be contacted by our team about your appointment. See our <a href="/privacy">privacy policy</a>.</p>
+          </form>
+      </div>
       </div>
     </div>
     </div>
@@ -82,53 +125,8 @@ const { offer } = site;
   </section>
 
 
-  <!-- CLAIM POP-UP -->
-  <dialog class="lp-dialog" id="claim" aria-labelledby="claim-title">
-    <div class="card lp-form">
-      <button class="lp-dialog__close" type="button" data-close aria-label="Close">×</button>
-        <h2 id="claim-title">Claim your {offer.price} assessment</h2>
-        <p class="fine-print" style="margin-top:-6px">Leave your details and we’ll call to make sure we can help.</p>
-        <form
-          class="form"
-          name="offer-lead"
-          method="POST"
-          action="/offer/thank-you"
-          data-netlify="true"
-          netlify-honeypot="company"
-          id="lead-form"
-        >
-          <input type="hidden" name="form-name" value="offer-lead" />
-          <p class="hidden"><label>Don’t fill this in: <input name="company" /></label></p>
-          <div class="form-row">
-            <label>First name<input name="first_name" autocomplete="given-name" required /></label>
-            <label>Last name<input name="last_name" autocomplete="family-name" required /></label>
-          </div>
-          <label>Email<input name="email" type="email" autocomplete="email" required /></label>
-          <label>Mobile<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required /></label>
-          <label>What made you interested in this offer?<textarea name="reason" rows="3" required></textarea></label>
-          <label>Do you work, live or will travel to Yandina?
-            <select name="travel" required>
-              <option value="">Select…</option>
-              <option>I am a Yandina local</option>
-              <option>Yes, I am happy to travel</option>
-              <option>Not sure, depends on the time</option>
-              <option>No</option>
-            </select>
-          </label>
-          <label>Your suburb<input name="suburb" autocomplete="address-level2" placeholder="e.g. Yandina" required /></label>
-          <label class="check"><input type="checkbox" name="marketing_consent" value="yes" /> <span>Send me occasional health tips and clinic offers by email or SMS. You can unsubscribe at any time.</span></label>
-          <input type="hidden" name="utm_source" />
-          <input type="hidden" name="utm_campaign" />
-          <input type="hidden" name="utm_medium" />
-          <input type="hidden" name="utm_content" />
-          <input type="hidden" name="utm_term" />
-          <input type="hidden" name="fbclid" />
-          <input type="hidden" name="gclid" />
-          <button class="btn btn--primary btn--block" type="submit">Claim My {offer.price} Assessment</button>
-          <p class="fine-print">By submitting you agree to be contacted by our team about your appointment. See our <a href="/privacy">privacy policy</a>.</p>
-        </form>
-    </div>
-  </dialog>
+  <!-- CLAIM POP-UP (the form card is moved in here while open) -->
+  <dialog class="lp-dialog" id="claim" aria-labelledby="claim-title"></dialog>
 
   <a class="lp-sticky btn btn--primary" href="#claim">Claim {offer.price} Assessment</a>
 </Base>
@@ -138,18 +136,32 @@ const { offer } = site;
     var form = document.getElementById('lead-form');
     if (!form) return;
     var dlg = document.getElementById('claim');
+    var card = document.getElementById('claim-card');
+    var slot = document.getElementById('form-slot');
     function openClaim() {
-      if (!dlg) return;
+      if (!dlg || !card) return;
+      slot.style.minHeight = slot.offsetHeight + 'px';   // keep the page from jumping
+      dlg.appendChild(card);
       if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+      card.scrollTop = 0;
       if (window.fbq) window.fbq('track', 'InitiateCheckout', { content_name: 'Offer form opened' });
       setTimeout(function () { var f = form.querySelector('input[name="first_name"]'); if (f && innerWidth > 700) f.focus(); }, 50);
     }
-    function closeClaim() { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
-    dlg.querySelector('[data-close]').addEventListener('click', closeClaim);
+    function closeClaim() { if (dlg.close) dlg.close(); else { dlg.removeAttribute('open'); putBack(); } }
+    function putBack() { slot.appendChild(card); slot.style.minHeight = ''; }
+    dlg.addEventListener('close', putBack);
+    card.querySelector('[data-close]').addEventListener('click', closeClaim);
     dlg.addEventListener('click', function (e) { if (e.target === dlg) closeClaim(); }); // tap outside
     document.querySelectorAll('a[href="#claim"]').forEach(function (a) {
       a.addEventListener('click', function (e) { e.preventDefault(); openClaim(); });
     });
+    // Hide the floating mobile button while the form is on screen
+    var sticky = document.querySelector('.lp-sticky');
+    if (sticky && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        sticky.style.visibility = entries[0].isIntersecting ? 'hidden' : 'visible';
+      }).observe(slot);
+    }
 
     // Swipe-to-claim: drag the price knob to the end (or tap / press Enter)
     var sw = document.querySelector('[data-swipe]');
@@ -218,7 +230,6 @@ const { offer } = site;
   .lp-form { box-shadow: var(--shadow); border: 0; }
   .lp-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(24px, 4vw, 56px); align-items: start; }
   .lp-form h2 { font-size: 1.6rem; }
-  .lp-photo { max-width: 540px; justify-self: end; width: 100%; align-self: center; }
   .swipe { position: relative; display: flex; align-items: center; width: min(100%, 420px); height: 68px; margin: 6px 0 26px; padding: 6px; border-radius: 999px; background: var(--white); border: 1px solid var(--line); box-shadow: var(--shadow-sm); cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: pan-y; overflow: hidden; }
   .swipe:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
   .swipe__fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 999px; background: rgba(108,179,80,.18); }
@@ -232,8 +243,10 @@ const { offer } = site;
   .lp-dialog { border: 0; padding: 0; background: transparent; width: min(560px, calc(100% - 24px)); max-height: calc(100dvh - 24px); overflow: visible; }
   .lp-dialog::backdrop { background: rgba(43,39,35,.55); backdrop-filter: blur(3px); }
   .lp-dialog .lp-form { position: relative; max-height: calc(100dvh - 24px); overflow-y: auto; padding-top: 28px; }
+  .lp-dialog__close { display: none; }
+  .lp-dialog .lp-dialog__close { display: block; }
   .lp-dialog h2 { padding-right: 44px; }
-  .lp-dialog__close { position: absolute; top: 10px; right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--sand); color: var(--ink); font-size: 1.6rem; line-height: 1; cursor: pointer; }
+  .lp-dialog .lp-dialog__close { position: absolute; top: 10px; right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--sand); color: var(--ink); font-size: 1.6rem; line-height: 1; cursor: pointer; }
   :global(html:has(dialog[open])) { overflow: hidden; }
   .lp-sticky { display: none; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -242,7 +255,6 @@ const { offer } = site;
   @media (max-width: 420px) { .form-row { grid-template-columns: 1fr; } }
   @media (max-width: 900px) {
     .lp-grid { grid-template-columns: 1fr; }
-    .lp-photo { justify-self: center; max-width: 420px; }
     .lp-sticky { display: flex; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 40; }
   }
 </style>
