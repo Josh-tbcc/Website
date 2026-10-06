@@ -101,8 +101,8 @@ back restores the Perfect Patients site.
 ## Step 7: Send website leads into the Google Sheet
 
 The landing page form (`/offer`, Netlify form name `offer-lead`) sends these fields:
-`first_name`, `last_name`, `email`, `phone`, `reason`, `concern` (optional free text),
-`suburb`, `travel` (happy to travel to Yandina?), `marketing_consent` ("yes" if ticked),
+`first_name`, `last_name`, `email`, `phone`, `reason` (what made them interested in the offer),
+`travel` (local / happy to travel / not sure / no), `suburb`, `marketing_consent` ("yes" if ticked),
 plus ad tracking: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`,
 `fbclid`, `gclid`.
 
@@ -120,8 +120,8 @@ plus ad tracking: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `ut
 function doPost(e) {
   const sheet = SpreadsheetApp.getActive().getSheetByName('Website Leads');
   const p = e.parameter;
-  sheet.appendRow([new Date(), p.first_name, p.last_name, p.email, p.phone, p.reason, p.concern,
-                   p.suburb, p.travel, p.marketing_consent || 'no',
+  sheet.appendRow([new Date(), p.first_name, p.last_name, p.email, p.phone, p.reason,
+                   p.travel, p.suburb, p.marketing_consent || 'no',
                    p.utm_source, p.utm_medium, p.utm_campaign, p.utm_content, p.utm_term, p.fbclid, p.gclid]);
   return ContentService.createTextOutput('ok');
 }
