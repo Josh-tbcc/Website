@@ -42,21 +42,45 @@ const { offer } = site;
         >
           <input type="hidden" name="form-name" value="offer-lead" />
           <p class="hidden"><label>Don’t fill this in: <input name="company" /></label></p>
-          <label>Full name<input name="name" autocomplete="name" required /></label>
-          <label>Mobile<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required /></label>
+          <div class="form-row">
+            <label>First name<input name="first_name" autocomplete="given-name" required /></label>
+            <label>Last name<input name="last_name" autocomplete="family-name" required /></label>
+          </div>
           <label>Email<input name="email" type="email" autocomplete="email" required /></label>
-          <label>What’s been going on?<textarea name="concern" rows="3" placeholder="e.g. lower back pain for 6 months"></textarea></label>
-          <label>Do you live, work or can travel to Yandina?
-            <select name="location" required>
+          <label>Mobile<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required /></label>
+          <label>Main reason for getting in touch
+            <select name="reason" required>
               <option value="">Select…</option>
-              <option>Yes, I live or work in Yandina</option>
-              <option>Yes, I can travel to Yandina</option>
+              <option>Lower back pain</option>
+              <option>Neck pain or headaches</option>
+              <option>Sciatica or leg pain</option>
+              <option>Shoulder, hip or knee pain</option>
+              <option>Posture</option>
+              <option>Pregnancy</option>
+              <option>Sports injury or performance</option>
+              <option>General check-up or wellness</option>
+              <option>Something else</option>
+            </select>
+          </label>
+          <label><span>Anything else we should know? <span class="opt">(optional)</span></span><textarea name="concern" rows="2" placeholder="e.g. lower back pain for 6 months"></textarea></label>
+          <label>Your suburb<input name="suburb" autocomplete="address-level2" placeholder="e.g. Nambour" required /></label>
+          <label>Are you happy to travel to our clinic in Yandina?
+            <select name="travel" required>
+              <option value="">Select…</option>
+              <option>Yes, I live or work nearby</option>
+              <option>Yes, I’m happy to travel</option>
+              <option>Not sure, it depends on the time</option>
               <option>No</option>
             </select>
           </label>
+          <label class="check"><input type="checkbox" name="marketing_consent" value="yes" /> <span>Send me occasional health tips and clinic offers by email or SMS. You can unsubscribe at any time.</span></label>
           <input type="hidden" name="utm_source" />
           <input type="hidden" name="utm_campaign" />
+          <input type="hidden" name="utm_medium" />
           <input type="hidden" name="utm_content" />
+          <input type="hidden" name="utm_term" />
+          <input type="hidden" name="fbclid" />
+          <input type="hidden" name="gclid" />
           <button class="btn btn--primary btn--block" type="submit">Claim My {offer.price} Assessment</button>
           <p class="fine-print">By submitting you agree to be contacted by our team about your appointment. See our <a href="/privacy">privacy policy</a>.</p>
         </form>
@@ -126,7 +150,7 @@ const { offer } = site;
     }
     // Carry ad tracking (utm_*) into the lead
     var params = new URLSearchParams(location.search);
-    ['utm_source', 'utm_campaign', 'utm_content'].forEach(function (k) {
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid'].forEach(function (k) {
       var el = form.querySelector('[name="' + k + '"]');
       if (el && params.get(k)) el.value = params.get(k);
     });
@@ -161,6 +185,11 @@ const { offer } = site;
   .price-tag__price { font-family: var(--font-head); font-size: 1.6rem; font-weight: 800; color: var(--ink); background: var(--accent); border-radius: 999px; padding: 6px 18px; letter-spacing: -0.03em; }
   .price-tag__label { font-weight: 600; }
   .lp-sticky { display: none; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .opt { font-weight: 500; color: var(--muted); }
+  .check { display: flex !important; gap: 10px; align-items: flex-start; font-weight: 500; font-size: .9rem; }
+  .check input { width: auto; margin-top: 4px; flex: none; }
+  @media (max-width: 420px) { .form-row { grid-template-columns: 1fr; } }
   @media (max-width: 900px) {
     .lp-grid { grid-template-columns: 1fr; }
     .lp-sticky { display: flex; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 40; }
