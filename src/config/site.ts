@@ -92,7 +92,7 @@ export const site = {
     thorough: 'thorough-care',             // how we investigate and plan long-term care
     brandStory: 'brand-story',             // why Dr Josh opened the clinic
     david: 'dr-david',                     // Dr David introduction (add public/videos/dr-david.mp4)
-    offer: 'three-technologies',           // 3 technologies (offer section cut out)
+    offer: 'three-technologies',           // 3 technologies (intro about back pain and offer section cut out)
   },
 
   social: {
