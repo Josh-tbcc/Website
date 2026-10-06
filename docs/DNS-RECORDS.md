@@ -3,6 +3,9 @@
 Captured 2 October 2026 from the Perfect Patients (Vortala) nameservers
 (ns3–ns6.vortala.com), before moving DNS to Netlify.
 
+**Confirmed 6 October 2026** against Perfect Patients' own zone export: these are the
+complete set of records. There are no other subdomains or records to copy.
+
 ## Website (replaced by Netlify)
 
 | Type | Name | Old value (Perfect Patients) | New value |
@@ -35,4 +38,5 @@ DKIM (`google._domainkey`), one line, no spaces:
 v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjilM9mSeu2RSAgNxeJFcufdE5F9GaxpLpV7T5re8mCzGuCkFj2J+qTAIxw6NYLfj33cZo+uGYsCbG7P+9MCKrN4vEsZbLcm2zOoGLbOUGAvU1A7VEijL0HDyez/0e5Xpf6fpYh+q9Lf1qYkp/IbLGwOMATURfh9UJl6QZ9W9KZfdF3dT3aiGBhdgRzxGNqy4IP1BGxwcZiU/CqQWsvJuqw/9Ew7oD6obXrC6tiYPydZfM6qzK5ggyGSS1hmae62x2RmHa6cnAFfoVY+giVmnpbD1mE2cwIcPlnuFbjTy5APcfZxgxkEPKALpddVcGN9outSETyGUjvgIb7i2S1teBwIDAQAB
 ```
 
-If Perfect Patients' zone export shows any other records (e.g. subdomains), add those too.
+Perfect Patients' export splits the DKIM key across several quoted chunks with stray
+spaces; the single line above is the same key joined correctly. Use the line above.
