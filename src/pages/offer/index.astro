@@ -30,7 +30,7 @@ const { offer } = site;
 
       <div class="card lp-form" id="claim">
         <h2>Claim your {offer.price} assessment</h2>
-        <p class="fine-print" style="margin-top:-6px">Leave your details and our team will call you to find a time that suits.</p>
+        <p class="fine-print" style="margin-top:-6px">Leave your details and we’ll call to make sure we can help.</p>
         <form
           class="form"
           name="offer-lead"
@@ -48,31 +48,17 @@ const { offer } = site;
           </div>
           <label>Email<input name="email" type="email" autocomplete="email" required /></label>
           <label>Mobile<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required /></label>
-          <label>Main reason for getting in touch
-            <select name="reason" required>
-              <option value="">Select…</option>
-              <option>Lower back pain</option>
-              <option>Neck pain or headaches</option>
-              <option>Sciatica or leg pain</option>
-              <option>Shoulder, hip or knee pain</option>
-              <option>Posture</option>
-              <option>Pregnancy</option>
-              <option>Sports injury or performance</option>
-              <option>General check-up or wellness</option>
-              <option>Something else</option>
-            </select>
-          </label>
-          <label><span>Anything else we should know? <span class="opt">(optional)</span></span><textarea name="concern" rows="2" placeholder="e.g. lower back pain for 6 months"></textarea></label>
-          <label>Your suburb<input name="suburb" autocomplete="address-level2" placeholder="e.g. Nambour" required /></label>
-          <label>Are you happy to travel to our clinic in Yandina?
+          <label>What made you interested in this offer?<textarea name="reason" rows="3" required></textarea></label>
+          <label>Do you work, live or will travel to Yandina?
             <select name="travel" required>
               <option value="">Select…</option>
-              <option>Yes, I live or work nearby</option>
-              <option>Yes, I’m happy to travel</option>
-              <option>Not sure, it depends on the time</option>
+              <option>I am a Yandina local</option>
+              <option>Yes, I am happy to travel</option>
+              <option>Not sure, depends on the time</option>
               <option>No</option>
             </select>
           </label>
+          <label>Your suburb<input name="suburb" autocomplete="address-level2" placeholder="e.g. Yandina" required /></label>
           <label class="check"><input type="checkbox" name="marketing_consent" value="yes" /> <span>Send me occasional health tips and clinic offers by email or SMS. You can unsubscribe at any time.</span></label>
           <input type="hidden" name="utm_source" />
           <input type="hidden" name="utm_campaign" />
@@ -186,7 +172,6 @@ const { offer } = site;
   .price-tag__label { font-weight: 600; }
   .lp-sticky { display: none; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .opt { font-weight: 500; color: var(--muted); }
   .check { display: flex !important; gap: 10px; align-items: flex-start; font-weight: 500; font-size: .9rem; }
   .check input { width: auto; margin-top: 4px; flex: none; }
   @media (max-width: 420px) { .form-row { grid-template-columns: 1fr; } }
