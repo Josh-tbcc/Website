@@ -18,7 +18,7 @@ import { site } from '../config/site';
       id="callback-form"
     >
       <input type="hidden" name="form-name" value="free-call" />
-      <input type="hidden" name="lead_type" value="Free phone call" />
+      <input type="hidden" name="lead_type" value="Website – free phone call" />
       <input type="hidden" name="page" />
       <p class="hidden"><label>Don’t fill this in: <input name="company" /></label></p>
       <div class="cb-row">
@@ -60,7 +60,8 @@ import { site } from '../config/site';
 
     function open() {
       if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
-      if (window.fbq) window.fbq('track', 'InitiateCheckout', { content_name: 'Free phone call form opened' });
+      // Custom event only (not a standard Meta event), so it never counts towards ad leads or audiences
+      if (window.fbq) window.fbq('trackCustom', 'WebsiteCallFormOpened');
       setTimeout(function () { var f = form.querySelector('input[name="first_name"]'); if (f && innerWidth > 700) f.focus(); }, 50);
     }
     function close() { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
@@ -119,7 +120,8 @@ import { site } from '../config/site';
       var jobs = [fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })];
       if (sheetWebhook) jobs.push(fetch(sheetWebhook, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body }));
       Promise.allSettled(jobs).then(function () {
-        if (window.fbq) window.fbq('track', 'Lead', { content_name: 'Free phone call' });
+        // Custom event, deliberately NOT 'Lead', so website call requests aren't counted as Meta ad leads
+        if (window.fbq) window.fbq('trackCustom', 'WebsiteCallRequest');
         location.href = '/free-call/thank-you';
       });
     });
