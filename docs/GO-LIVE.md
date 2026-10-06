@@ -101,9 +101,11 @@ back restores the Perfect Patients site.
 ## Step 7: Send website leads into the Google Sheet
 
 There are two lead forms:
-- `/offer` landing page, Netlify form **offer-lead** (`lead_type` = "$49 assessment")
+- `/offer` landing page, Netlify form **offer-lead** (`lead_type` = "Meta ad – $49 assessment"; counts as a Meta **Lead**)
 - the site-wide "Free new patient phone call" swipe pop-up, Netlify form **free-call**
-  (`lead_type` = "Free phone call", plus `page` = the page it was sent from)
+  (`lead_type` = "Website – free phone call", plus `page` = the page it was sent from).
+  This one is deliberately **not** sent to Meta as a Lead: it fires custom events
+  `WebsiteCallFormOpened` / `WebsiteCallRequest` instead, so ad results stay clean.
 
 Both send these fields:
 `first_name`, `last_name`, `email`, `phone`, `reason` (what made them interested in the offer),
