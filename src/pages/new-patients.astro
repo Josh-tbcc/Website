@@ -7,6 +7,7 @@ import CtaBand from '../components/CtaBand.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
+import SwipeCall from '../components/SwipeCall.astro';
 
 const faqs = [
   {
@@ -35,6 +36,7 @@ const faqs = [
   <PageHero eyebrow="New patients" title="Welcome. Here’s exactly <span class='hl'>what to expect.</span>" lead="No guesswork, no rushing. Your first two visits are all about finding the real cause and giving you a clear plan forward.">
     <div class="btn-row" slot="actions">
       <BookButton label="Book new patient consult" />
+      <SwipeCall />
       {site.intakeFormUrl && <a class="btn btn--glass" href={site.intakeFormUrl} target="_blank" rel="noopener">Complete intake form</a>}
     </div>
     <Media slot="aside" src="/images/np-consult.jpg" alt="Dr Josh chatting with a new patient during their consultation" label="Consultation photo" eager />

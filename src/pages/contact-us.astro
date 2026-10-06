@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import BookButton from '../components/BookButton.astro';
 import PageHero from '../components/PageHero.astro';
 import { site } from '../config/site';
+import SwipeCall from '../components/SwipeCall.astro';
 const a = site.address;
 ---
 <Base title="Contact Our Yandina Chiropractor" crumb="Contact" description={`Find The Balanced Chiropractic Centre at ${a.street}, ${a.suburb}. Hours, phone and directions.`}>
@@ -18,7 +19,7 @@ const a = site.address;
         <table class="hours-table">
           {site.hours.map((h) => <tr><td>{h.days}</td><td>{h.time.split(', ').map((t, i) => <>{i > 0 && <br />}{t}</>)}</td></tr>)}
         </table>
-        <div class="btn-row" style="margin-top:24px"><BookButton /></div>
+        <div class="btn-row" style="margin-top:24px"><BookButton /><SwipeCall /></div>
       </div>
       <div class="map">
         <iframe src={site.mapsEmbed} title="Map to The Balanced Chiropractic Centre" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>

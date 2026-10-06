@@ -7,10 +7,11 @@ import CtaBand from '../components/CtaBand.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
+import SwipeCall from '../components/SwipeCall.astro';
 ---
 <Base title="Thermography & Inflammation Scan Yandina" crumb="Thermal Scan" image="/images/thermal-scanning.jpg" description="Thermpix thermography (inflammation scan) with AI-assisted analysis in Yandina, near Nambour. Highlights heat patterns that suggest inflammation and nervous system stress.">
   <PageHero eyebrow="Thermography nerve scan" title="Clarity starts with <span class='hl'>measurement.</span>" lead="Thermography imaging identifies specific hotspots on your body and spine. It gives us an objective indication of which areas need attention, so your care is based on data, not guesswork.">
-    <div class="btn-row" slot="actions"><BookButton label="Book a consult & scan" /></div>
+    <div class="btn-row" slot="actions"><BookButton label="Book a consult & scan" /><SwipeCall /></div>
     <div slot="aside" class="hero-reel"><Media src="/images/thermal-scanning.jpg" alt="Dr Josh performing a ThermPix thermography scan" label="ThermPix scan photo" shape="tall" /></div>
   </PageHero>
 
@@ -46,7 +47,10 @@ import { site } from '../config/site';
         <span class="eyebrow">Watch</span>
         <h2>Dr Josh explains the ThermPix scanner</h2>
         <p class="lead">See how the scan shows where inflammation and stress are sitting in your body, and how we compare scans over time to track your progress.</p>
-        <a class="btn btn--dark" href="/book-online-yandina" data-book>Book a consult & scan<Icon name="arrow" /></a>
+        <div class="btn-row">
+          <a class="btn btn--dark" href="/book-online-yandina" data-book>Book a consult & scan<Icon name="arrow" /></a>
+          <SwipeCall />
+        </div>
       </div>
       <Video file={site.videos.thermography} vertical title="Dr Josh explains the ThermPix inflammation scanner" />
     </div>

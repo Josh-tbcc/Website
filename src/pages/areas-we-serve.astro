@@ -6,6 +6,7 @@ import Icon from '../components/Icon.astro';
 import BookButton from '../components/BookButton.astro';
 import { site } from '../config/site';
 import { conditions } from '../config/conditions';
+import SwipeCall from '../components/SwipeCall.astro';
 
 // Approximate drive times from the clinic in Yandina
 const areas = [
@@ -34,7 +35,7 @@ const faqs = [
   schema={{ '@type': 'FAQPage', mainEntity: faqs.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: ans } })) }}
 >
   <PageHero eyebrow="Areas we serve" title="Chiropractic care across the <span class='hl'>Sunshine Coast hinterland.</span>" lead="Our clinic is in Yandina, a short drive from Nambour, Eumundi, Bli Bli, Cooroy and the coast. Here’s how close we are to you.">
-    <div class="btn-row" slot="actions"><BookButton label="Book a consultation" /></div>
+    <div class="btn-row" slot="actions"><BookButton label="Book a consultation" /><SwipeCall /></div>
   </PageHero>
 
   <section class="section">

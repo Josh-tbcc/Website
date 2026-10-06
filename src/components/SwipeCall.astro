@@ -1,0 +1,24 @@
+---
+// "Free new patient phone call" swipe bar. Drag the knob to the end (or tap /
+// press Enter) to open the call-back form pop-up (CallbackDialog in Base).
+import Icon from './Icon.astro';
+---
+<div class="swipecall" data-call-swipe role="button" tabindex="0" aria-haspopup="dialog" aria-controls="callback" aria-label="Swipe or tap to request a free new patient phone call">
+  <span class="swipecall__fill" aria-hidden="true"></span>
+  <span class="swipecall__text" aria-hidden="true"><strong>Free new patient phone call</strong><small>Swipe for a call back →</small></span>
+  <span class="swipecall__knob" aria-hidden="true"><Icon name="phone" /></span>
+</div>
+
+<style>
+  .swipecall { position: relative; display: inline-flex; align-items: center; width: min(100%, 330px); height: 54px; padding: 4px; border-radius: 999px; background: var(--white); border: 1px solid var(--line); box-shadow: var(--shadow-sm); cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: pan-y; overflow: hidden; vertical-align: middle; }
+  .swipecall:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+  .swipecall__fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 999px; background: rgba(108,179,80,.18); }
+  .swipecall__knob { position: relative; z-index: 2; flex: none; width: 46px; height: 46px; display: grid; place-items: center; border-radius: 50%; background: var(--accent); color: var(--ink); cursor: grab; touch-action: none; box-shadow: 0 6px 18px -6px rgba(77,127,59,.6); }
+  .swipecall__knob :global(svg) { width: 20px; height: 20px; }
+  .swipecall__knob:active { cursor: grabbing; }
+  .swipecall__text { position: absolute; left: 62px; right: 14px; z-index: 1; display: grid; line-height: 1.2; pointer-events: none; text-align: left; }
+  .swipecall__text strong { color: var(--ink); font-size: .9rem; white-space: nowrap; }
+  .swipecall__text small { color: var(--brand); font-weight: 700; font-size: .74rem; letter-spacing: .04em; animation: swipecall-hint 2.2s ease-in-out infinite; }
+  @keyframes swipecall-hint { 0%, 100% { transform: translateX(0); opacity: .75; } 50% { transform: translateX(6px); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .swipecall__text small { animation: none; } }
+</style>

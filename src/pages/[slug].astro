@@ -7,6 +7,7 @@ import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import Video from '../components/Video.astro';
 import { conditions, type Condition } from '../config/conditions';
+import SwipeCall from '../components/SwipeCall.astro';
 
 export function getStaticPaths() {
   return conditions.map((c) => ({ params: { slug: c.slug }, props: { c } }));
@@ -25,6 +26,7 @@ const faqSchema = {
   <PageHero eyebrow={`${c.name} · Chiropractor Yandina`} title={c.h1} lead={c.intro}>
     <div class="btn-row" slot="actions">
       <BookButton label="Book a consultation" />
+      <SwipeCall />
       <a class="btn btn--glass" href="/new-patients">What to expect</a>
     </div>
     <Media slot="aside" src={c.photo} alt={c.photoAlt} label={c.photoAlt} />

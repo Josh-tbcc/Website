@@ -8,6 +8,7 @@ import CtaBand from '../components/CtaBand.astro';
 import fs from 'node:fs';
 import path from 'node:path';
 import { site } from '../config/site';
+import SwipeCall from '../components/SwipeCall.astro';
 
 const hasVideo = fs.existsSync(path.join(process.cwd(), 'public/videos', `${site.videos.david}.mp4`));
 ---
@@ -15,6 +16,7 @@ const hasVideo = fs.existsSync(path.join(process.cwd(), 'public/videos', `${site
   <PageHero eyebrow="Meet the team" title="Dr David <span class='hl'>Rowan</span>" lead="Known for his friendly, relatable manner and the time he takes to understand each person, Dr David tailors your care to your individual needs and what you hope to achieve.">
     <div class="btn-row" slot="actions">
       <BookButton label="Book with Dr David" />
+      <SwipeCall />
     </div>
     <Media slot="aside" src="/images/dr-david.jpg" alt="Dr David Rowan, chiropractor" label="Dr David portrait" shape="tall" />
   </PageHero>
