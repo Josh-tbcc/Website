@@ -77,7 +77,7 @@ const hasPhoto = (src: string) => fs.existsSync(path.join(process.cwd(), 'public
           {g.body.map((p) => <p>{p}</p>)}
           {g.links && <p class="cond-links">{g.links.map(([l, h]) => <a href={h}>{l}</a>)}</p>}
           <div class="btn-row">
-            <a class="btn btn--dark" href="/book-online-yandina" data-book>Book a consult<Icon name="arrow" /></a>
+            <a class="btn btn--dark" href="/book-online-yandina" data-book>Book a consult</a>
             <SwipeCall />
           </div>
         </div>
