@@ -98,23 +98,40 @@ Resize photos to about **2000px wide** first. Your originals are 7–10MB each, 
 Choose a quiet time (e.g. Sunday evening). If anything goes wrong, putting the old A record
 back restores the Perfect Patients site.
 
-## Step 7 (optional): Send leads straight into your Google Sheet
+## Step 7: Send website leads into the Google Sheet
 
-1. Open the **Facebook – Leads – Yandina** sheet → add a tab called `Website Leads`.
-2. **Extensions → Apps Script**, paste this, then **Save**:
+The landing page form (`/offer`, Netlify form name `offer-lead`) sends these fields:
+`first_name`, `last_name`, `email`, `phone`, `reason`, `concern` (optional free text),
+`suburb`, `travel` (happy to travel to Yandina?), `marketing_consent` ("yes" if ticked),
+plus ad tracking: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`,
+`fbclid`, `gclid`.
+
+**Option A: Zapier (recommended if you already use it)**
+1. Zapier → Create Zap → Trigger app **Netlify** → event **New Form Submission**.
+2. Connect the Netlify account, choose the site and the form **offer-lead**.
+3. Action app **Google Sheets** → **Create Spreadsheet Row** → the **Facebook – Leads – Yandina**
+   sheet, tab `Website Leads` (add column headers matching the fields above first).
+4. Map each field to its column, test, and switch the Zap on.
+
+**Option B: no Zapier (free, direct)**
+1. In the sheet add a tab called `Website Leads`, then **Extensions → Apps Script**, paste this, **Save**:
 
 ```js
 function doPost(e) {
   const sheet = SpreadsheetApp.getActive().getSheetByName('Website Leads');
   const p = e.parameter;
-  sheet.appendRow([new Date(), p.name, p.phone, p.email, p.concern, p.location,
-                   p.utm_source, p.utm_campaign, p.utm_content]);
+  sheet.appendRow([new Date(), p.first_name, p.last_name, p.email, p.phone, p.reason, p.concern,
+                   p.suburb, p.travel, p.marketing_consent || 'no',
+                   p.utm_source, p.utm_medium, p.utm_campaign, p.utm_content, p.utm_term, p.fbclid, p.gclid]);
   return ContentService.createTextOutput('ok');
 }
 ```
 
-3. **Deploy → New deployment → Web app**. Execute as: **Me**. Who has access: **Anyone**. Copy the URL.
-4. Paste that URL into `offer.sheetWebhook` in `src/config/site.ts`.
+2. **Deploy → New deployment → Web app**. Execute as: **Me**. Who has access: **Anyone**. Copy the URL.
+3. Paste that URL into `offer.sheetWebhook` in `src/config/site.ts`.
+
+Every lead is also stored in Netlify → **Forms → offer-lead** either way, and Netlify can email
+you each one (Forms → Form notifications).
 
 ## Step 8: Replace the Perfect Patients email automations
 
