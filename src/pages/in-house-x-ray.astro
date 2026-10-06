@@ -7,10 +7,11 @@ import CtaBand from '../components/CtaBand.astro';
 import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
+import SwipeCall from '../components/SwipeCall.astro';
 ---
 <Base title="In-House Spinal X-Ray Yandina" crumb="X-Ray" image="/images/xray-room.jpg" description="On-site digital X-ray at The Balanced Chiropractic Centre, Yandina. Full-spine and motion X-rays when clinically required, explained to you in plain English.">
   <PageHero eyebrow="In-house X-ray" title="See what’s happening <span class='hl'>inside.</span>" lead="When your history and exam show they’re needed, we take X-rays right here in the clinic. They show the structure of your spine and discs, so we know exactly what we’re working with before we start.">
-    <div class="btn-row" slot="actions"><BookButton label="Book a consultation" /></div>
+    <div class="btn-row" slot="actions"><BookButton label="Book a consultation" /><SwipeCall /></div>
     <Media slot="aside" src="/images/xray-room.jpg" alt="Dr Josh taking a spinal X-ray in the clinic’s in-house X-ray room" label="X-ray room photo" eager />
   </PageHero>
 
@@ -46,7 +47,10 @@ import { site } from '../config/site';
         <span class="eyebrow">Watch</span>
         <h2>Dr Josh on why we X-ray</h2>
         <p class="lead">Why a specific set of full-spine and motion X-rays helps us find the area that isn’t moving and correct it in the right direction.</p>
-        <a class="btn btn--dark" href="/book-online-yandina" data-book>Book a consultation<Icon name="arrow" /></a>
+        <div class="btn-row">
+          <a class="btn btn--dark" href="/book-online-yandina" data-book>Book a consultation<Icon name="arrow" /></a>
+          <SwipeCall />
+        </div>
       </div>
       <Video file={site.videos.xray} vertical title="Dr Josh explains full-spine and motion X-rays" />
     </div>

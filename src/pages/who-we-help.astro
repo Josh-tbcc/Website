@@ -6,6 +6,7 @@ import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import fs from 'node:fs';
 import path from 'node:path';
+import SwipeCall from '../components/SwipeCall.astro';
 
 const groups = [
   {
@@ -75,7 +76,10 @@ const hasPhoto = (src: string) => fs.existsSync(path.join(process.cwd(), 'public
           <h2>{g.title}</h2>
           {g.body.map((p) => <p>{p}</p>)}
           {g.links && <p class="cond-links">{g.links.map(([l, h]) => <a href={h}>{l}</a>)}</p>}
-          <a class="btn btn--dark" href="/book-online-yandina" data-book>Book a consult<Icon name="arrow" /></a>
+          <div class="btn-row">
+            <a class="btn btn--dark" href="/book-online-yandina" data-book>Book a consult<Icon name="arrow" /></a>
+            <SwipeCall />
+          </div>
         </div>
         {hasPhoto(g.photo) && <Media src={g.photo} alt={g.alt} label={`${g.title} photo`} shape="tall" class="reveal" />}
       </div>

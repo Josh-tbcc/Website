@@ -7,6 +7,7 @@ import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 import { conditions } from '../config/conditions';
+import SwipeCall from '../components/SwipeCall.astro';
 
 const a = site.address;
 const reasons = [
@@ -29,7 +30,7 @@ const faqs = [
   schema={{ '@type': 'FAQPage', mainEntity: faqs.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: ans } })) }}
 >
   <PageHero eyebrow="Chiropractor near Nambour" title="Your local chiropractor, <span class='hl'>just up the road.</span>" lead="The Balanced Chiropractic Centre is around 10 minutes’ drive north of Nambour, in the heart of Yandina. Families from Nambour, Kulangoor, Coes Creek and Burnside come to us for thorough assessments and a clear plan.">
-    <div class="btn-row" slot="actions"><BookButton label="Book a consultation" /><a class="btn btn--glass" href={site.mapsUrl} target="_blank" rel="noopener"><Icon name="pin" />Get directions</a></div>
+    <div class="btn-row" slot="actions"><BookButton label="Book a consultation" /><SwipeCall /><a class="btn btn--glass" href={site.mapsUrl} target="_blank" rel="noopener"><Icon name="pin" />Get directions</a></div>
     <Media slot="aside" src="/images/reception.jpg" alt="Reception at The Balanced Chiropractic Centre in Yandina" label="Reception photo" shape="tall" />
   </PageHero>
 

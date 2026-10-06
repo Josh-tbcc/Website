@@ -4,6 +4,7 @@ import { site, team } from '../config/site';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileBookBar from '../components/MobileBookBar.astro';
+import CallbackDialog from '../components/CallbackDialog.astro';
 
 interface Props {
   title?: string;
@@ -160,6 +161,7 @@ if (extra) schema.push(...(Array.isArray(extra) ? extra : [extra]).map((x) => ({
       <>
         <Footer />
         <MobileBookBar />
+        <CallbackDialog />
       </>
     )}
 

@@ -1,0 +1,140 @@
+---
+// Site-wide "Free new patient phone call" pop-up. Opened by any SwipeCall bar
+// (data-call-swipe) or link with data-call-open. Included once in Base.
+import { site } from '../config/site';
+---
+<dialog class="cb-dialog" id="callback" aria-labelledby="callback-title">
+  <div class="card cb-card">
+    <button class="cb-close" type="button" data-cb-close aria-label="Close">×</button>
+    <h2 id="callback-title">Free new patient phone call</h2>
+    <p class="fine-print" style="margin-top:-6px">Leave your details and we’ll call to make sure we can help.</p>
+    <form
+      class="form"
+      name="free-call"
+      method="POST"
+      action="/free-call/thank-you"
+      data-netlify="true"
+      netlify-honeypot="company"
+      id="callback-form"
+    >
+      <input type="hidden" name="form-name" value="free-call" />
+      <input type="hidden" name="lead_type" value="Free phone call" />
+      <input type="hidden" name="page" />
+      <p class="hidden"><label>Don’t fill this in: <input name="company" /></label></p>
+      <div class="cb-row">
+        <label>First name<input name="first_name" autocomplete="given-name" required /></label>
+        <label>Last name<input name="last_name" autocomplete="family-name" required /></label>
+      </div>
+      <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+      <label>Mobile<input name="phone" type="tel" autocomplete="tel" inputmode="tel" required /></label>
+      <label>What would you like help with?<textarea name="reason" rows="3" required></textarea></label>
+      <label>Do you work, live or will travel to Yandina?
+        <select name="travel" required>
+          <option value="">Select…</option>
+          <option>I am a Yandina local</option>
+          <option>Yes, I am happy to travel</option>
+          <option>Not sure, depends on the time</option>
+          <option>No</option>
+        </select>
+      </label>
+      <label>Your suburb<input name="suburb" autocomplete="address-level2" placeholder="e.g. Yandina" required /></label>
+      <label class="cb-check"><input type="checkbox" name="marketing_consent" value="yes" /> <span>Send me occasional health tips and clinic offers by email or SMS. You can unsubscribe at any time.</span></label>
+      <input type="hidden" name="utm_source" />
+      <input type="hidden" name="utm_medium" />
+      <input type="hidden" name="utm_campaign" />
+      <input type="hidden" name="utm_content" />
+      <input type="hidden" name="utm_term" />
+      <input type="hidden" name="fbclid" />
+      <input type="hidden" name="gclid" />
+      <button class="btn btn--primary btn--block" type="submit">Request My Free Call</button>
+      <p class="fine-print">By submitting you agree to be contacted by our team. See our <a href="/privacy">privacy policy</a>.</p>
+    </form>
+  </div>
+</dialog>
+
+<script is:inline define:vars={{ sheetWebhook: site.offer.sheetWebhook }}>
+  (function () {
+    var dlg = document.getElementById('callback');
+    var form = document.getElementById('callback-form');
+    if (!dlg || !form) return;
+
+    function open() {
+      if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+      if (window.fbq) window.fbq('track', 'InitiateCheckout', { content_name: 'Free phone call form opened' });
+      setTimeout(function () { var f = form.querySelector('input[name="first_name"]'); if (f && innerWidth > 700) f.focus(); }, 50);
+    }
+    function close() { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
+    dlg.querySelector('[data-cb-close]').addEventListener('click', close);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) close(); });
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('[data-call-open]');
+      if (a) { e.preventDefault(); open(); }
+    });
+
+    // Swipe bars: drag the knob to the end, or tap / press Enter
+    document.querySelectorAll('[data-call-swipe]').forEach(function (sw) {
+      var knob = sw.querySelector('.swipecall__knob'), fill = sw.querySelector('.swipecall__fill'), txt = sw.querySelector('.swipecall__text');
+      var startX = 0, x = 0, max = 0, dragging = false, moved = false;
+      var measure = function () { max = sw.clientWidth - knob.offsetWidth - 8; };
+      var set = function (v, anim) {
+        x = Math.max(0, Math.min(max, v));
+        var t = anim ? 'transform .3s, width .3s, opacity .3s' : 'none';
+        knob.style.transition = fill.style.transition = txt.style.transition = t;
+        knob.style.transform = 'translateX(' + x + 'px)';
+        fill.style.width = (x + knob.offsetWidth + 4) + 'px';
+        txt.style.opacity = max ? String(Math.max(0, 1 - x / (max * 0.7))) : '1';
+      };
+      var done = function () { measure(); set(max, true); setTimeout(function () { open(); set(0, true); }, 220); };
+      knob.addEventListener('pointerdown', function (e) {
+        dragging = true; moved = false; measure(); startX = e.clientX - x;
+        knob.setPointerCapture(e.pointerId);
+      });
+      knob.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        if (Math.abs(e.clientX - startX - x) > 3) moved = true;
+        set(e.clientX - startX);
+      });
+      knob.addEventListener('pointerup', function () {
+        if (!dragging) return; dragging = false;
+        if (!moved || x > max * 0.6) done(); else set(0, true);
+      });
+      knob.addEventListener('pointercancel', function () { dragging = false; set(0, true); });
+      sw.addEventListener('click', function (e) { if (!knob.contains(e.target)) done(); });
+      sw.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); done(); } });
+    });
+
+    // Carry ad tracking and the page into the lead
+    var params = new URLSearchParams(location.search);
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid'].forEach(function (k) {
+      var el = form.querySelector('[name="' + k + '"]');
+      if (el && params.get(k)) el.value = params.get(k);
+    });
+    form.querySelector('[name="page"]').value = location.pathname;
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('button[type=submit]');
+      btn.disabled = true; btn.textContent = 'Sending…';
+      var body = new URLSearchParams(new FormData(form)).toString();
+      var jobs = [fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })];
+      if (sheetWebhook) jobs.push(fetch(sheetWebhook, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body }));
+      Promise.allSettled(jobs).then(function () {
+        if (window.fbq) window.fbq('track', 'Lead', { content_name: 'Free phone call' });
+        location.href = '/free-call/thank-you';
+      });
+    });
+  })();
+</script>
+
+<style>
+  .cb-dialog { border: 0; padding: 0; background: transparent; width: min(560px, calc(100% - 24px)); max-height: calc(100dvh - 24px); overflow: visible; }
+  .cb-dialog::backdrop { background: rgba(43,39,35,.55); backdrop-filter: blur(3px); }
+  .cb-card { position: relative; max-height: calc(100dvh - 24px); overflow-y: auto; padding-top: 28px; box-shadow: var(--shadow); border: 0; }
+  .cb-card h2 { font-size: 1.6rem; padding-right: 44px; }
+  .cb-close { position: absolute; top: 10px; right: 12px; width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--sand); color: var(--ink); font-size: 1.6rem; line-height: 1; cursor: pointer; }
+  .cb-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .cb-check { display: flex !important; gap: 10px; align-items: flex-start; font-weight: 500; font-size: .9rem; }
+  .cb-check input { width: auto; margin-top: 4px; flex: none; }
+  @media (max-width: 420px) { .cb-row { grid-template-columns: 1fr; } }
+  :global(html:has(dialog[open])) { overflow: hidden; }
+</style>

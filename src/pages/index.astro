@@ -7,6 +7,7 @@ import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../config/site';
 import { publishedPosts, formatDate } from '../utils/posts';
+import SwipeCall from '../components/SwipeCall.astro';
 const latestPosts = (await publishedPosts()).slice(0, 3);
 
 const conditions = [
@@ -45,6 +46,7 @@ const who = [
         </p>
         <div class="btn-row">
           <BookButton label="Book your first visit" />
+          <SwipeCall />
           <a class="btn btn--glass" href="/new-patients">What to expect</a>
         </div>
       </div>
@@ -149,6 +151,7 @@ const who = [
         <p class="lead">We take the time to carefully and fully assess your spine, gathering everything needed to understand your concern and the right solution for you. Then we walk you through it.</p>
         <div class="btn-row">
           <BookButton label="Book new patient consult" />
+          <SwipeCall />
           <a class="btn btn--ghost" href="/new-patients">Learn more</a>
         </div>
       </div>

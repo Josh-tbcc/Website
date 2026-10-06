@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import Video from '../../components/Video.astro';
+import { site } from '../../config/site';
+---
+<Base noindex title="Thank You">
+  <section class="section section--mint">
+    <div class="container narrow center">
+      <span class="eyebrow">Request received</span>
+      <h1>Thanks! We’ll call you soon.</h1>
+      <p class="lead">One of our team will call you from <strong>{site.phone}</strong>, usually the same or next business day, to see if we can help. If you miss us, we’ll send a text.</p>
+      <p>Prefer to talk now? Call us on <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a>.</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" style="max-width:880px">
+      <h2 class="center">While you wait: a welcome from Dr Josh</h2>
+      <Video file={site.videos.welcome} title="Welcome from Dr Josh: what to expect at your first visit" />
+    </div>
+  </section>
+</Base>
