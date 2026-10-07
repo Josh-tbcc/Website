@@ -85,18 +85,9 @@ Resize photos to about **2000px wide** first. Your originals are 7–10MB each, 
 
 ## Step 6: Point the domain at Netlify (go-live day)
 
-1. In Netlify → **Domain management → Add a domain** → `thebalancedchiro.com.au`. Also add `www.thebalancedchiro.com.au`.
-2. Netlify will show you the DNS records to add. At your registrar (VentraIP etc.) → DNS:
-   - **A record** for `@` (the bare domain) → `75.2.60.5` (Netlify's load balancer. Use whatever Netlify shows you if it differs.)
-   - **CNAME** for `www` → `your-site-name.netlify.app`
-   - **Delete only** the old A / CNAME records that pointed at Perfect Patients.
-   - **Leave MX and TXT records alone** (that's your email).
-3. Wait 15 minutes to a few hours. Netlify issues a free HTTPS certificate automatically.
-4. Test: open the site on your phone (on 4G, not the clinic wifi), send yourself an email,
-   submit a test lead, make a test booking.
-
-Choose a quiet time (e.g. Sunday evening). If anything goes wrong, putting the old A record
-back restores the Perfect Patients site.
+Your DNS is hosted by Perfect Patients (nameservers ns3–ns6.vortala.com), so the switch is done
+by moving the nameservers to Netlify DNS. Follow **Stage 2 in `docs/TRANSITION-CHECKLIST.md`**,
+using the records in `docs/DNS-RECORDS.md`.
 
 ## Step 7: Send website leads into the Google Sheet
 
