@@ -69,7 +69,7 @@ export const site = {
     // Where lead-form submissions go. Netlify Forms captures them
     // automatically. Optionally also POST to a Google Sheet
     // (see docs/GO-LIVE.md → "Send leads to Google Sheets").
-    sheetWebhook: '', // optional Google Apps Script web-app URL
+    sheetWebhook: 'https://script.google.com/macros/s/AKfycbx5pNrykrEkqjjEvNcCindmpQT4XWouQLqU4pHSuMDeuwXmG-reqrLH3Nc6u9kFTQ_L/exec', // Google Sheet 'Website Leads' tab (Apps Script)
   },
 
   // Tracking
