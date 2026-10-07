@@ -1,12 +1,12 @@
 ---
-// Site-wide "Free new patient phone call" pop-up. Opened by any SwipeCall bar
+// Site-wide "Request a call back" pop-up. Opened by any SwipeCall bar
 // (data-call-swipe) or link with data-call-open. Included once in Base.
 import { site } from '../config/site';
 ---
 <dialog class="cb-dialog" id="callback" aria-labelledby="callback-title">
   <div class="card cb-card">
     <button class="cb-close" type="button" data-cb-close aria-label="Close">×</button>
-    <h2 id="callback-title">Free new patient phone call</h2>
+    <h2 id="callback-title">Request a call back</h2>
     <p class="fine-print" style="margin-top:-6px">Leave your details and we’ll call to make sure we can help.</p>
     <form
       class="form"
@@ -18,7 +18,7 @@ import { site } from '../config/site';
       id="callback-form"
     >
       <input type="hidden" name="form-name" value="free-call" />
-      <input type="hidden" name="lead_type" value="Website – free phone call" />
+      <input type="hidden" name="lead_type" value="Website – call back request" />
       <input type="hidden" name="page" />
       <p class="hidden"><label>Don’t fill this in: <input name="company" /></label></p>
       <div class="cb-row">
@@ -39,7 +39,7 @@ import { site } from '../config/site';
       </label>
       <label>Your suburb<input name="suburb" autocomplete="address-level2" placeholder="e.g. Yandina" required /></label>
       <label class="cb-check"><input type="checkbox" name="marketing_consent" value="yes" /> <span>Send me occasional health tips and clinic offers by email or SMS. You can unsubscribe at any time.</span></label>
-      <button class="btn btn--primary btn--block" type="submit">Request My Free Call</button>
+      <button class="btn btn--primary btn--block" type="submit">Request a Call Back</button>
       <p class="fine-print">By submitting you agree to be contacted by our team. See our <a href="/privacy">privacy policy</a>.</p>
     </form>
   </div>

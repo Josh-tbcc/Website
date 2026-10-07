@@ -4,13 +4,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-interface Props { src: string; alt: string; shape?: 'tall' | 'wide' | 'square' | 'default'; label?: string; eager?: boolean; class?: string }
-const { src, alt, shape = 'default', label, eager = false, class: extra } = Astro.props;
+interface Props { src: string; alt: string; shape?: 'tall' | 'wide' | 'square' | 'default'; label?: string; eager?: boolean; class?: string; position?: string }
+const { src, alt, shape = 'default', label, eager = false, class: extra, position } = Astro.props;
 const exists = fs.existsSync(path.join(process.cwd(), 'public', src));
 const cls = ['media', shape !== 'default' && `media--${shape}`, extra].filter(Boolean).join(' ');
 ---
 <div class={cls}>
   {exists
-    ? <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />
+    ? <img src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" style={position ? `object-position:${position}` : undefined} />
     : <span class="media__label">{label ?? alt}<small>Photo to add: public{src}</small></span>}
 </div>

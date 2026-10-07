@@ -93,8 +93,8 @@ using the records in `docs/DNS-RECORDS.md`.
 
 There are two lead forms:
 - `/offer` landing page, Netlify form **offer-lead** (`lead_type` = "Meta ad – $49 assessment"; counts as a Meta **Lead**)
-- the site-wide "Free new patient phone call" swipe pop-up, Netlify form **free-call**
-  (`lead_type` = "Website – free phone call", plus `page` = the page it was sent from).
+- the site-wide "New patient phone call" swipe pop-up, Netlify form **free-call**
+  (`lead_type` = "Website – call back request", plus `page` = the page it was sent from).
   This one is deliberately **not** sent to Meta as a Lead: it fires custom events
   `WebsiteCallFormOpened` / `WebsiteCallRequest` instead, so ad results stay clean.
 

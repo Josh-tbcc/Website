@@ -29,7 +29,7 @@ export const GET: APIRoute = () => {
 - Pregnancy: pregnancy pillows let mums-to-be lie comfortably on their tummy.
 - Kids and families welcome; gentle, age-appropriate techniques.
 - First visit: 30-minute assessment including a Thermpix thermography scan; X-rays on site only if clinically required; results explained at a second visit.
-- Free new patient phone call: request a call back from any page of the website and we will check whether we can help.
+- New patient call back: request a call back from any page of the website and we will check whether we can help.
 - Practitioners are AHPRA-registered chiropractors. We refer on when something needs a different approach.
 
 ## Conditions and people we commonly help
