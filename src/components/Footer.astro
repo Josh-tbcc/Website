@@ -9,11 +9,20 @@ const tel = `tel:${site.phone.replace(/\s/g, '')}`;
 <footer class="site-footer">
   <div class="container">
     <div class="footer-top">
-      <div>
+      <div class="footer-top__copy">
         <img class="footer-icon" src="/images/icon.png" alt="" width="64" height="64" loading="lazy" />
         <p class="footer-big">Health<br /><span>from within.</span></p>
+        <p class="footer-sub">Family chiropractic in {a.suburb}, on the Sunshine Coast.</p>
+        <div class="footer-actions">
+          <a class="btn btn--primary" href="/book-online-yandina" data-book>Book online</a>
+          <div class="footer-social" aria-label="Follow us">
+            {site.social.facebook && <a href={site.social.facebook} target="_blank" rel="noopener" aria-label="The Balanced Chiropractic Centre on Facebook"><Icon name="facebook" /></a>}
+            {site.social.instagram && <a href={site.social.instagram} target="_blank" rel="noopener" aria-label="The Balanced Chiropractic Centre on Instagram"><Icon name="instagram" /></a>}
+            {site.social.googleReviews && <a href={site.social.googleReviews} target="_blank" rel="noopener" aria-label="Our Google reviews"><Icon name="star" /></a>}
+          </div>
+        </div>
       </div>
-      <a class="btn btn--primary" href="/book-online-yandina" data-book>Book online</a>
+      <img class="footer-photo" src="/images/reception.jpg" alt="Reception at The Balanced Chiropractic Centre in Yandina, with the Health from Within sign" width="1800" height="1200" loading="lazy" />
     </div>
     <div class="footer-grid">
       <div>
@@ -50,7 +59,7 @@ const tel = `tel:${site.phone.replace(/\s/g, '')}`;
           <li><a href="/in-house-x-ray">In-House X-Ray</a></li>
           <li><a href="/who-we-help">Who We Help</a></li>
           <li><a href="/wellness-workshops">Wellness Workshops</a></li>
-          <li><a href="/blog">Blog</a></li>
+          <li><a href="/blog">Education Centre</a></li>
           <li><a href="/about">About Us</a></li>
           <li><a href="/contact-us">Contact</a></li>
           <li><a href="/areas-we-serve">Areas We Serve</a></li>
@@ -66,15 +75,23 @@ const tel = `tel:${site.phone.replace(/\s/g, '')}`;
 </footer>
 
 <style>
-  .site-footer { background: var(--cream); color: var(--text); border-top: 1px solid var(--line); padding: clamp(64px, 8vw, 104px) 0 28px; font-size: .95rem; margin-top: 12px; }
+  .site-footer { background: var(--white); color: var(--text); border-top: 1px solid var(--line); padding: clamp(40px, 6vw, 72px) 0 28px; font-size: .95rem; margin-top: 12px; }
   .site-footer h3 { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; margin-bottom: 1.1em; }
   .site-footer a { color: var(--ink); text-decoration: none; }
   .site-footer a:hover { color: var(--brand); }
   .site-footer .btn--primary, .site-footer .btn--primary:hover { color: var(--ink); }
-  .footer-top { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; padding-bottom: 56px; margin-bottom: 56px; border-bottom: 1px solid var(--line); }
-  .footer-big { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.03em; line-height: 1; font-size: clamp(2.4rem, 6vw, 4.6rem); color: var(--ink); margin: 0; }
+  .footer-top { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(28px, 5vw, 72px); align-items: center; padding-bottom: clamp(40px, 5vw, 56px); margin-bottom: clamp(40px, 5vw, 56px); border-bottom: 1px solid var(--line); }
+  .footer-big { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.03em; line-height: 1; font-size: clamp(2.4rem, 5vw, 4.2rem); color: var(--ink); margin: 0; }
   .footer-big span { font-style: italic; color: var(--brand); }
+  .footer-sub { color: var(--muted); margin: 14px 0 0; }
   .footer-icon { width: 64px; height: 64px; border-radius: 50%; margin-bottom: 20px; }
+  .footer-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 18px; margin-top: 22px; }
+  .footer-social { display: flex; gap: 10px; }
+  .footer-social a { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); color: var(--ink); background: var(--cream); transition: background .2s, color .2s; }
+  .footer-social a:hover { background: var(--brand); color: var(--white); }
+  .footer-social :global(svg) { width: 20px; height: 20px; }
+  .footer-photo { width: 100%; height: auto; max-height: 340px; aspect-ratio: 2 / 1; object-fit: cover; object-position: 40% 6%; border-radius: var(--radius-lg); display: block; }
+  @media (max-width: 860px) { .footer-top { grid-template-columns: 1fr; } .footer-photo { order: -1; aspect-ratio: 16 / 9; } }
   .footer-grid { display: grid; grid-template-columns: 1.1fr 1fr 1.3fr .9fr .9fr; gap: 36px; }
   :global(.fi) { width: 16px; height: 16px; display: inline; vertical-align: -3px; margin-right: 6px; color: var(--brand); }
   .hours, .links { list-style: none; padding: 0; margin: 0; }

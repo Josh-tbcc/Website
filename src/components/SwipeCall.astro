@@ -1,15 +1,17 @@
 ---
-// "Free new patient phone call" swipe bar. Drag the knob to the end (or tap /
+// "New patient phone call" swipe bar. Drag the knob to the end (or tap /
 // press Enter) to open the call-back form pop-up (CallbackDialog in Base).
 import Icon from './Icon.astro';
 ---
-<div class="swipecall" data-call-swipe role="button" tabindex="0" aria-haspopup="dialog" aria-controls="callback" aria-label="Swipe or tap to request a free new patient phone call">
+<div class="swipecall-row"><div class="swipecall" data-call-swipe role="button" tabindex="0" aria-haspopup="dialog" aria-controls="callback" aria-label="Swipe or tap to request a call back about becoming a new patient">
   <span class="swipecall__fill" aria-hidden="true"></span>
-  <span class="swipecall__text" aria-hidden="true"><strong>Free new patient phone call</strong><small>Swipe for a call back →</small></span>
+  <span class="swipecall__text" aria-hidden="true"><strong>New patient phone call</strong><small>Swipe for a call back →</small></span>
   <span class="swipecall__knob" aria-hidden="true"><Icon name="phone" /></span>
-</div>
+</div></div>
 
 <style>
+  /* Always sits on its own line under the buttons beside it */
+  .swipecall-row { flex: 0 0 100%; order: 10; display: flex; }
   .swipecall { position: relative; display: inline-flex; align-items: center; width: min(100%, 330px); height: 54px; padding: 4px; border-radius: 999px; background: var(--white); border: 1px solid var(--line); box-shadow: var(--shadow-sm); cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: pan-y; overflow: hidden; vertical-align: middle; }
   .swipecall:focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
   .swipecall__fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 999px; background: rgba(108,179,80,.18); }

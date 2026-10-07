@@ -30,11 +30,11 @@ DNS records to copy: `docs/DNS-RECORDS.md` (confirmed against PP's own export).
       `offer-lead` and one for `free-call`, into a `Website Leads` tab.
 - [ ] Option B, free: Apps Script in the sheet (see `docs/GO-LIVE.md` step 7) → send the web-app
       URL to Claude to connect.
-- [ ] The `lead_type` column separates **"Meta ad – $49 assessment"** from **"Website – free phone call"**.
+- [ ] The `lead_type` column separates **"Meta ad – $49 assessment"** from **"Website – call back request"**.
 
 **Test everything on the preview site** (use your own details, then delete the test rows)
 - [ ] $49 page: swipe → form → submit → thank-you page → email notification → sheet row.
-- [ ] Free phone call swipe bar (any page) → submit → thank-you → notification → sheet row.
+- [ ] New patient phone call swipe bar (any page) → submit → thank-you → notification → sheet row.
 - [ ] Workshop RSVP and newsletter sign-up.
 - [ ] Book Online opens Zurili and a test booking works.
 - [ ] Read every page once on your phone: hours, team bios, photos (consent for anyone shown).

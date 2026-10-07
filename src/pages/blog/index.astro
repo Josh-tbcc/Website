@@ -9,14 +9,14 @@ import { publishedPosts, formatDate } from '../../utils/posts';
 const posts = await publishedPosts();
 const [latest, ...rest] = posts;
 ---
-<Base title="Chiropractic & Health Blog, Sunshine Coast" crumb="Blog" description="Practical health tips from our Yandina chiropractors: back and neck pain, posture, headaches, stress, kids and staying active on the Sunshine Coast.">
-  <PageHero eyebrow="Blog" title="Health tips from <span class='hl'>your Yandina chiropractors.</span>" lead="Practical, down-to-earth articles on posture, pain, stress and staying active. A new post every fortnight." />
+<Base title="Education Centre: Chiropractic & Health Tips" crumb="Education Centre" description="Practical health tips from our Yandina chiropractors: back and neck pain, posture, headaches, stress, kids and staying active on the Sunshine Coast.">
+  <PageHero eyebrow="Education Centre" title="Health tips from <span class='hl'>your Yandina chiropractors.</span>" lead="Practical, down-to-earth articles on posture, pain, stress and staying active. A new post every fortnight." />
 
   <section class="section">
     <div class="container">
       {latest && (
         <a class="feature reveal" href={`/blog/${latest.id}/`}>
-          <Media src={latest.data.image} alt={latest.data.imageAlt} shape="wide" />
+          <Media src={latest.data.image} alt={latest.data.imageAlt} position="50% 18%" />
           <div>
             <span class="meta">Latest · {formatDate(latest.data.date)}</span>
             <h2>{latest.data.title}</h2>
@@ -28,7 +28,7 @@ const [latest, ...rest] = posts;
       <div class="grid grid-3 posts">
         {rest.map((p, i) => (
           <a class={`card card--hover post reveal reveal-delay-${i % 3}`} href={`/blog/${p.id}/`}>
-            <Media src={p.data.image} alt={p.data.imageAlt} shape="wide" />
+            <Media src={p.data.image} alt={p.data.imageAlt} position="50% 18%" />
             <span class="meta">{formatDate(p.data.date)}</span>
             <h3>{p.data.title}</h3>
             <p>{p.data.description}</p>

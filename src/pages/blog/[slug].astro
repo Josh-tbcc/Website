@@ -47,7 +47,7 @@ const author = team[0];
         <p class="meta">{formatDate(d.date)} · {readingTime(post.body)} min read · The Balanced Chiropractic Centre, Yandina</p>
       </div>
       <div class="container post-hero__img">
-        <Media src={d.image} alt={d.imageAlt} shape="wide" eager />
+        <Media src={d.image} alt={d.imageAlt} eager position="50% 18%" />
       </div>
     </header>
 
@@ -89,7 +89,7 @@ const author = team[0];
 <style>
   .post-hero { padding: clamp(40px, 6vw, 72px) 0 0; }
   .post-hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); margin-top: 18px; }
-  .post-hero__img { max-width: 1040px; margin-top: 28px; }
+  .post-hero__img { max-width: 760px; margin-top: 28px; }
   .back { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: .9rem; text-decoration: none; }
   .back :global(svg) { width: 15px; height: 15px; transform: rotate(180deg); }
   .meta { font-size: .85rem; color: var(--muted); }
