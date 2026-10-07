@@ -29,3 +29,9 @@ jobs:
           if [ -z "$due" ] && [ "$FORCE" != "true" ]; then echo "No post dated $today, skipping build"; exit 0; fi
           echo "Publishing: ${due:-forced rebuild}"
           curl -fsS -X POST -d '{}' "$HOOK"
+      - name: Tell search engines about the new post (once the domain is live)
+        if: vars.INDEXNOW_ENABLED == 'true'
+        run: |
+          if [ -z "$(grep -lE "^date: ['\"]?$(date -u +%F)" src/content/blog/*.md || true)" ] && [ "${{ inputs.force }}" != "true" ]; then exit 0; fi
+          sleep 240
+          .github/scripts/indexnow.sh

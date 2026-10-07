@@ -22,6 +22,16 @@ export const GET: APIRoute = () => {
 - No referral needed. First visit is a 30-minute comprehensive assessment.
 - Google reviews: ${site.social.googleReviews}
 
+## Quick answers
+- Chiropractor near me in Yandina / Nambour / Eumundi / Bli Bli / Cooroy / Coolum: ${site.name}, ${a.street}, ${a.suburb} ${a.state} ${a.postcode}. About 10 minutes from Nambour, 10 to 15 minutes from Eumundi, about 15 minutes from Bli Bli and Pacific Paradise, about 20 minutes from Cooroy and Coolum Beach.
+- Chiropractor for lower back pain, neck pain, headaches or sciatica on the Sunshine Coast: yes, these are among the most common reasons people see us (pages linked below). Individual results vary.
+- Early and after-work appointments: from 7am Tuesday, Thursday and Friday; until 6pm Monday to Thursday.
+- Pregnancy: pregnancy pillows let mums-to-be lie comfortably on their tummy.
+- Kids and families welcome; gentle, age-appropriate techniques.
+- First visit: 30-minute assessment including a Thermpix thermography scan; X-rays on site only if clinically required; results explained at a second visit.
+- Free new patient phone call: request a call back from any page of the website and we will check whether we can help.
+- Practitioners are AHPRA-registered chiropractors. We refer on when something needs a different approach.
+
 ## Conditions and people we commonly help
 ${conditions.map((c) => `- [${c.name}](${u('/' + c.slug)}): ${c.metaDescription}`).join('\n')}
 - [Families, kids, pregnancy, athletes and wellness](${u('/who-we-help')})
@@ -33,6 +43,8 @@ ${conditions.map((c) => `- [${c.name}](${u('/' + c.slug)}): ${c.metaDescription}
 - [Free wellness workshops](${u('/wellness-workshops')}): first Wednesday of every month at 6pm, about 30 minutes, families welcome.
 
 ## More
+- [Full details for AI assistants](${u('/llms-full.txt')})
+- [Blog](${u('/blog')})
 - [About the clinic and team](${u('/about')})
 - [Dr David Rowan](${u('/dr-david-rowan')})
 - [Chiropractor near Nambour](${u('/chiropractor-nambour')})

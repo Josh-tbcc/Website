@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site, team } from '../config/site';
+import { conditions } from '../config/conditions';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileBookBar from '../components/MobileBookBar.astro';
@@ -23,9 +24,12 @@ interface Props {
 }
 const { title, description = site.description, landing = false, noindex = false, overlayHeader = false, image = '/images/hero.jpg', crumb } = Astro.props;
 // Keep titles short enough that Google shows them in full (~60 characters)
-const fullTitle = title
-  ? `${title} | ${title.length + site.name.length + 3 <= 62 ? site.name : site.shortName}`
-  : `Chiropractor Yandina & Surrounding Suburbs | ${site.shortName}`;
+// (falls back to the short name, then to no brand at all, so the keywords stay visible)
+const fullTitle = !title
+  ? `Chiropractor Yandina & Surrounding Suburbs | ${site.shortName}`
+  : title.length + site.name.length + 3 <= 62 ? `${title} | ${site.name}`
+  : title.length + site.shortName.length + 3 <= 62 ? `${title} | ${site.shortName}`
+  : title;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL(image, site.url).href;
 const a = site.address;
@@ -59,7 +63,24 @@ const schema: Record<string, unknown>[] = [{
   image: `${site.url}/images/hero.jpg`,
   logo: `${site.url}/images/icon.png`,
   openingHoursSpecification: openingHours,
-  employee: team.map((m) => ({ '@type': 'Person', name: m.name, jobTitle: 'Chiropractor', image: `${site.url}${m.photo}`, ...(m.page ? { url: `${site.url}${m.page}` } : {}) })),
+  alternateName: ['Balanced Chiro', 'The Balanced Chiro', 'Balanced Chiropractic Yandina'],
+  isAcceptingNewPatients: true,
+  currenciesAccepted: 'AUD',
+  founder: { '@id': `${site.url}/#dr-joshua-kassis` },
+  employee: team.map((m, i) => ({
+    '@type': 'Person',
+    ...(i === 0 ? { '@id': `${site.url}/#dr-joshua-kassis` } : {}),
+    name: m.name, jobTitle: 'Chiropractor', image: `${site.url}${m.photo}`,
+    url: `${site.url}${m.page ?? '/about'}`,
+    hasCredential: { '@type': 'EducationalOccupationalCredential', name: m.credentials, credentialCategory: 'degree' },
+  })),
+  knowsAbout: ['Chiropractic', ...conditions.map((c) => c.name), 'Thermography', 'Spinal X-ray', 'Posture'],
+  availableService: [
+    ...conditions.map((c) => ({ '@type': 'MedicalTherapy', name: `Chiropractic care for ${c.name.toLowerCase()}`, url: `${site.url}/${c.slug}` })),
+    { '@type': 'MedicalTest', name: 'Thermpix thermography (thermal nerve) scan', url: `${site.url}/thermography` },
+    { '@type': 'MedicalTest', name: 'In-house spinal X-ray (when clinically required)', url: `${site.url}/in-house-x-ray` },
+  ],
+  potentialAction: { '@type': 'ReserveAction', name: 'Book an appointment', target: `${site.url}/book-online-yandina` },
   address: { '@type': 'PostalAddress', streetAddress: a.street, addressLocality: a.suburb, addressRegion: a.state, postalCode: a.postcode, addressCountry: 'AU' },
   geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
   hasMap: site.mapsUrl,
@@ -101,6 +122,10 @@ if (extra) schema.push(...(Array.isArray(extra) ? extra : [extra]).map((x) => ({
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="theme-color" content="#f1e9dd" />
+    <meta name="geo.region" content="AU-QLD" />
+    <meta name="geo.placename" content={`${a.suburb}, Sunshine Coast`} />
+    <meta name="geo.position" content={`${site.geo.lat};${site.geo.lng}`} />
+    <meta name="ICBM" content={`${site.geo.lat}, ${site.geo.lng}`} />
     <script is:inline>document.documentElement.classList.add('js');</script>
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="alternate" type="application/rss+xml" title="The Balanced Chiropractic Centre Blog" href="/blog/rss.xml" />

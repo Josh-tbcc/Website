@@ -7,6 +7,7 @@ import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import Video from '../components/Video.astro';
 import { conditions, type Condition } from '../config/conditions';
+import { site } from '../config/site';
 import SwipeCall from '../components/SwipeCall.astro';
 
 export function getStaticPaths() {
@@ -15,13 +16,40 @@ export function getStaticPaths() {
 
 const { c } = Astro.props as { c: Condition };
 const others = conditions.filter((o) => o.slug !== c.slug);
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: c.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+// How people phrase this condition when searching "chiropractor near me for …"
+const topics: Record<string, string> = {
+  'Chronic & ongoing pain': 'chronic pain', 'Upper & mid back pain': 'upper back pain', 'Whiplash & car accidents': 'whiplash',
+  'Sports & active people': 'sports injuries', 'Jaw pain (TMJ)': 'jaw pain and TMJ', 'Poor posture': 'posture',
+  'Stress & tension': 'stress and tension', 'Pregnancy': 'pregnancy care',
 };
+const topic = topics[c.name] ?? c.name.toLowerCase();
+const a = site.address;
+const openDays = site.hours.filter((h) => /\d/.test(h.time) && !/market/i.test(h.time)).map((h) => `${h.days} ${h.time}`).join('; ');
+const localFaq = {
+  q: `Is there a chiropractor near me for ${topic}?`,
+  a: `Yes. The Balanced Chiropractic Centre is at ${a.street}, ${a.suburb} ${a.state} ${a.postcode} on the Sunshine Coast, about 10 minutes from Nambour and Eumundi. We see people for ${topic} from ${site.areaServed.filter((x) => x !== 'Sunshine Coast').join(', ')} and the wider Sunshine Coast. Opening hours: ${openDays}. No referral is needed: book online or call ${site.phone}.`,
+};
+const faqs = [...c.faqs, localFaq];
+const pageUrl = new URL(Astro.url.pathname, site.url).href;
+const schema = [
+  {
+    '@type': 'MedicalWebPage',
+    name: c.metaTitle,
+    url: pageUrl,
+    description: c.metaDescription,
+    inLanguage: 'en-AU',
+    about: { '@type': 'MedicalCondition', name: c.name },
+    reviewedBy: { '@id': `${site.url}/#dr-joshua-kassis` },
+    lastReviewed: site.contentReviewed,
+    publisher: { '@id': `${site.url}/#clinic` },
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
 ---
-<Base title={c.metaTitle} description={c.metaDescription} crumb={c.name} image={c.photo} schema={faqSchema}>
+<Base title={c.metaTitle} description={c.metaDescription} crumb={c.name} image={c.photo} schema={schema}>
 
   <PageHero eyebrow={`${c.name} · Chiropractor Yandina`} title={c.h1} lead={c.intro}>
     <div class="btn-row" slot="actions">
@@ -83,7 +111,7 @@ const faqSchema = {
   <section class="section">
     <div class="container narrow">
       <h2 class="center">{c.name}: common questions</h2>
-      {c.faqs.map((f) => (
+      {faqs.map((f) => (
         <details class="faq"><summary>{f.q}</summary><p>{f.a}</p></details>
       ))}
       <p class="fine-print" style="margin-top:28px">Individual results vary. Your care is tailored to you following a thorough history and examination. If we find something that needs a different approach, we’ll refer you to the right health professional.</p>

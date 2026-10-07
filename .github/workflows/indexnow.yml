@@ -1,0 +1,19 @@
+# After each change to the live site, tell Bing (which powers ChatGPT search) and other
+# IndexNow search engines to re-read the site. Switched off until the domain points at
+# Netlify: then set the repository variable INDEXNOW_ENABLED = true
+# (GitHub → Settings → Secrets and variables → Actions → Variables).
+name: Notify search engines (IndexNow)
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  ping:
+    if: vars.INDEXNOW_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for Netlify to finish deploying
+        run: sleep 240
+      - name: Ping IndexNow
+        run: .github/scripts/indexnow.sh

@@ -26,7 +26,7 @@ export const conditions: Condition[] = [
     h1: 'Back pain that keeps <span class="hl">coming back?</span>',
     metaTitle: 'Lower Back Pain Chiropractor Yandina & Nambour',
     metaDescription:
-      'Lower and mid back pain care in Yandina, near Nambour on the Sunshine Coast. Thermography scan, in-house X-ray and a staged plan that looks beyond short-term relief.',
+      'Chiropractor for lower back pain in Yandina, near Nambour. Thermography scan, in-house X-ray if needed and a staged plan that looks beyond short-term relief.',
     intro:
       'Back pain is one of the most common reasons people walk through our door. Often it has been settling and flaring for months or years. We look past the sore spot to understand how your spine is moving, loading and adapting.',
     signs: [
@@ -59,7 +59,7 @@ export const conditions: Condition[] = [
     h1: 'Neck pain and <span class="hl">stiffness</span>',
     metaTitle: 'Neck Pain Chiropractor Yandina & Nambour',
     metaDescription:
-      'Neck pain, stiffness and posture-related tension care in Yandina, near Nambour on the Sunshine Coast. Objective assessment and a clear plan from The Balanced Chiropractic Centre.',
+      'Chiropractor for neck pain, stiffness and posture-related tension in Yandina, near Nambour on the Sunshine Coast. Objective assessment and a clear plan.',
     intro:
       'Desk work, phones, driving and sleep positions all load the neck. When stiffness and tension keep returning, it’s usually a sign of a pattern rather than a one-off strain.',
     signs: [
@@ -412,7 +412,7 @@ export const conditions: Condition[] = [
     h1: 'Moving better with <span class="hl">arthritis</span>',
     metaTitle: 'Arthritis Chiropractic Care Yandina & Nambour',
     metaDescription:
-      'Gentle chiropractic care for people with arthritis and joint stiffness in Yandina, near Nambour on the Sunshine Coast. Tailored techniques and long-term support.',
+      'Gentle chiropractic care for arthritis and joint stiffness in Yandina, near Nambour on the Sunshine Coast. Tailored techniques and long-term support.',
     intro:
       'Arthritis and joint degeneration are common, especially as we age. Our focus is helping you keep moving as comfortably and freely as possible, with gentle techniques tailored to you.',
     signs: [
@@ -444,7 +444,7 @@ export const conditions: Condition[] = [
     h1: 'It’s not just your posture. <span class="hl">It’s the pattern.</span>',
     metaTitle: 'Posture Correction Chiropractor Yandina & Nambour',
     metaDescription:
-      'Posture assessment and correction in Yandina, near Nambour on the Sunshine Coast. Digital postural analysis, thermography and a plan to change the pattern, not just the position.',
+      'Posture assessment and correction in Yandina, near Nambour. Postural analysis, thermography and a plan to change the pattern, not just the position.',
     intro:
       'Rounded shoulders, forward head posture and slouching are rarely just about willpower. When parts of the spine stop moving well, your body settles into positions that feel “normal” even when they aren’t.',
     signs: [
@@ -506,7 +506,7 @@ export const conditions: Condition[] = [
     h1: 'Pregnancy <span class="hl">chiropractic care</span>',
     metaTitle: 'Pregnancy Chiropractor Yandina & Nambour',
     metaDescription:
-      'Gentle pregnancy and post-natal chiropractic care in Yandina, near Nambour on the Sunshine Coast. Pregnancy-friendly positioning and techniques through every trimester.',
+      'Gentle pregnancy and post-natal chiropractic in Yandina, near Nambour. Pregnancy pillows, friendly positioning and techniques for every trimester.',
     intro:
       'Your body changes quickly during pregnancy, and your spine and pelvis carry much of that load. We use pregnancy-friendly positioning and gentle techniques to support your comfort through each trimester and after your baby arrives.',
     signs: [
