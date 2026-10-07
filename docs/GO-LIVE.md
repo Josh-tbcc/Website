@@ -100,9 +100,7 @@ There are two lead forms:
 
 Both send these fields:
 `first_name`, `last_name`, `email`, `phone`, `reason` (what made them interested in the offer),
-`travel` (local / happy to travel / not sure / no), `suburb`, `marketing_consent` ("yes" if ticked),
-plus ad tracking: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`,
-`fbclid`, `gclid`.
+`travel` (local / happy to travel / not sure / no), `suburb`, `marketing_consent` ("yes" if ticked).
 
 **Option A: Zapier (recommended if you already use it)**
 1. Zapier → Create Zap → Trigger app **Netlify** → event **New Form Submission**.
@@ -119,9 +117,8 @@ plus ad tracking: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `ut
 function doPost(e) {
   const sheet = SpreadsheetApp.getActive().getSheetByName('Website Leads');
   const p = e.parameter;
-  sheet.appendRow([new Date(), p.lead_type, p.page, p.first_name, p.last_name, p.email, p.phone, p.reason,
-                   p.travel, p.suburb, p.marketing_consent || 'no',
-                   p.utm_source, p.utm_medium, p.utm_campaign, p.utm_content, p.utm_term, p.fbclid, p.gclid]);
+  sheet.appendRow([new Date(), p.lead_type, p.page, p.first_name, p.last_name, p.email, p.phone,
+                   p.reason, p.travel, p.suburb, p.marketing_consent === 'yes' ? 'Yes' : 'No']);
   return ContentService.createTextOutput('ok');
 }
 ```

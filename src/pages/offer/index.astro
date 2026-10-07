@@ -64,13 +64,6 @@ const { offer } = site;
             </label>
             <label>Your suburb<input name="suburb" autocomplete="address-level2" placeholder="e.g. Yandina" required /></label>
             <label class="check"><input type="checkbox" name="marketing_consent" value="yes" /> <span>Send me occasional health tips and clinic offers by email or SMS. You can unsubscribe at any time.</span></label>
-            <input type="hidden" name="utm_source" />
-            <input type="hidden" name="utm_campaign" />
-            <input type="hidden" name="utm_medium" />
-            <input type="hidden" name="utm_content" />
-            <input type="hidden" name="utm_term" />
-            <input type="hidden" name="fbclid" />
-            <input type="hidden" name="gclid" />
             <button class="btn btn--primary btn--block" type="submit">Claim My {offer.price} Assessment</button>
             <p class="fine-print">By submitting you agree to be contacted by our team about your appointment. See our <a href="/privacy">privacy policy</a>.</p>
           </form>
@@ -201,12 +194,6 @@ const { offer } = site;
       sw.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); max = sw.clientWidth - knob.offsetWidth - 12; done(); } });
     }
 
-    // Carry ad tracking (utm_*) into the lead
-    var params = new URLSearchParams(location.search);
-    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid'].forEach(function (k) {
-      var el = form.querySelector('[name="' + k + '"]');
-      if (el && params.get(k)) el.value = params.get(k);
-    });
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
