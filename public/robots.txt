@@ -4,6 +4,7 @@ Allow: /
 Disallow: /offer/thank-you
 Disallow: /wellness-workshops/thank-you
 Disallow: /blog/subscribed
+Disallow: /free-call/thank-you
 
 User-agent: GPTBot
 Allow: /
@@ -30,6 +31,24 @@ User-agent: Google-Extended
 Allow: /
 
 User-agent: Bingbot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Amazonbot
 Allow: /
 
 Sitemap: https://thebalancedchiro.com.au/sitemap-index.xml

@@ -12,7 +12,7 @@ import SwipeCall from '../components/SwipeCall.astro';
 
 const hasVideo = fs.existsSync(path.join(process.cwd(), 'public/videos', `${site.videos.david}.mp4`));
 ---
-<Base title="Dr David Rowan, Chiropractor Yandina" crumb="Dr David Rowan" image="/images/dr-david.jpg" schema={{ '@type': 'Person', name: 'Dr David Rowan', jobTitle: 'Chiropractor', image: `${site.url}/images/dr-david.jpg`, url: `${site.url}/dr-david-rowan`, worksFor: { '@id': `${site.url}/#clinic` }, alumniOf: 'CQUniversity', knowsLanguage: 'English' }} description="Meet Dr David Rowan, chiropractor at The Balanced Chiropractic Centre in Yandina, offering friendly, personalised care for individuals and families on the Sunshine Coast.">
+<Base title="Dr David Rowan, Chiropractor Yandina" crumb="Dr David Rowan" image="/images/dr-david.jpg" schema={{ '@type': 'Person', name: 'Dr David Rowan', jobTitle: 'Chiropractor', image: `${site.url}/images/dr-david.jpg`, url: `${site.url}/dr-david-rowan`, worksFor: { '@id': `${site.url}/#clinic` }, alumniOf: 'CQUniversity', knowsLanguage: 'English' }} description="Meet Dr David Rowan, chiropractor at The Balanced Chiropractic Centre in Yandina: friendly, personalised care for individuals and families.">
   <PageHero eyebrow="Meet the team" title="Dr David <span class='hl'>Rowan</span>" lead="Known for his friendly, relatable manner and the time he takes to understand each person, Dr David tailors your care to your individual needs and what you hope to achieve.">
     <div class="btn-row" slot="actions">
       <BookButton label="Book with Dr David" />
