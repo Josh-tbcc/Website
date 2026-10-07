@@ -110,7 +110,8 @@ Both send these fields:
    sheet, tab `Website Leads` (add column headers matching the fields above first).
 4. Map each field to its column, test, and switch the Zap on.
 
-**Option B: no Zapier (free, direct)**
+**Option B: no Zapier (free, direct) — in use.** Current script: `docs/LEADS-SHEET-SCRIPT.md`.
+
 1. In the sheet add a tab called `Website Leads`, then **Extensions → Apps Script**, paste this, **Save**:
 
 ```js

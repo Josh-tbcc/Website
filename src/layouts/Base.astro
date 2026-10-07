@@ -127,6 +127,31 @@ if (extra) schema.push(...(Array.isArray(extra) ? extra : [extra]).map((x) => ({
     <meta name="geo.position" content={`${site.geo.lat};${site.geo.lng}`} />
     <meta name="ICBM" content={`${site.geo.lat}, ${site.geo.lng}`} />
     <script is:inline>document.documentElement.classList.add('js');</script>
+    <script is:inline>
+      // Remember where a visitor came from (ad/campaign tags, first page, referring site) so a
+      // lead sent later from any page can be credited to the right ad. Stored only in this
+      // visitor's browser; sent with the lead to the clinic's Google Sheet (Lead Tracking tab).
+      (function () {
+        var KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid', 'gclid'];
+        var read = function () { try { return JSON.parse(localStorage.getItem('tbcc_attr') || '{}'); } catch (e) { return {}; } };
+        var a = read(), q = new URLSearchParams(location.search), hit = {}, any = false;
+        KEYS.forEach(function (k) { var v = q.get(k); if (v) { hit[k] = v.slice(0, 200); any = true; } });
+        var ref = document.referrer && document.referrer.indexOf(location.host) === -1 ? document.referrer.slice(0, 300) : '';
+        var now = new Date().toISOString();
+        if (!a.first_seen) { a.first_seen = now; a.first_landing = location.pathname; a.first_referrer = ref; a.first = hit; }
+        if (any) { a.last = hit; a.last_seen = now; a.last_landing = location.pathname; }
+        try { localStorage.setItem('tbcc_attr', JSON.stringify(a)); } catch (e) {}
+        // Flat fields for the lead: latest ad tags (falling back to the first visit's), plus first visit info
+        window.tbccAttribution = function () {
+          var x = read(), src = (x.last && Object.keys(x.last).length) ? x.last : (x.first || {}), out = {};
+          KEYS.forEach(function (k) { out[k] = src[k] || ''; });
+          out.landing_page = x.last_landing || x.first_landing || '';
+          out.first_seen = x.first_seen || '';
+          out.referrer = x.first_referrer || '';
+          return out;
+        };
+      })();
+    </script>
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="alternate" type="application/rss+xml" title="The Balanced Chiropractic Centre Blog" href="/blog/rss.xml" />
     <slot name="head" />

@@ -104,8 +104,15 @@ import { site } from '../config/site';
       var btn = form.querySelector('button[type=submit]');
       btn.disabled = true; btn.textContent = 'Sending…';
       var body = new URLSearchParams(new FormData(form)).toString();
+      // Tracking goes only to the sheet (Lead Tracking tab), never into the notification email
+      var leadId = 'L' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      var sheetParams = new URLSearchParams(new FormData(form));
+      sheetParams.set('lead_id', leadId);
+      var attr = window.tbccAttribution ? window.tbccAttribution() : {};
+      Object.keys(attr).forEach(function (k) { sheetParams.set(k, attr[k]); });
+      var sheetBody = sheetParams.toString();
       var jobs = [fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })];
-      if (sheetWebhook) jobs.push(fetch(sheetWebhook, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body }));
+      if (sheetWebhook) jobs.push(fetch(sheetWebhook, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: sheetBody }));
       Promise.allSettled(jobs).then(function () {
         // Custom event, deliberately NOT 'Lead', so website call requests aren't counted as Meta ad leads
         if (window.fbq) window.fbq('trackCustom', 'WebsiteCallRequest');
