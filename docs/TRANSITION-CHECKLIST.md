@@ -6,6 +6,10 @@
 - The domain switch (stage 2) **must happen before 1 November**, ideally mid-October, so email never breaks.
 
 Preview site: https://balanced-chiro.netlify.app
+Progress is tracked on the shared tick-box page: https://claude.ai/artifact/MddERZGaKgmVGhHFf9R7MM
+
+_Done 7 Oct: GoDaddy checked (domain in Josh's own account, no delegate access, auto-renew on,
+expires 9 July 2027, password changed); Netlify form detection and email notifications on._
 DNS records to copy: `docs/DNS-RECORDS.md` (confirmed against PP's own export).
 
 ---
