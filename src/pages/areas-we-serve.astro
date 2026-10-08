@@ -6,13 +6,14 @@ import Icon from '../components/Icon.astro';
 import BookButton from '../components/BookButton.astro';
 import { site } from '../config/site';
 import { conditions } from '../config/conditions';
+import { areas as areaPages } from '../config/areas';
 import SwipeCall from '../components/SwipeCall.astro';
 
 // Approximate drive times from the clinic in Yandina
 const areas = [
   { name: 'Yandina', time: 'Right here', text: `We’re on Farrell Street in the centre of town. ${site.directions}` },
   { name: 'Yandina Creek', time: 'About 5–10 min', text: 'A quick drive in for families and acreage owners in Yandina Creek.' },
-  { name: 'Nambour', time: 'About 10 min', text: 'Just north of Nambour, away from the busy town centre.', href: '/chiropractor-nambour' },
+  { name: 'Nambour', time: 'About 10 min', text: 'Just north of Nambour, away from the busy town centre.' },
   { name: 'Kulangoor', time: 'About 10 min', text: 'A short drive up the road from Kulangoor and Coes Creek.' },
   { name: 'North Arm', time: 'About 10 min', text: 'Close by for North Arm families and rural properties.' },
   { name: 'Ninderry & Valdora', time: 'About 10 min', text: 'Easy to reach from the Ninderry and Valdora area.' },
@@ -21,10 +22,12 @@ const areas = [
   { name: 'Pacific Paradise', time: 'About 15–20 min', text: 'Convenient for Pacific Paradise, Mudjimba and Twin Waters.' },
   { name: 'Cooroy', time: 'About 20 min', text: 'An easy run down the highway from Cooroy and Pomona.' },
   { name: 'Coolum Beach', time: 'About 20 min', text: 'Over the hill from Coolum, Peregian and the coast.' },
+  { name: 'Maroochydore', time: 'About 20–25 min', text: 'Inland from Maroochydore, Buderim and Kuluin, away from the coastal traffic.' },
 ];
+const pageFor = Object.fromEntries(areaPages.map((x) => [x.name, `/chiropractor-${x.slug}`]));
 const faqs = [
   ['Where is The Balanced Chiropractic Centre?', `${site.address.street}, ${site.address.suburb} ${site.address.state} ${site.address.postcode}, on the Sunshine Coast. ${site.directions}`],
-  ['Which areas do you see patients from?', `Yandina, Yandina Creek, Nambour, Kulangoor, North Arm, Ninderry, Valdora, Eumundi, Bli Bli, Pacific Paradise, Cooroy, Coolum Beach and the wider Sunshine Coast.`],
+  ['Which areas do you see patients from?', `Yandina, Yandina Creek, Nambour, Kulangoor, North Arm, Ninderry, Valdora, Eumundi, Bli Bli, Pacific Paradise, Cooroy, Coolum Beach, Maroochydore and the wider Sunshine Coast.`],
   ['What conditions do you help with?', `Common reasons people see us include ${conditions.slice(0, 8).map((c) => c.name.toLowerCase()).join(', ')} and more.`],
 ];
 ---
@@ -46,7 +49,7 @@ const faqs = [
             <span class="area__time"><Icon name="pin" />{ar.time}</span>
             <h2 class="area__name">Chiropractor {ar.name}</h2>
             <p>{ar.text}</p>
-            {ar.href && <a href={ar.href}>More for {ar.name} patients<Icon name="arrow" /></a>}
+            {pageFor[ar.name] && <a href={pageFor[ar.name]}>More for {ar.name} patients<Icon name="arrow" /></a>}
           </div>
         ))}
       </div>

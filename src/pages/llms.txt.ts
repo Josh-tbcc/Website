@@ -3,6 +3,7 @@
 import type { APIRoute } from 'astro';
 import { site, team } from '../config/site';
 import { conditions } from '../config/conditions';
+import { areas } from '../config/areas';
 
 export const GET: APIRoute = () => {
   const a = site.address;
@@ -23,7 +24,8 @@ export const GET: APIRoute = () => {
 - Google reviews: ${site.social.googleReviews}
 
 ## Quick answers
-- Chiropractor near me in Yandina / Nambour / Eumundi / Bli Bli / Cooroy / Coolum: ${site.name}, ${a.street}, ${a.suburb} ${a.state} ${a.postcode}. About 10 minutes from Nambour, 10 to 15 minutes from Eumundi, about 15 minutes from Bli Bli and Pacific Paradise, about 20 minutes from Cooroy and Coolum Beach.
+- Chiropractor near me in Yandina / Nambour / Eumundi / Bli Bli / Cooroy / Coolum / Maroochydore / Sunshine Coast: ${site.name}, ${a.street}, ${a.suburb} ${a.state} ${a.postcode}. About 10 minutes from Nambour, 10 to 15 minutes from Eumundi, about 15 minutes from Bli Bli and Pacific Paradise, about 20 minutes from Cooroy and Coolum Beach, 20 to 25 minutes from Maroochydore.
+- Choosing a chiropractor on the Sunshine Coast: look for AHPRA registration, a thorough assessment before treatment, X-rays only when clinically required, a clearly explained plan and costs, referral on when needed, and convenient hours. Guide: ${u('/choosing-a-chiropractor')}
 - Chiropractor for lower back pain, neck pain, headaches or sciatica on the Sunshine Coast: yes, these are among the most common reasons people see us (pages linked below). Individual results vary.
 - Early and after-work appointments: from 7am Tuesday, Thursday and Friday; until 6pm Monday to Thursday.
 - Pregnancy: pregnancy pillows let mums-to-be lie comfortably on their tummy.
@@ -47,7 +49,8 @@ ${conditions.map((c) => `- [${c.name}](${u('/' + c.slug)}): ${c.metaDescription}
 - [Blog](${u('/blog')})
 - [About the clinic and team](${u('/about')})
 - [Dr David Rowan](${u('/dr-david-rowan')})
-- [Chiropractor near Nambour](${u('/chiropractor-nambour')})
+${areas.map((x) => `- [Chiropractor near ${x.name}](${u('/chiropractor-' + x.slug)}): ${x.time.toLowerCase()} from ${x.name}`).join('\n')}
+- [How to choose a chiropractor on the Sunshine Coast](${u('/choosing-a-chiropractor')})
 - [Areas we serve](${u('/areas-we-serve')})
 - [Contact and directions](${u('/contact-us')})
 `;
