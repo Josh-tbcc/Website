@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import BookButton from '../components/BookButton.astro';
+import SwipeCall from '../components/SwipeCall.astro';
+import { site } from '../config/site';
+import { areas } from '../config/areas';
+
+const a = site.address;
+const checks = [
+  ['Are they registered?', 'Every chiropractor in Australia must be registered with AHPRA. You can check any practitioner by name on the public register at ahpra.gov.au before you book.'],
+  ['Do they assess before they treat?', 'A good first visit starts with questions and tests: your health history, posture, movement and nerve function. Ask what the first appointment includes and how long it takes.'],
+  ['Are X-rays only taken when needed?', 'X-rays should be taken when they are clinically required, not as a routine for everyone. Ask how the clinic decides.'],
+  ['Will they explain your results and plan?', 'You should leave knowing what was found, what they suggest, how long it is likely to take and what it costs, with time to ask questions.'],
+  ['Do they work with other health professionals?', 'Some problems need a GP, physio or specialist. A good chiropractor tells you when something is outside their scope and refers you on.'],
+  ['Is it practical for you?', 'Location, parking, early or after-work appointments and online booking all make it easier to keep up with care.'],
+];
+const faqs = [
+  ['Who is the best chiropractor on the Sunshine Coast?', 'There is no single best chiropractor for everyone. The right one for you is AHPRA-registered, assesses you thoroughly before treating, explains your results and options clearly, takes X-rays only when clinically required, refers on when needed, and is easy for you to get to. Independent Google reviews can also help you compare clinics.'],
+  ['How do I find a chiropractor near me on the Sunshine Coast?', `Search Google Maps for “chiropractor” to see clinics close to you, then check their registration, first-visit process and hours. Our clinic is at ${a.street}, ${a.suburb} ${a.state} ${a.postcode}, about 10 minutes from Nambour and Eumundi and 20 minutes from Coolum Beach and Cooroy.`],
+  ['Do I need a referral to see a chiropractor?', 'No. You can book directly. If you have a GP Chronic Disease Management plan, you may be able to claim a Medicare rebate for some visits; ask your GP.'],
+  ['What should happen at a first chiropractic visit?', 'A thorough health history, a physical, postural and neurological assessment, and imaging only if clinically required. At our clinic the first visit is a 30-minute assessment including a Thermpix thermography scan, and your results are explained at a second visit.'],
+  ['Can I claim chiropractic on private health insurance?', 'Many extras policies cover chiropractic. Check with your fund about your level of cover and annual limits.'],
+];
+---
+<Base
+  title="How to Choose a Chiropractor on the Sunshine Coast"
+  crumb="Choosing a chiropractor"
+  description="What to look for in a chiropractor on the Sunshine Coast: registration, a thorough assessment, X-rays only when needed, a clear plan and easy access."
+  schema={{ '@type': 'FAQPage', mainEntity: faqs.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: ans } })) }}
+>
+  <PageHero eyebrow="A practical guide" title="How to choose a chiropractor <span class='hl'>on the Sunshine Coast.</span>" lead="Six things worth checking before you book, wherever you go. Use them to compare clinics near you.">
+    <div class="btn-row" slot="actions"><BookButton label="Book a consultation" /><SwipeCall /></div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container narrow">
+      <ol class="checks">
+        {checks.map(([q, ans]) => <li><h2>{q}</h2><p>{ans}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--cream panel">
+    <div class="container narrow">
+      <span class="eyebrow">How we do it</span>
+      <h2>Our approach in Yandina</h2>
+      <p>At {site.name}, every new patient has a 30-minute assessment with a Thermpix thermography scan, spinal and neurological tests, and in-house X-ray only if clinically required. At your second visit we explain the findings and a staged plan in plain English. Individual results vary.</p>
+      <p>We’re at <strong>{a.street}, {a.suburb}</strong>, with early appointments from 7am on Tuesdays, Thursdays and Fridays. Patients come to us from {areas.map((x, i) => <>{i > 0 && ', '}<a href={`/chiropractor-${x.slug}`}>{x.name}</a></>)} and across the Sunshine Coast.</p>
+      <p><a href="/new-patients">See what happens at your first visit</a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <h2 class="center">Common questions</h2>
+      <div style="margin-top:24px">
+        {faqs.map(([q, ans]) => <details class="faq"><summary>{q}</summary><p>{ans}</p></details>)}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+<style>
+  .checks { list-style: none; counter-reset: c; padding: 0; margin: 0; display: grid; gap: 18px; }
+  .checks li { counter-increment: c; display: grid; grid-template-columns: 44px 1fr; column-gap: 16px; padding: 22px 24px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); }
+  .checks li::before { content: counter(c); grid-row: span 2; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--mint-soft); color: var(--brand-dark); font-weight: 800; }
+  .checks h2 { font-family: var(--font-head); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; margin: 6px 0 4px; }
+  .checks p { margin: 0; color: var(--muted); }
+</style>

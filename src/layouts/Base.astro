@@ -26,7 +26,7 @@ const { title, description = site.description, landing = false, noindex = false,
 // Keep titles short enough that Google shows them in full (~60 characters)
 // (falls back to the short name, then to no brand at all, so the keywords stay visible)
 const fullTitle = !title
-  ? `Chiropractor Yandina & Surrounding Suburbs | ${site.shortName}`
+  ? `Chiropractor Yandina, Nambour, Sunshine Coast | ${site.shortName}`
   : title.length + site.name.length + 3 <= 62 ? `${title} | ${site.name}`
   : title.length + site.shortName.length + 3 <= 62 ? `${title} | ${site.shortName}`
   : title;
