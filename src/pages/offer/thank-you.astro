@@ -65,6 +65,14 @@ const explore = [
       <p class="center" style="margin-top:28px"><a class="btn btn--primary" href="/">Go to our homepage</a></p>
     </div>
   </section>
+<script is:inline>
+  // Meta Lead event: fires once, only after a real form submission on /offer
+  (function () {
+    var id = null;
+    try { id = sessionStorage.getItem('tbcc_lead'); sessionStorage.removeItem('tbcc_lead'); } catch (e) {}
+    if (id && window.fbq) window.fbq('track', 'Lead', {}, { eventID: id });
+  })();
+</script>
 </Base>
 <style>
   .ty-actions { justify-content: center; margin-top: 8px; }
