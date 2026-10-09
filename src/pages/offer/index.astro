@@ -222,7 +222,8 @@ const { offer } = site;
         jobs.push(fetch(sheetWebhook, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: sheetBody }));
       }
       Promise.allSettled(jobs).then(function () {
-        if (window.fbq) window.fbq('track', 'Lead');
+        // The thank-you page fires Meta's Lead event once for this submission (not on refresh or direct visits)
+        try { sessionStorage.setItem('tbcc_lead', leadId); } catch (err) {}
         location.href = '/offer/thank-you';
       });
     });
