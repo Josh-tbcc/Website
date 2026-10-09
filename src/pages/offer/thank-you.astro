@@ -1,21 +1,78 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Video from '../../components/Video.astro';
+import Icon from '../../components/Icon.astro';
 import { site } from '../../config/site';
+
+const steps = [
+  ['phone', 'We call you', `One of our team will call you from ${site.phone}, usually the same or next business day. If you miss us, we’ll send a text.`],
+  ['calendar', 'We book your assessment', 'We’ll check we can help with what you’re experiencing, then find a time that suits you.'],
+  ['scan', 'Your first visit', 'A 30-minute assessment, including a Thermpix thermal nerve scan. X-rays only if clinically required.'],
+];
+const explore = [
+  ['/new-patients', 'What to expect', 'Your first two visits, step by step.'],
+  ['/thermography', 'Thermal nerve scans', 'How the scan works and what it shows.'],
+  ['/about', 'Meet the team', 'Dr Josh, Dr David and the clinic.'],
+];
 ---
-<Base landing noindex title="Thank You">
+<Base noindex title="Thank You">
   <section class="section section--mint">
     <div class="container narrow center">
-      <span class="eyebrow">You’re in</span>
-      <h1>Thanks! We’ll be in touch shortly.</h1>
-      <p class="lead">One of our team will call you from <strong>{site.phone}</strong> to find a time for your assessment. Keep an eye on your phone. If you miss us, we’ll send a text.</p>
-      <p>Can’t wait? Call us now on <a href={`tel:${site.phone.replace(/\s/g, '')}`}>{site.phone}</a>.</p>
+      <span class="eyebrow">Details received</span>
+      <h1>Thank you! We’ll be in touch shortly.</h1>
+      <p class="lead">Your details have come through to our team in Yandina. Keep an eye on your phone for a call from <strong>{site.phone}</strong>.</p>
+      <div class="btn-row ty-actions">
+        <a class="btn btn--primary" href="/">Visit our website</a>
+        <a class="btn btn--ghost" href={`tel:${site.phone.replace(/\s/g, '')}`}><Icon name="phone" />Call {site.phone}</a>
+      </div>
     </div>
   </section>
-  <section class="section">
+
+  <section class="section section--tight">
+    <div class="container">
+      <h2 class="center">What happens next</h2>
+      <ol class="ty-steps grid grid-3">
+        {steps.map(([icon, t, d]) => (
+          <li class="card">
+            <div class="icon"><Icon name={icon} /></div>
+            <h3>{t}</h3>
+            <p>{d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--tight">
     <div class="container" style="max-width:880px">
       <h2 class="center">While you wait: a welcome from Dr Josh</h2>
       <Video file={site.videos.welcome} title="Welcome from Dr Josh: what to expect at your first visit" />
     </div>
   </section>
+
+  <section class="section section--tight">
+    <div class="container">
+      <h2 class="center">Explore our website</h2>
+      <div class="grid grid-3 ty-explore">
+        {explore.map(([href, t, d]) => (
+          <a class="card card--hover" href={href}>
+            <h3>{t}</h3>
+            <p>{d}</p>
+            <span class="more">Read more<Icon name="arrow" /></span>
+          </a>
+        ))}
+      </div>
+      <p class="center" style="margin-top:28px"><a class="btn btn--primary" href="/">Go to our homepage</a></p>
+    </div>
+  </section>
 </Base>
+<style>
+  .ty-actions { justify-content: center; margin-top: 8px; }
+  .ty-steps { list-style: none; padding: 0; margin: 28px 0 0; }
+  .ty-steps h3, .ty-explore h3 { margin: 10px 0 .3em; }
+  .ty-steps p, .ty-explore p { margin: 0; color: var(--muted); }
+  .ty-explore { margin-top: 28px; }
+  .ty-explore a { text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 6px; }
+  .ty-explore .more { display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-weight: 700; color: var(--brand-dark); }
+  .ty-explore .more :global(svg) { width: 14px; height: 14px; }
+</style>
